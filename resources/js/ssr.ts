@@ -6,13 +6,14 @@ import createServer from '@inertiajs/vue3/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 
-const appName = 'Laravel';
+const APP_NAME = import.meta.env.VITE_APP_NAME || 'Laravel';
+const INERTIA_SSR_PORT = import.meta.env.VITE_INERTIA_SSR_PORT || 13714;
 
-createServer((page) =>
-    createInertiaApp({
+createServer((page) => {
+    return createInertiaApp({
         page,
         render: renderToString,
-        title: (title) => `${title} - ${appName}`,
+        title: (title) => `${title} - ${APP_NAME}`,
         resolve: (name) =>
             resolvePageComponent(
                 `./Pages/${name}.vue`,
@@ -28,5 +29,5 @@ createServer((page) =>
                     location: new URL(page.props.ziggy.location),
                 });
         },
-    })
-);
+    });
+}, INERTIA_SSR_PORT);
