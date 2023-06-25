@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc && vite build && vite build --ssr",
-        "lint": "eslint --ext .js,.ts,.vue ."
+        "lint": "eslint --ext .js,.ts,.vue .",
+        "format": "prettier --write ."
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
