@@ -3,4 +3,5 @@ vendor/*
 public/*
 bootstrap/*
 resources/js/types/*
+resources/js/ziggy.js
 tailwind.config.js

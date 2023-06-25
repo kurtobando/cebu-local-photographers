@@ -1,13 +1,13 @@
 import './bootstrap';
-import '../css/app.css';
 import 'primevue/resources/primevue.min.css';
-import 'primevue/resources/themes/tailwind-light/theme.css';
 import 'primeicons/primeicons.css';
+import '../css/app.css';
 
 import { createApp, h, DefineComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import PrimeVue from 'primevue/config';
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -21,6 +21,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(PrimeVue)
             .use(ZiggyVue, Ziggy)
             .mount(el);
     },
