@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createSSRApp, h, DefineComponent } from 'vue';
 import { renderToString } from '@vue/server-renderer';
 import { createInertiaApp } from '@inertiajs/vue3';
