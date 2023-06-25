@@ -2,6 +2,7 @@ import './bootstrap';
 import '../css/app.css';
 import "primevue/resources/primevue.min.css";
 import "primevue/resources/themes/tailwind-light/theme.css";
+import 'primeicons/primeicons.css';
 
 import { createApp, h, DefineComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
