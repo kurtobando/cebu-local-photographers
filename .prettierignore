@@ -4,6 +4,7 @@ public/*
 bootstrap/*
 storage/*
 resources/js/types/*
+resources/js/ziggy.js
 composer.*
 package.*
 package-lock.*

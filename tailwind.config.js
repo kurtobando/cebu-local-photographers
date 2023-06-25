@@ -9,5 +9,11 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
+    theme: {
+        fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Poppins', 'serif'],
+        },
+    },
     plugins: [forms],
 };
