@@ -1,8 +1,7 @@
 <template>
-    <p>Hello World</p>
+    <p>Members</p>
 </template>
 
 <script setup lang="ts"></script>
 
 <style scoped></style>
-
