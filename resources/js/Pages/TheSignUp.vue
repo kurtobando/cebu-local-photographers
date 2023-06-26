@@ -1,16 +1,16 @@
 <template>
     <section>
-        <Meta title="Sign In" />
+        <Meta title="Sign Up" />
 
-        <form class="flex flex-col gap-4 justify-center">
-            <h1 class="font-bold text-4xl text-center">Sign up</h1>
-            <p class="leading-relaxed text-center text-slate-600">Lets get started! Create your account</p>
-            <div class="flex flex-col gap-4 text-center justify-center px-8 mt-8">
+        <form class="flex flex-col gap-2 justify-center">
+            <h1 class="font-bold text-4xl text-center -tracking-wide">Let's get started!</h1>
+            <h1 class="font-bold text-4xl text-center -tracking-wide">Create your account</h1>
+            <div class="flex flex-col gap-6 text-center justify-center px-8 mt-8">
                 <Button
                     icon="pi pi-google"
                     label="Sign up with Google" />
                 <Link :href="route('sign-in')">
-                    <u class="text-slate-600">Have an account? Sign-in here</u>
+                    <span class="text-slate-600">Have an account? Sign-in here</span>
                 </Link>
             </div>
         </form>
