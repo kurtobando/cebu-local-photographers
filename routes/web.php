@@ -17,7 +17,10 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('TheHome');
-});
+})->name('home');
 Route::get('/sign-in', function () {
     return Inertia::render('TheSignIn');
-});
+})->name('sign-in');
+Route::get('/sign-up', function () {
+    return Inertia::render('TheSignUp');
+})->name('sign-up');
