@@ -3,10 +3,7 @@ import { Ziggy } from '@/ziggy';
 function useRoutes() {
     const { routes, url } = Ziggy;
 
-    return <T extends keyof typeof routes>(
-        name: T | string,
-        params?: { [keys: string]: string | number }
-    ) => {
+    return <T extends keyof typeof routes>(name: T | string, params?: { [keys: string]: string | number }) => {
         if (!Object.keys(routes).includes(name)) {
             console.error(`Route name "${name}" was not found`);
             return `${url}`;
@@ -25,9 +22,7 @@ function useRoutes() {
                 if (uriWithParams === '/') {
                     uriWithParams = uriWithParams.replace('/', '');
                 }
-                uriWithParams = uriWithParams.includes('?')
-                    ? uriWithParams
-                    : `${uriWithParams}?`;
+                uriWithParams = uriWithParams.includes('?') ? uriWithParams : `${uriWithParams}?`;
                 uriWithParams = `${uriWithParams}&${key}=${value}`;
             }
             uriWithParams = uriWithParams.replace(`{${key}}`, value.toString());

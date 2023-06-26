@@ -20,4 +20,7 @@ export default defineConfig({
         }),
         DefineOptions(),
     ],
+    ssr: {
+        noExternal: ['primevue'],
+    },
 });
