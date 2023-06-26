@@ -34,6 +34,7 @@
     "dependencies": {
         "lucide-vue-next": "^0.252.0",
         "primeicons": "^6.0.1",
-        "primevue": "^3.29.2"
+        "primevue": "^3.29.2",
+        "vite-plugin-static-copy": "^0.16.0"
     }
 }
