@@ -18,3 +18,6 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('TheHome');
 });
+Route::get('/sign-in', function () {
+    return Inertia::render('TheSignIn');
+});
