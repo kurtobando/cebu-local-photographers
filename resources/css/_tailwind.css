@@ -6,4 +6,7 @@
     html {
         font-family: 'Poppins', sans-serif;
     }
+    a:hover {
+        @apply text-accent;
+    }
 }

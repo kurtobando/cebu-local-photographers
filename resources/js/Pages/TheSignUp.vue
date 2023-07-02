@@ -16,9 +16,7 @@
                     icon="pi pi-google"
                     label="Sign up with Google"
                     outlined />
-                <Link :href="route('sign-in')">
-                    <span class="text-slate-600">Have an account? Sign-in here</span>
-                </Link>
+                <Link :href="route('sign-in')">Have an account? Sign-in here </Link>
             </div>
         </form>
     </section>
