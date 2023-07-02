@@ -16,8 +16,5 @@
         },
         "types": ["unplugin-vue-define-options/macros-global"]
     },
-    "vueCompilerOptions": {
-        "plugins": ["@vue-macros/volar/define-options"]
-    },
     "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"]
 }

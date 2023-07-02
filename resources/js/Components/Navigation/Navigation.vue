@@ -1,5 +1,5 @@
 <template>
-    <div class="inline-flex gap-12">
+    <div class="hidden lg:inline-flex gap-12">
         <nav class="inline-flex items-center gap-8">
             <Link href="">Discover</Link>
             <Link href="">Events</Link>
@@ -14,7 +14,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import useRoute from '@/composables/useRoute';
