@@ -1,19 +1,19 @@
 <template>
     <section>
         <Meta title="Discover" />
-        <div class="grid grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8">
             <CardImage
                 v-for="(image, key) in images"
                 :key="key"
-                :image-source="image.source"
-                :image-alt="image.alt"
                 :author="image.author"
+                :image-alt="image.alt"
+                :image-source="image.source"
                 :reactions="image.reactions" />
         </div>
     </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Meta from '@/Components/Meta/Meta.vue';
 import LayoutPublic from '@/Layouts/LayoutPublic.vue';
 import CardImage from '@/Components/CardImage/CardImage.vue';
