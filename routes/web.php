@@ -24,3 +24,6 @@ Route::get('/sign-in', function () {
 Route::get('/sign-up', function () {
     return Inertia::render('TheSignUp');
 })->name('sign-up');
+Route::get('/password-reset', function () {
+    return Inertia::render('ThePasswordReset');
+})->name('password-reset');
