@@ -1,5 +1,5 @@
 <template>
-    <div class="p-8 border-b border-gray-200">
+    <div class="p-8 border-b">
         <div class="w-full inline-flex items-center justify-between">
             <Brand />
             <Navigation />
@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Brand from '@/Components/Brand/Brand.vue';
 import Navigation from '@/Components/Navigation/Navigation.vue';
 </script>

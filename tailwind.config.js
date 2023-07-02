@@ -13,6 +13,12 @@ export default {
             sans: ['Poppins', 'sans-serif'],
             serif: ['Poppins', 'serif'],
         },
+        extend: {
+            colors: {
+                primary: '#383838',
+                accent: '#FF7D00',
+            },
+        },
     },
     plugins: [forms],
 };

@@ -16,11 +16,11 @@
                     icon="pi pi-google"
                     label="Sign in with Google"
                     outlined />
-                <Link :href="route('sign-up')">
-                    <span class="text-slate-600">Create an account</span>
-                </Link>
-                <Link :href="route('password-reset')">
-                    <span class="text-slate-600">Forgot password?</span>
+                <Link :href="route('sign-up')">Create an account? Click here </Link>
+                <Link
+                    :href="route('password-reset')"
+                    class="text-slate-600">
+                    Forgot password?
                 </Link>
             </div>
         </form>
