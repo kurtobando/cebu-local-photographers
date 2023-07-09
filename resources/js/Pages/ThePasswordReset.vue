@@ -20,9 +20,9 @@ import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Meta from '@/Components/Meta/Meta.vue';
-import LayoutAuth from '@/Layouts/LayoutAuth.vue';
+import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 
-defineOptions({ layout: LayoutAuth });
+defineOptions({ layout: PageLayoutAuth });
 </script>
 
 <style scoped></style>

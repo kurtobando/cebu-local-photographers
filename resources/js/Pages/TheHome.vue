@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import Meta from '@/Components/Meta/Meta.vue';
-import LayoutPublic from '@/Layouts/LayoutPublic.vue';
+import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
 import CardImage from '@/Components/CardImage/CardImage.vue';
 
 const images = [
@@ -125,7 +125,7 @@ const images = [
     },
 ];
 
-defineOptions({ layout: LayoutPublic });
+defineOptions({ layout: PageLayoutPublic });
 </script>
 
 <style scoped></style>

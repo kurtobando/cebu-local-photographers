@@ -26,10 +26,10 @@
 import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import Meta from '@/Components/Meta/Meta.vue';
-import LayoutAuth from '@/Layouts/LayoutAuth.vue';
+import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 import InputText from 'primevue/inputtext';
 
-defineOptions({ layout: LayoutAuth });
+defineOptions({ layout: PageLayoutAuth });
 </script>
 
 <style scoped></style>
