@@ -21,9 +21,6 @@ import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import Meta from '@/Components/Meta/Meta.vue';
 import LayoutAuth from '@/Layouts/LayoutAuth.vue';
-import useRoute from '@/composables/useRoute';
-
-const route = useRoute();
 
 defineOptions({ layout: LayoutAuth });
 </script>

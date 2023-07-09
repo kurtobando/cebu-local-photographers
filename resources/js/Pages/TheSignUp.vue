@@ -27,10 +27,7 @@ import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import Meta from '@/Components/Meta/Meta.vue';
 import LayoutAuth from '@/Layouts/LayoutAuth.vue';
-import useRoute from '@/composables/useRoute';
 import InputText from 'primevue/inputtext';
-
-const route = useRoute();
 
 defineOptions({ layout: LayoutAuth });
 </script>

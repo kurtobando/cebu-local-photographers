@@ -7,8 +7,8 @@
             <div class="flex flex-col gap-8 font-medium mt-14">
                 <nav class="flex flex-col gap-8">
                     <Link
-                        class="inline-flex items-center gap-3"
-                        href="">
+                        :href="route('home')"
+                        class="inline-flex items-center gap-3">
                         <HeartHandshake />
                         <span>Discover</span>
                     </Link>
@@ -19,8 +19,8 @@
                         <span>Events</span>
                     </Link>
                     <Link
-                        class="inline-flex items-center gap-3"
-                        href="">
+                        :href="route('members')"
+                        class="inline-flex items-center gap-3">
                         <Users />
                         <span>Members</span>
                     </Link>
@@ -54,9 +54,7 @@ import { Menu, User2, HeartHandshake, Users, Star } from 'lucide-vue-next';
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
 import Brand from '@/Components/Brand/Brand.vue';
-import useRoute from '@/composables/useRoute';
 
-const route = useRoute();
 const visible = ref(false);
 </script>
 

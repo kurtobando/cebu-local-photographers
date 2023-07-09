@@ -1,9 +1,9 @@
 <template>
     <div class="hidden lg:inline-flex gap-12">
         <nav class="inline-flex items-center gap-8">
-            <Link href="">Discover</Link>
+            <Link :href="route('home')">Discover</Link>
             <Link href="">Events</Link>
-            <Link href="">Members</Link>
+            <Link :href="route('members')">Members</Link>
         </nav>
         <nav class="inline-flex items-center gap-8">
             <Link :href="route('sign-in')">Sign-in</Link>
@@ -17,9 +17,6 @@
 <script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
-import useRoute from '@/composables/useRoute';
-
-const route = useRoute();
 </script>
 
 <style scoped></style>
