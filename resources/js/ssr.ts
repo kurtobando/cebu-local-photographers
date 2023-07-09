@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createSSRApp, h, DefineComponent } from 'vue';
 import { renderToString } from '@vue/server-renderer';
 import { createInertiaApp } from '@inertiajs/vue3';
 import createServer from '@inertiajs/vue3/server';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import { Ziggy } from './ziggy';
 import PrimeVue from 'primevue/config';
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -21,12 +21,7 @@ createServer((page) => {
             return createSSRApp({ render: () => h(App, props) })
                 .use(plugin)
                 .use(PrimeVue)
-                .use(ZiggyVue, {
-                    // @ts-expect-error
-                    ...page.props.ziggy,
-                    // @ts-expect-error
-                    location: new URL(page.props.ziggy.location),
-                });
+                .use(ZiggyVue, Ziggy);
         },
     });
 }, INERTIA_SSR_PORT);

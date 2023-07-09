@@ -5,11 +5,8 @@
     </Link>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
-import useRoute from '@/composables/useRoute';
-
-const route = useRoute();
 </script>
 
 <style scoped></style>
