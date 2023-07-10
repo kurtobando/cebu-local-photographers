@@ -8,19 +8,22 @@
                 <nav class="flex flex-col gap-8">
                     <Link
                         :href="route('home')"
-                        class="inline-flex items-center gap-3">
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible">
                         <HeartHandshake />
                         <span>Discover</span>
                     </Link>
                     <Link
                         :href="route('events')"
-                        class="inline-flex items-center gap-3">
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible">
                         <Star />
                         <span>Events</span>
                     </Link>
                     <Link
                         :href="route('members')"
-                        class="inline-flex items-center gap-3">
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible">
                         <Users />
                         <span>Members</span>
                     </Link>
@@ -28,11 +31,14 @@
                 <nav class="flex flex-col gap-8">
                     <Link
                         :href="route('sign-in')"
-                        class="inline-flex items-center gap-3">
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible">
                         <User2 />
                         <span>Sign-in</span>
                     </Link>
-                    <Link :href="route('sign-up')">
+                    <Link
+                        :href="route('sign-up')"
+                        @click="toggleVisible">
                         <Button
                             class="w-full"
                             label="Create an account" />
@@ -56,6 +62,10 @@ import Button from 'primevue/button';
 import Brand from '@/Components/Brand/Brand.vue';
 
 const visible = ref(false);
+
+function toggleVisible() {
+    visible.value = !visible.value;
+}
 </script>
 
 <style scoped></style>
