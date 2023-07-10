@@ -4,7 +4,7 @@
         <template v-slot:header>
             <h1 class="text-4xl font-bold text-center leading-relaxed">Upcoming Events</h1>
         </template>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
             <CardEvent
                 v-for="event in events"
                 :key="event.id"
