@@ -3,7 +3,7 @@
         v-model:visible="visible"
         class="!w-[90%] md:!w-[50%] !p-4">
         <div>
-            <Brand />
+            <Brand @click="toggleVisible" />
             <div class="flex flex-col gap-8 font-medium mt-14">
                 <nav class="flex flex-col gap-8">
                     <Link
