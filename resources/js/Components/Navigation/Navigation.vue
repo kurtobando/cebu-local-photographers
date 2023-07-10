@@ -2,7 +2,7 @@
     <div class="hidden lg:inline-flex gap-12">
         <nav class="inline-flex items-center gap-8">
             <Link :href="route('home')">Discover</Link>
-            <Link href="">Events</Link>
+            <Link :href="route('events')">Events</Link>
             <Link :href="route('members')">Members</Link>
         </nav>
         <nav class="inline-flex items-center gap-8">

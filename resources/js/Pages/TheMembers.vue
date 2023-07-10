@@ -4,7 +4,7 @@
         <template v-slot:header>
             <h1 class="text-4xl font-bold text-center leading-relaxed">Meet the people behind their amazing work</h1>
         </template>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-6">
             <CardAvatarImage
                 v-for="(image, key) in images"
                 :key="key"
