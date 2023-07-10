@@ -2,8 +2,9 @@
     <LayoutTheFold>
         <Meta title="Portfolio" />
         <template v-slot:header>
-            <div class="grid place-content-center">
-                <div class="inline-flex gap-8 items-center max-w-3xl">
+            <div class="grid place-content-center -mt-8">
+                <div
+                    class="flex flex-col md:flex-row justify-center gap-8 items-center text-center md:text-left max-w-3xl">
                     <img
                         alt="avatar"
                         class="rounded-full w-52 h-52 object-cover mx-auto"
@@ -14,11 +15,11 @@
                             I’m John Doe, located in Cebu. I am a freelance photographer, send me a message if you are
                             interested.
                         </p>
-                        <div class="inline-flex gap-4 mt-4">
+                        <div class="inline-flex gap-4 mt-4 justify-center md:justify-start">
                             <a href="#">Follow</a>
                             <a href="#">Hire Me</a>
                         </div>
-                        <div class="inline-flex gap-4 items-center">
+                        <div class="inline-flex gap-4 items-center justify-center md:justify-start">
                             <p class="inline-flex items-center gap-2">
                                 <Image />
                                 12
