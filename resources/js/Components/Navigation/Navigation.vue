@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden lg:inline-flex gap-12">
+    <div class="hidden lg:inline-flex gap-16">
         <nav class="inline-flex items-center gap-8">
             <Link :href="route('home')">Discover</Link>
             <Link :href="route('events')">Events</Link>
