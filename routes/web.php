@@ -15,18 +15,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('TheHome');
-})->name('home');
-Route::get('/members', function() {
-    return Inertia::render('TheMembers');
-})->name('members');
-Route::get('/sign-in', function () {
-    return Inertia::render('TheSignIn');
-})->name('sign-in');
-Route::get('/sign-up', function () {
-    return Inertia::render('TheSignUp');
-})->name('sign-up');
-Route::get('/password-reset', function () {
-    return Inertia::render('ThePasswordReset');
-})->name('password-reset');
+Route::get('/', fn () => Inertia::render('TheHome'))->name('home');
+Route::get('/members', fn () => Inertia::render('TheMembers'))->name('members');
+Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
+Route::get('/sign-in', fn () => Inertia::render('TheSignIn'))->name('sign-in');
+Route::get('/sign-up', fn () => Inertia::render('TheSignUp'))->name('sign-up');
+Route::get('/password-reset', fn () => Inertia::render('ThePasswordReset'))->name('password-reset');
