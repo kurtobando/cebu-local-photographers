@@ -4,11 +4,11 @@
         <template v-slot:header>
             <div class="grid place-content-center -mt-8">
                 <CardPortfolio
+                    :followers="1000"
+                    :posts="12"
                     about="I’m John Doe, located in Cebu. I am a freelance photographer, send me a message if you are interested."
-                    followers="1000"
                     image-source="https://images.unsplash.com/photo-1687579520892-5160c0df4b3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80"
                     name="John Doe"
-                    posts="12"
                     role="Contributor" />
             </div>
         </template>
