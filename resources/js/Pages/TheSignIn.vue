@@ -1,10 +1,10 @@
 <template>
     <section class="w-full max-w-[24rem]">
         <Meta title="Sign In" />
-        <form class="flex flex-col gap-2 justify-center">
-            <h1 class="font-bold text-4xl text-center -tracking-wide">Hey, there!</h1>
-            <h1 class="font-bold text-4xl text-center -tracking-wide">Welcome back</h1>
-            <div class="flex flex-col gap-4 text-center justify-center px-8 mt-8">
+        <form class="flex flex-col justify-center gap-2">
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Hey, there!</h1>
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Welcome back</h1>
+            <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
                 <InputText
                     placeholder="email address"
                     type="email" />
@@ -16,12 +16,18 @@
                     icon="pi pi-google"
                     label="Sign in with Google"
                     outlined />
-                <Link :href="route('sign-up')">Create an account? Click here </Link>
-                <Link
-                    :href="route('password-reset')"
-                    class="text-slate-600">
-                    Forgot password?
-                </Link>
+                <div class="mt-4 flex flex-col gap-4">
+                    <Link
+                        class="text-sm"
+                        :href="route('sign-up')">
+                        Create an account? Click here
+                    </Link>
+                    <Link
+                        :href="route('password-reset')"
+                        class="text-sm text-slate-600">
+                        Forgot password?
+                    </Link>
+                </div>
             </div>
         </form>
     </section>

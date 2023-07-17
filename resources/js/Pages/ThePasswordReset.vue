@@ -1,15 +1,19 @@
 <template>
     <section class="w-full max-w-[24rem]">
         <Meta title="Password Reset" />
-        <form class="flex flex-col gap-2 justify-center">
-            <h1 class="font-bold text-4xl text-center -tracking-wide">Forgot password?</h1>
-            <h1 class="font-bold text-4xl text-center -tracking-wide">Reset them now!</h1>
-            <div class="flex flex-col gap-4 text-center justify-center px-8 mt-8">
+        <form class="flex flex-col justify-center gap-2">
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Forgot password?</h1>
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Reset them now!</h1>
+            <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
                 <InputText
                     placeholder="email address"
                     type="email" />
                 <Button label="Send Password Reset" />
-                <Link :href="route('sign-in')">Have an account? Sign-in here </Link>
+                <Link
+                    class="mt-4 text-sm"
+                    :href="route('sign-in')">
+                    Have an account? Sign-in here
+                </Link>
             </div>
         </form>
     </section>
