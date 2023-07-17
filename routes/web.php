@@ -23,3 +23,4 @@ Route::get('/post', fn () => Inertia::render('ThePost'))->name('post');
 Route::get('/sign-in', fn () => Inertia::render('TheSignIn'))->name('sign-in');
 Route::get('/sign-up', fn () => Inertia::render('TheSignUp'))->name('sign-up');
 Route::get('/password-reset', fn () => Inertia::render('ThePasswordReset'))->name('password-reset');
+Route::get('/dashboard', fn() => Inertia::render('Dashboard/TheDashboard'))->name('dashboard');
