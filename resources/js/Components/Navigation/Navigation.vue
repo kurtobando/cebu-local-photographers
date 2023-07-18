@@ -5,6 +5,18 @@
             <Link :href="route('events')">Events</Link>
             <Link :href="route('members')">Members</Link>
         </nav>
+        <nav class="font-sm inline-flex items-center gap-8 text-sm">
+            <Link href="">My Photos</Link>
+            <Link href="">My Profile</Link>
+            <Link href="">
+                <Bell />
+            </Link>
+            <Link href="">
+                <Button
+                    :label="'Submit a Photo'"
+                    class="!py-[0.9rem] !text-sm" />
+            </Link>
+        </nav>
         <nav class="inline-flex items-center gap-8">
             <Link :href="route('sign-in')">Sign-in</Link>
             <Link :href="route('sign-up')">
@@ -15,10 +27,12 @@
         </nav>
     </div>
 </template>
+“
 
 <script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
 import Button from 'primevue/button';
+import { Bell } from 'lucide-vue-next';
 </script>
 
 <style scoped></style>

@@ -1,10 +1,10 @@
 <template>
     <Sidebar
         v-model:visible="visible"
-        class="!w-[90%] md:!w-[50%] !p-4">
+        class="!w-[90%] !p-4 md:!w-[50%]">
         <div>
             <Brand @click="toggleVisible" />
-            <div class="flex flex-col gap-8 font-medium mt-14">
+            <div class="mt-14 flex flex-col gap-8 font-medium">
                 <nav class="flex flex-col gap-8">
                     <Link
                         :href="route('home')"
@@ -30,6 +30,36 @@
                 </nav>
                 <nav class="flex flex-col gap-8">
                     <Link
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible"
+                        href="">
+                        <Image />
+                        <span>My Photos</span>
+                    </Link>
+                    <Link
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible"
+                        href="">
+                        <User2 />
+                        <span>My Profile</span>
+                    </Link>
+                    <Link
+                        class="inline-flex items-center gap-3"
+                        @click="toggleVisible"
+                        href="">
+                        <Bell />
+                        <span>Notification</span>
+                    </Link>
+                    <Link
+                        @click="toggleVisible"
+                        href="">
+                        <Button
+                            :label="'Submit a Photo'"
+                            class="w-full" />
+                    </Link>
+                </nav>
+                <nav class="flex flex-col gap-8">
+                    <Link
                         :href="route('sign-in')"
                         class="inline-flex items-center gap-3"
                         @click="toggleVisible">
@@ -49,14 +79,14 @@
     </Sidebar>
     <Menu
         :size="28"
-        class="cursor-pointer lg:hidden hover:text-accent"
+        class="cursor-pointer hover:text-accent lg:hidden"
         @click="visible = true" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Menu, User2, HeartHandshake, Users, Star } from 'lucide-vue-next';
+import { Menu, User2, HeartHandshake, Users, Star, Bell, Image } from 'lucide-vue-next';
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
 import Brand from '@/Components/Brand/Brand.vue';
