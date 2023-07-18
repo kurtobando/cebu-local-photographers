@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthGoogleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,3 +25,6 @@ Route::get('/sign-in', fn () => Inertia::render('TheSignIn'))->name('sign-in');
 Route::get('/sign-up', fn () => Inertia::render('TheSignUp'))->name('sign-up');
 Route::get('/password-reset', fn () => Inertia::render('ThePasswordReset'))->name('password-reset');
 Route::get('/dashboard', fn() => Inertia::render('Dashboard/TheDashboard'))->name('dashboard');
+
+Route::get('/auth/google/redirect', [AuthGoogleController::class, "redirect"])->name('auth.google.redirect');
+Route::get('/auth/google/callback',[AuthGoogleController::class, "callback"])->name('auth.google.callback');
