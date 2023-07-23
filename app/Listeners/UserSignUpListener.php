@@ -14,8 +14,7 @@ class UserSignUpListener
 
     public function handle(UserSignUpEvent $event): void
     {
-        // TODO!
-        // sends email notification to user email address
+        // TODO! sends email notification to user email address
 
         Log::debug($event->user->email);
         Log::debug("TODO! send sign up email to user");

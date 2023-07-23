@@ -5,13 +5,28 @@
             <h1 class="text-center text-3xl font-bold -tracking-wide">Let's get started!</h1>
             <h1 class="text-center text-3xl font-bold -tracking-wide">Create your account</h1>
             <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
-                <InputText
-                    placeholder="email address"
-                    type="email" />
-                <InputText
-                    placeholder="password"
-                    type="password" />
-                <Button label="Sign up" />
+                <div class="flex flex-col gap-2">
+                    <InputText
+                        v-model="form.email"
+                        placeholder="email address"
+                        type="email" />
+                    <InputError
+                        v-if="form.errors.email"
+                        :text="form.errors.email" />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <InputText
+                        v-model="form.password"
+                        placeholder="password"
+                        type="password" />
+                    <InputError
+                        v-if="form.errors.password"
+                        :text="form.errors.password" />
+                </div>
+                <Button
+                    label="Sign up"
+                    :loading="form.processing"
+                    @click="onSubmit" />
                 <a :href="route('auth.google.redirect')">
                     <Button
                         class="w-full"
@@ -30,11 +45,28 @@
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import Meta from '@/Components/Meta/Meta.vue';
 import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 import InputText from 'primevue/inputtext';
+import InputError from '@/Components/InputError/InputError.vue';
+import useRoute from '@/composables/useRoute';
+
+const route = useRoute();
+const form = useForm({
+    email: '',
+    password: '',
+});
+
+function onSubmit() {
+    form.post(route('sign-up'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            // form.reset();
+        },
+    });
+}
 
 defineOptions({ layout: PageLayoutAuth });
 </script>

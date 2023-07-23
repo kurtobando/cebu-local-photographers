@@ -15,8 +15,7 @@ class UserSignInListener implements ShouldQueue
 
     public function handle(UserSignInEvent $event): void
     {
-        // TODO!
-        // sends email notification to user email address
+        // TODO! sends email notification to user email address
 
         Log::debug($event->user->email);
         Log::debug("TODO! send sign in email to user");
