@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignUpRequest extends FormRequest
+class SignInRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,8 +16,8 @@ class SignUpRequest extends FormRequest
         // TODO! update email validation rules
 
         return [
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8'],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ];
     }
 }
