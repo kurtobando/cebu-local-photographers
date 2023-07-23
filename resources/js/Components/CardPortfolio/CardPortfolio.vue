@@ -1,17 +1,17 @@
 <template>
-    <div class="flex flex-col md:flex-row justify-center gap-8 items-center text-center md:text-left max-w-3xl">
+    <div class="flex max-w-3xl flex-col items-center justify-center gap-8 text-center md:flex-row md:text-left">
         <img
             :alt="name"
             :src="imageSource"
-            class="rounded-full w-52 h-52 object-cover mx-auto" />
+            class="mx-auto h-52 w-52 rounded-full object-cover" />
         <div class="flex flex-col gap-2">
-            <h2 class="font-bold text-2xl">{{ name }}</h2>
+            <h2 class="text-2xl font-bold">{{ name }}</h2>
             <p class="leading-relaxed">{{ about }}</p>
-            <div class="inline-flex gap-4 mt-4 justify-center md:justify-start">
+            <div class="mt-4 inline-flex justify-center gap-4 md:justify-start">
                 <a href="#">Follow</a>
                 <a href="#">Hire Me</a>
             </div>
-            <div class="inline-flex gap-4 items-center justify-center md:justify-start">
+            <div class="inline-flex items-center justify-center gap-4 md:justify-start">
                 <p class="inline-flex items-center gap-2">
                     <Image />
                     {{ posts }}

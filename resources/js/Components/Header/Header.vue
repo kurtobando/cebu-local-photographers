@@ -1,6 +1,6 @@
 <template>
-    <div class="p-8 border-b">
-        <div class="w-full inline-flex items-center justify-between">
+    <div class="border-b p-8">
+        <div class="inline-flex w-full items-center justify-between">
             <Brand />
             <Navigation />
             <MobileNavigation />

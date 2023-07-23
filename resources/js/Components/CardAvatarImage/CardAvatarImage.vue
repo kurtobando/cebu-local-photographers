@@ -4,7 +4,7 @@
             <img
                 :alt="imageAlt"
                 :src="imageSource"
-                class="w-full h-[18rem] object-cover rounded" />
+                class="h-[18rem] w-full rounded object-cover" />
         </Link>
     </div>
 </template>

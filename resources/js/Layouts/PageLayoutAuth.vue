@@ -1,12 +1,12 @@
 <template>
-    <section class="w-full min-h-screen inline-flex">
-        <div class="w-full lg:w-1/2 grid place-items-center">
+    <section class="inline-flex min-h-screen w-full">
+        <div class="grid w-full place-items-center lg:w-1/2">
             <slot />
         </div>
-        <div class="lg:w-1/2 bg-slate-200 hidden lg:block">
+        <div class="hidden bg-slate-200 lg:block lg:w-1/2">
             <img
                 alt="auth background image"
-                class="w-full h-screen object-cover"
+                class="h-screen w-full object-cover"
                 src="/build/assets/images/background-auth.jpg" />
         </div>
     </section>

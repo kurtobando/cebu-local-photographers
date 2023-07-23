@@ -1,7 +1,7 @@
 <template>
-    <div class="inline-flex gap-4 items-center">
+    <div class="inline-flex items-center gap-4">
         <img
-            class="h-12 w-12 object-cover rounded-full"
+            class="h-12 w-12 rounded-full object-cover"
             :src="imageSource"
             alt="avatar" />
         <p class="leading-relaxed">

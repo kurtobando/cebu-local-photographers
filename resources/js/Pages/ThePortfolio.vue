@@ -2,7 +2,7 @@
     <LayoutTheFold>
         <Meta title="Portfolio" />
         <template v-slot:header>
-            <div class="grid place-content-center -mt-8">
+            <div class="-mt-8 grid place-content-center">
                 <CardPortfolio
                     :followers="1000"
                     :posts="12"
@@ -12,7 +12,7 @@
                     role="Contributor" />
             </div>
         </template>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
             <CardAvatarImage
                 v-for="(image, key) in images"
                 :key="key"

@@ -3,8 +3,8 @@
         <img
             :src="imageSource"
             :alt="imageAlt"
-            class="w-full h-[25rem] object-cover rounded" />
-        <div class="w-full inline-flex items-center justify-between py-4">
+            class="h-[25rem] w-full rounded object-cover" />
+        <div class="inline-flex w-full items-center justify-between py-4">
             <AvatarWithName
                 :name="author.name"
                 :image-source="author.avatar" />

@@ -2,9 +2,9 @@
     <LayoutTheFold>
         <Meta title="Events" />
         <template v-slot:header>
-            <h1 class="text-4xl font-bold text-center leading-relaxed">Upcoming Events</h1>
+            <h1 class="text-center text-4xl font-bold leading-relaxed">Upcoming Events</h1>
         </template>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto">
+        <div class="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <CardEvent
                 v-for="event in events"
                 :key="event.id"
