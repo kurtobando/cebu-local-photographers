@@ -12,10 +12,15 @@
                     placeholder="password"
                     type="password" />
                 <Button label="Sign in" />
-                <Button
-                    icon="pi pi-google"
-                    label="Sign in with Google"
-                    outlined />
+                <a
+                    :href="route('auth.google.redirect')"
+                    class="block">
+                    <Button
+                        class="w-full"
+                        icon="pi pi-google"
+                        label="Sign in with Google"
+                        outlined />
+                </a>
                 <div class="mt-4 flex flex-col gap-4">
                     <Link
                         class="text-sm"
