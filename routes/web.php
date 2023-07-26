@@ -40,6 +40,6 @@ Route::get('/auth/google/callback', [AuthGoogleController::class, "callback"])->
 // TODO!, add middleware to protect dashboard routes
 Route::prefix('dashboard')
     ->middleware(['auth'])
-    ->group(function ()  {
+    ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name('dashboard');
     });

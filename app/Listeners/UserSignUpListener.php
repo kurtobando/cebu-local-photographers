@@ -3,9 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\UserSignUpEvent;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UserSignUpListener
+class UserSignUpListener implements ShouldQueue
 {
     public function __construct()
     {
