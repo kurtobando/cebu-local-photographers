@@ -28,7 +28,9 @@
                         <span>Members</span>
                     </Link>
                 </nav>
-                <nav class="flex flex-col gap-8">
+                <nav
+                    v-if="isAuthenticated"
+                    class="flex flex-col gap-8">
                     <Link
                         class="inline-flex items-center gap-3"
                         href=""
@@ -51,15 +53,6 @@
                         <span>Notification</span>
                     </Link>
                     <Link
-                        href=""
-                        @click="toggleVisible">
-                        <Button
-                            :label="'Submit a Photo'"
-                            class="w-full" />
-                    </Link>
-                </nav>
-                <nav class="flex flex-col gap-8">
-                    <Link
                         :href="route('dashboard.sign-out')"
                         class="inline-flex items-center gap-3"
                         method="POST"
@@ -67,6 +60,17 @@
                         <LogOut />
                         <span>Sign-out</span>
                     </Link>
+                    <Link
+                        href=""
+                        @click="toggleVisible">
+                        <Button
+                            :label="'Submit a Photo'"
+                            class="w-full" />
+                    </Link>
+                </nav>
+                <nav
+                    v-if="!isAuthenticated"
+                    class="flex flex-col gap-8">
                     <Link
                         :href="route('sign-in')"
                         class="inline-flex items-center gap-3"
@@ -98,7 +102,9 @@ import { Menu, User2, HeartHandshake, Users, Star, Bell, Image, LogOut } from 'l
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
 import Brand from '@/Components/Brand/Brand.vue';
+import useAuth from '@/composables/useAuth';
 
+const { isAuthenticated } = useAuth();
 const visible = ref(false);
 
 function toggleVisible() {

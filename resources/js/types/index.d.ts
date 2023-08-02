@@ -15,6 +15,6 @@ export interface User {
 export interface SharedProps extends PageProps {
     app: App;
     auth: {
-        user: User;
+        user: User | null;
     };
 }

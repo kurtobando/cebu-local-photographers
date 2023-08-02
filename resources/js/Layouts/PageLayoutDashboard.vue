@@ -7,7 +7,7 @@
     </main>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import Header from '@/Components/Header/Header.vue';
 </script>
 
