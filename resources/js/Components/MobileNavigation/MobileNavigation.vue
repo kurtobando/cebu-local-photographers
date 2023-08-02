@@ -31,34 +31,42 @@
                 <nav class="flex flex-col gap-8">
                     <Link
                         class="inline-flex items-center gap-3"
-                        @click="toggleVisible"
-                        href="">
+                        href=""
+                        @click="toggleVisible">
                         <Image />
                         <span>My Photos</span>
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"
-                        @click="toggleVisible"
-                        href="">
+                        href=""
+                        @click="toggleVisible">
                         <User2 />
                         <span>My Profile</span>
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"
-                        @click="toggleVisible"
-                        href="">
+                        href=""
+                        @click="toggleVisible">
                         <Bell />
                         <span>Notification</span>
                     </Link>
                     <Link
-                        @click="toggleVisible"
-                        href="">
+                        href=""
+                        @click="toggleVisible">
                         <Button
                             :label="'Submit a Photo'"
                             class="w-full" />
                     </Link>
                 </nav>
                 <nav class="flex flex-col gap-8">
+                    <Link
+                        :href="route('dashboard.sign-out')"
+                        class="inline-flex items-center gap-3"
+                        method="POST"
+                        @click="toggleVisible">
+                        <LogOut />
+                        <span>Sign-out</span>
+                    </Link>
                     <Link
                         :href="route('sign-in')"
                         class="inline-flex items-center gap-3"
@@ -86,7 +94,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Menu, User2, HeartHandshake, Users, Star, Bell, Image } from 'lucide-vue-next';
+import { Menu, User2, HeartHandshake, Users, Star, Bell, Image, LogOut } from 'lucide-vue-next';
 import Sidebar from 'primevue/sidebar';
 import Button from 'primevue/button';
 import Brand from '@/Components/Brand/Brand.vue';

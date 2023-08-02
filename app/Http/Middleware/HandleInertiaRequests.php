@@ -23,7 +23,7 @@ class HandleInertiaRequests extends Middleware
                 'url' => config('app.url'),
             ],
             'auth' => [
-                'user' => $request->user()->only(['id', 'name', 'email', 'avatar', 'provider']),
+                'user' => $request->user()?->only(['id', 'name', 'email', 'avatar', 'provider']),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy())->toArray(), [

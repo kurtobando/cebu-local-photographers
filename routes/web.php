@@ -3,6 +3,7 @@
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -42,4 +43,5 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name('dashboard');
+        Route::post('/sign-out', [SignOutController::class, "store"])->name('dashboard.sign-out');
     });
