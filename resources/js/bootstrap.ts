@@ -30,3 +30,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+// TODO! find a better way for this issue, see https://github.com/inertiajs/inertia/issues/247
+window.addEventListener('popstate', function (): void {
+    location.reload();
+});
