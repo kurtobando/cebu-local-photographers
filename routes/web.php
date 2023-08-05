@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\SignInController;
 use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,8 +25,9 @@ Route::get('/members', fn () => Inertia::render('TheMembers'))->name('members');
 Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
 Route::get('/post', fn () => Inertia::render('ThePost'))->name('post');
-Route::get('/sign-up', fn () => Inertia::render('TheSignUp'))->name('sign-up');
-Route::get('/password-reset', fn () => Inertia::render('ThePasswordReset'))->name('password-reset');
+
+Route::get('/password-reset', [PasswordResetController::class, "index"])->name('password-reset');
+Route::post('/password-reset', [PasswordResetController::class, "store"])->name('password-reset.store');
 
 Route::get('/sign-in', [SignInController::class, 'index'])->name('sign-in');
 Route::post('/sign-in', [SignInController::class, 'store'])->name('sign-in.store');
