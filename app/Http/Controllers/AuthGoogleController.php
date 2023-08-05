@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
-use App\Enums\UserRoleEnum;
 use App\Events\UserSignInEvent;
 use App\Events\UserSignUpEvent;
 use App\Models\User;
@@ -50,7 +49,6 @@ class AuthGoogleController extends Controller
             }
 
             auth()->login($user->first());
-            auth()->user()->assignRole(UserRoleEnum::USER->value);
 
             UserSignInEvent::dispatch($user->first());
 

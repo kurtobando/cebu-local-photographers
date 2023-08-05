@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
+use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
+use App\Notifications\SignUpNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
 
 class UserSignUpListener implements ShouldQueue
 {
@@ -15,9 +16,7 @@ class UserSignUpListener implements ShouldQueue
 
     public function handle(UserSignUpEvent $event): void
     {
-        // TODO! sends email notification to user email address
-
-        Log::debug($event->user->email);
-        Log::debug("TODO! send sign up email to user");
+        $event->user->assignRole(UserRoleEnum::USER->value);
+        $event->user->notify(new SignUpNotification());
     }
 }
