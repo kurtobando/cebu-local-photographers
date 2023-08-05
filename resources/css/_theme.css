@@ -5715,6 +5715,7 @@
 .p-toast .p-toast-message .p-toast-message-content {
     padding: 1rem;
     border-width: 0 0 0 6px;
+    align-items: center;
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
     margin: 0 0 0 1rem;
@@ -5731,6 +5732,7 @@
 }
 .p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
     margin: 0.5rem 0 0 0;
+    font-size: 14px;
 }
 .p-toast .p-toast-message .p-toast-icon-close {
     width: 2rem;
