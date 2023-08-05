@@ -2,25 +2,23 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+ use App\Enums\UserRoleEnum;
+ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+ use Illuminate\Support\Facades\Gate;
 
-class AuthServiceProvider extends ServiceProvider
+ class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
     protected $policies = [
         //
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     */
     public function boot(): void
     {
-        //
+        // Implicitly grant "Super Admin" role all permissions
+        // This works in the app by using gate-related functions like auth()->user->can() and @can()
+        // ref https://spatie.be/docs/laravel-permission/v5/basic-usage/super-admin
+        Gate::before(function ($user) {
+            return $user->hasRole(UserRoleEnum::SUPER_ADMIN->value) ? true : null;
+        });
     }
 }
