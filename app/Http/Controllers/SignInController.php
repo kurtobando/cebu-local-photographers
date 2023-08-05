@@ -16,7 +16,7 @@ class SignInController extends Controller
         if (!auth()->attempt($request->only('email', 'password'), true)) {
             return redirect()
                 ->route('sign-in')
-                ->with('error', 'Your credentials are invalid, please try again.');
+                ->with(['error' => 'Make sure you have the correct email address and password, then try again.']);
         }
 
         $request->session()->regenerate();
