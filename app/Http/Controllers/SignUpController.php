@@ -39,7 +39,7 @@ class SignUpController extends Controller
 
         $request->session()->regenerate();
 
-        UserSignUpEvent::dispatch($this->user->where('email', $request->email)->first());
+        UserSignUpEvent::dispatch(auth()->user());
 
         return redirect()->route('dashboard');
     }

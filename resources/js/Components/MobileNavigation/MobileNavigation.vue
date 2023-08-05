@@ -55,7 +55,7 @@
                     <Link
                         :href="route('dashboard.sign-out')"
                         class="inline-flex items-center gap-3"
-                        method="POST"
+                        method="post"
                         @click="toggleVisible">
                         <LogOut />
                         <span>Sign-out</span>
@@ -96,11 +96,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
-import { Menu, User2, HeartHandshake, Users, Star, Bell, Image, LogOut } from 'lucide-vue-next';
-import Sidebar from 'primevue/sidebar';
+import { Bell, HeartHandshake, Image, LogOut, Menu, Star, User2, Users } from 'lucide-vue-next';
 import Button from 'primevue/button';
+import Sidebar from 'primevue/sidebar';
+import { ref } from 'vue';
 import Brand from '@/Components/Brand/Brand.vue';
 import useAuth from '@/composables/useAuth';
 

@@ -12,7 +12,7 @@
             <Link href="">My Profile</Link>
             <Link
                 :href="route('dashboard.sign-out')"
-                method="POST">
+                method="post">
                 Sign-out
             </Link>
             <Link href="">
@@ -39,8 +39,8 @@
 
 <script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
-import Button from 'primevue/button';
 import { Bell } from 'lucide-vue-next';
+import Button from 'primevue/button';
 import useAuth from '@/composables/useAuth';
 
 const { isAuthenticated } = useAuth();
