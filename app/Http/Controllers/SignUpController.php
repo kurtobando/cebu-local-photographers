@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
+use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
@@ -36,6 +37,8 @@ class SignUpController extends Controller
                 ->route('sign-up')
                 ->with(['error' => 'Your credentials are invalid! Please try again.']);
         }
+
+        auth()->user()->assignRole(UserRoleEnum::USER->value);
 
         $request->session()->regenerate();
 
