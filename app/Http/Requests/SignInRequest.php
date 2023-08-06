@@ -13,11 +13,9 @@ class SignInRequest extends FormRequest
 
     public function rules(): array
     {
-        // TODO! update email validation rules
-
         return [
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ];
     }
 }

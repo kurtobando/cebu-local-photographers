@@ -1,16 +1,17 @@
 <template>
     <section class="w-full max-w-[24rem]">
-        <Meta title="Sign In" />
+        <Meta title="Change Your Password" />
         <form
-            class="flex flex-col justify-center gap-2"
-            @submit.prevent="onSubmit">
-            <h1 class="text-center text-3xl font-bold -tracking-wide">Hey, there!</h1>
-            <h1 class="text-center text-3xl font-bold -tracking-wide">Welcome back</h1>
+            @submit.prevent="onSubmit"
+            class="flex flex-col justify-center gap-2">
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Change your password</h1>
             <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
                 <InputText
                     v-model="form.email"
                     placeholder="email address"
-                    type="email" />
+                    readonly
+                    disabled
+                    type="text" />
                 <InputError
                     :text="form.errors.email"
                     v-if="form.errors.email" />
@@ -21,59 +22,50 @@
                 <InputError
                     :text="form.errors.password"
                     v-if="form.errors.password" />
+                <InputText
+                    v-model="form.password_confirmation"
+                    placeholder="confirm password"
+                    type="password" />
+                <InputError
+                    :text="form.errors.password_confirmation"
+                    v-if="form.errors.password_confirmation" />
                 <Button
+                    :loading="form.processing"
                     type="submit"
-                    label="Sign in" />
-                <a
-                    :href="route('auth.google.redirect')"
-                    class="block">
-                    <Button
-                        :loading="form.processing"
-                        class="w-full"
-                        icon="pi pi-google"
-                        label="Sign in with Google"
-                        outlined />
-                </a>
-                <div class="mt-4 flex flex-col gap-4">
-                    <Link
-                        class="text-sm"
-                        :href="route('sign-up')">
-                        Create an account? Click here
-                    </Link>
-                    <Link
-                        :href="route('password-reset')"
-                        class="text-sm text-slate-600">
-                        Forgot password?
-                    </Link>
-                </div>
+                    label="Change Password" />
             </div>
         </form>
         <Toast />
     </section>
 </template>
 
-<script lang="ts" setup>
-import { Link, useForm } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { useForm, usePage } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
-import { onMounted } from 'vue';
+import { computed } from 'vue';
 import InputError from '@/Components/InputError/InputError.vue';
 import Meta from '@/Components/Meta/Meta.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
+import { SharedProps } from '@/types';
 
-const { error, success } = useFlashMessage();
-const route = useRoute();
+const email = computed(() => usePage<SharedProps>().props.email as string);
+const token = computed(() => usePage<SharedProps>().props.token as string);
+const { error } = useFlashMessage();
 const toast = useToast();
+const route = useRoute();
 const form = useForm({
-    email: '',
+    email: email.value,
     password: '',
+    password_confirmation: '',
+    token: token.value,
 });
 
 function onSubmit() {
-    form.post(route('sign-in.store'), {
+    form.post(route('password-confirmation.update'), {
         onFinish: () => {
             if (error.value) {
                 toast.add({
@@ -85,18 +77,8 @@ function onSubmit() {
         onSuccess: () => {
             form.reset();
         },
-        preserveScroll: true,
     });
 }
-
-onMounted(() => {
-    if (success.value) {
-        toast.add({
-            detail: success.value,
-            severity: 'success',
-        });
-    }
-});
 
 defineOptions({ layout: PageLayoutAuth });
 </script>

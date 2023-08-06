@@ -25,6 +25,7 @@
                 </Link>
             </div>
         </form>
+        <Toast />
     </section>
 </template>
 
@@ -32,11 +33,15 @@
 import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
+import { useToast } from 'primevue/usetoast';
 import InputError from '@/Components/InputError/InputError.vue';
 import Meta from '@/Components/Meta/Meta.vue';
+import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 
+const { success } = useFlashMessage();
+const toast = useToast();
 const route = useRoute();
 const form = useForm({
     email: '',
@@ -44,6 +49,14 @@ const form = useForm({
 
 function onSubmit() {
     form.post(route('password-reset.store'), {
+        onFinish: () => {
+            if (success.value) {
+                toast.add({
+                    detail: success.value,
+                    severity: 'success',
+                });
+            }
+        },
         onSuccess: () => {
             form.reset();
         },

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
@@ -28,6 +29,9 @@ Route::get('/post', fn () => Inertia::render('ThePost'))->name('post');
 
 Route::get('/password-reset', [PasswordResetController::class, "index"])->name('password-reset');
 Route::post('/password-reset', [PasswordResetController::class, "store"])->name('password-reset.store');
+
+Route::get('/password-confirmation', [PasswordConfirmationController::class, "index"])->name('password-confirmation');
+Route::post('/password-confirmation', [PasswordConfirmationController::class, "update"])->name('password-confirmation.update');
 
 Route::get('/sign-in', [SignInController::class, 'index'])->name('sign-in');
 Route::post('/sign-in', [SignInController::class, 'store'])->name('sign-in.store');
