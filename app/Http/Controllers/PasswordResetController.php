@@ -38,7 +38,7 @@ class PasswordResetController extends Controller
             'is_used' => false
         ]);
 
-        $this->passwordResetEvent->dispatch(User::where('email', $request->email)->first(), $token->token);
+        $this->passwordResetEvent->dispatch($token);
 
         return redirect()
             ->route('password-reset')
