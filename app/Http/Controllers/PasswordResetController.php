@@ -7,30 +7,38 @@ use App\Http\Requests\PasswordResetRequest;
 use App\Models\PasswordResetToken;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Inertia\Inertia;
 
 class PasswordResetController extends Controller
 {
+    public function __construct(
+        private readonly User               $user,
+        private readonly PasswordResetEvent $passwordResetEvent,
+        private readonly PasswordResetToken $passwordResetToken
+    )
+    {
+        //
+    }
+
     public function index()
     {
-        return Inertia::render('ThePasswordReset');
+        return inertia('ThePasswordReset');
     }
 
     public function store(PasswordResetRequest $request)
     {
-        if (User::where('email', $request->email)->where('is_active', true)->doesntExist()) {
+        if ($this->user->where('email', $request->email)->where('is_active', true)->doesntExist()) {
             return redirect()
                 ->route('password-reset')
                 ->withErrors(['email' => 'This email address is no longer active status. If you wish to continue with the password reset, please contact our support team.']);
         }
 
-       $passwordResetToken = PasswordResetToken::create([
+        $token = $this->passwordResetToken->create([
             'email' => $request->email,
             'token' => Hash::make(now()),
             'is_used' => false
         ]);
 
-        PasswordResetEvent::dispatch(User::where('email', $request->email)->first(), $passwordResetToken->token);
+        $this->passwordResetEvent->dispatch(User::where('email', $request->email)->first(), $token->token);
 
         return redirect()
             ->route('password-reset')

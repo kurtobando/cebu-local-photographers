@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
-    public function __construct(private readonly User $user)
+    public function __construct(
+        private readonly User $user,
+        private readonly UserSignUpEvent $userSignUpEvent
+    )
     {
         //
     }
@@ -39,7 +42,7 @@ class SignUpController extends Controller
 
         $request->session()->regenerate();
 
-        UserSignUpEvent::dispatch(auth()->user());
+        $this->userSignUpEvent->dispatch(auth()->user());
 
         return redirect()->route('dashboard');
     }
