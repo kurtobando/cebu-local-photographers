@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
+use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 class SignUpController extends Controller
 {
     public function __construct(
-        private readonly User $user,
+        private readonly User            $user,
         private readonly UserSignUpEvent $userSignUpEvent
     ) {
         //
@@ -40,6 +41,8 @@ class SignUpController extends Controller
         }
 
         $request->session()->regenerate();
+
+        auth()->user()->assignRole(UserRoleEnum::USER->value);
 
         $this->userSignUpEvent->dispatch(auth()->user());
 

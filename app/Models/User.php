@@ -26,6 +26,10 @@ class User extends Authenticatable
         'avatar',
     ];
 
+    protected $appends = [
+        'role',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -35,4 +39,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getRoleAttribute(): string
+    {
+        return $this->roles->pluck('name')->first();
+    }
 }
