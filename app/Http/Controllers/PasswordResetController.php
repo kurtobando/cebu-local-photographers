@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserAuthProviderEnum;
 use App\Events\PasswordResetEvent;
 use App\Http\Requests\PasswordResetRequest;
 use App\Models\PasswordResetToken;
@@ -25,7 +26,14 @@ class PasswordResetController extends Controller
 
     public function store(PasswordResetRequest $request)
     {
-        if ($this->user->where('email', $request->email)->where('is_active', true)->doesntExist()) {
+        if (
+            $this
+                ->user
+                ->where('email', $request->email)
+                ->where('is_active', true)
+                ->where('provider', UserAuthProviderEnum::DEFAULT->value)
+                ->doesntExist()
+        ) {
             return redirect()
                 ->route('password-reset')
                 ->withErrors(['email' => 'This email address is no longer active status. If you wish to continue with the password reset, please contact our support team.']);
