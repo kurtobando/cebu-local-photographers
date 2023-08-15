@@ -9,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class PasswordResetListener implements ShouldQueue
 {
-
     public function __construct(private readonly User $user)
     {
         //

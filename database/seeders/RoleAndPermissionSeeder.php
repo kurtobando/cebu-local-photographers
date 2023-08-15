@@ -94,4 +94,3 @@ class RoleAndPermissionSeeder extends Seeder
         $user->givePermissionTo(['store user-profile', 'update user-profile']);
     }
 }
-

@@ -13,8 +13,7 @@ class SignUpController extends Controller
     public function __construct(
         private readonly User $user,
         private readonly UserSignUpEvent $userSignUpEvent
-    )
-    {
+    ) {
         //
     }
 

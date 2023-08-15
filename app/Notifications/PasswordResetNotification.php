@@ -14,8 +14,7 @@ class PasswordResetNotification extends Notification implements ShouldQueue
     public function __construct(
         private readonly string $token,
         private readonly string $email
-    )
-    {
+    ) {
         //
     }
 
@@ -26,7 +25,7 @@ class PasswordResetNotification extends Notification implements ShouldQueue
 
     public function toMail(): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Your Password Reset')
             ->line('You are receiving this email because we received a password reset request for your account.')
             ->line('If you wish to continue with the password reset, please click the button below.')

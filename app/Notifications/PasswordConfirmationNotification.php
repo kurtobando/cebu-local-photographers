@@ -23,7 +23,7 @@ class PasswordConfirmationNotification extends Notification implements ShouldQue
 
     public function toMail(): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Your Password Changed Successfully')
             ->line('You are receiving this email because you have successfully changed your password.')
             ->line('If you did not change your password, please contact us immediately.');

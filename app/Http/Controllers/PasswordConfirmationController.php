@@ -14,8 +14,7 @@ class PasswordConfirmationController extends Controller
         private readonly User $user,
         private readonly PasswordResetToken $passwordResetToken,
         private readonly PasswordConfirmationEvent $passwordConfirmationEvent
-    )
-    {
+    ) {
         //
     }
 
@@ -36,7 +35,7 @@ class PasswordConfirmationController extends Controller
     {
         $token = $request->token;
         $email = $request->email;
-        
+
         if (!$this->isTokenValid($token, $email)) {
             return redirect()->route('password-confirmation')->with(['error' => 'This token is no longer valid.']);
         }

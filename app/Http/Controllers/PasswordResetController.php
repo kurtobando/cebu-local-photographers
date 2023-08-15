@@ -14,8 +14,7 @@ class PasswordResetController extends Controller
         private readonly User               $user,
         private readonly PasswordResetEvent $passwordResetEvent,
         private readonly PasswordResetToken $passwordResetToken
-    )
-    {
+    ) {
         //
     }
 
