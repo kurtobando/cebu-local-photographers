@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRoleEnum;
+use App\Events\UserSignUpEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -40,8 +42,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $dispatchesEvents = [
+        'created' => UserSignUpEvent::class,
+    ];
+
     public function getRoleAttribute(): string
     {
-        return $this->roles->pluck('name')->first();
+        return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
     }
 }

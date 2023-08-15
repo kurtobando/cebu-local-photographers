@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
-use App\Enums\UserRoleEnum;
-use App\Events\UserSignInEvent;
-use App\Events\UserSignUpEvent;
 use App\Models\User;
 use Exception;
 use Laravel\Socialite\Facades\Socialite;
@@ -14,9 +11,7 @@ use Laravel\Socialite\Two\InvalidStateException;
 class AuthGoogleController extends Controller
 {
     public function __construct(
-        private readonly User            $user,
-        private readonly UserSignUpEvent $userSignUpEvent,
-        private readonly UserSignInEvent $userSignInEvent
+        private readonly User $user,
     ) {
         //
     }
@@ -47,18 +42,15 @@ class AuthGoogleController extends Controller
                 $this->user->provider_refresh_token = $google->refreshToken;
                 $this->user->avatar = $google->getAvatar();
                 $this->user->save();
-
-                $user->first()->assignRole(UserRoleEnum::USER->value);
-                $this->userSignUpEvent->dispatch($user->first());
             }
 
             auth()->login($user->first());
 
-            $this->userSignInEvent->dispatch(auth()->user());
-
             return redirect()->route('dashboard');
         } catch (InvalidStateException|Exception $e) {
-            return redirect()->route('sign-in');
+            return redirect()
+                ->route('sign-in')
+                ->withErrors($e->getMessage());
         }
     }
 }
