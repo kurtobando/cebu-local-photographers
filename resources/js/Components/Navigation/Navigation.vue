@@ -11,6 +11,7 @@
             <Link href="">My Photos</Link>
             <Link href="">My Profile</Link>
             <Link
+                as="button"
                 :href="route('dashboard.sign-out')"
                 method="post">
                 Sign-out

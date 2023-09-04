@@ -53,6 +53,7 @@
                         <span>Notification</span>
                     </Link>
                     <Link
+                        as="button"
                         :href="route('dashboard.sign-out')"
                         class="inline-flex items-center gap-3"
                         method="post"
