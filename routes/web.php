@@ -43,7 +43,6 @@ Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store
 Route::get('/auth/google/redirect', [AuthGoogleController::class, "redirect"])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [AuthGoogleController::class, "callback"])->name('auth.google.callback');
 
-// TODO!, add middleware to protect dashboard routes
 Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
