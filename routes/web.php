@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
@@ -52,4 +53,6 @@ Route::prefix('dashboard')
 
         Route::get('/profile', [DashboardProfileController::class, "index"])->name('dashboard.profile');
         Route::patch('/profile', [DashboardProfileController::class, "update"])->name('dashboard.profile.update');
+
+        Route::get('/photos', [DashboardPhotosController::class, "create"])->name('dashboard.photos.create');
     });

@@ -33,7 +33,7 @@
                     class="flex flex-col gap-8">
                     <Link
                         class="inline-flex items-center gap-3"
-                        href=""
+                        :href="route('dashboard.photos.create')"
                         @click="toggleVisible">
                         <Image />
                         <span>My Photos</span>

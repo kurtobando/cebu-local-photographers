@@ -8,7 +8,7 @@
         <nav
             v-if="isAuthenticated"
             class="font-sm inline-flex items-center gap-8 text-sm">
-            <Link href="">My Photos</Link>
+            <Link :href="route('dashboard.photos.create')">My Photos</Link>
             <Link :href="route('dashboard.profile')">My Profile</Link>
             <Link
                 as="button"

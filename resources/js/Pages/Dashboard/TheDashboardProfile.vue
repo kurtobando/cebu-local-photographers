@@ -1,5 +1,6 @@
 <template>
     <section class="mx-auto flex max-w-2xl flex-col gap-4 py-8">
+        <Meta title="Manage Profile" />
         <div>
             <h2 class="text-lg font-bold">My Profile</h2>
             <p class="text-sm">Manage your profile details here</p>
@@ -81,6 +82,7 @@ import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import { useToast } from 'primevue/usetoast';
 import InputError from '@/Components/InputError/InputError.vue';
+import Meta from '@/Components/Meta/Meta.vue';
 import useAuth from '@/composables/useAuth';
 import useRoutes from '@/composables/useRoute';
 import PageLayoutDashboard from '@/Layouts/PageLayoutDashboard.vue';
