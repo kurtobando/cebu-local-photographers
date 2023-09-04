@@ -4,6 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc && vite build && vite build --ssr",
+        "serve:ssr": "node bootstrap/ssr/ssr.js",
         "lint": "eslint --ext .js,.ts,.vue .",
         "format": "prettier --write ."
     },
