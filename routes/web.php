@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SignInController;
@@ -48,4 +49,7 @@ Route::prefix('dashboard')
     ->group(function () {
         Route::get('/', [DashboardController::class, "index"])->name('dashboard');
         Route::post('/sign-out', [SignOutController::class, "store"])->name('dashboard.sign-out');
+
+        Route::get('/profile', [DashboardProfileController::class, "index"])->name('dashboard.profile');
+        Route::patch('/profile', [DashboardProfileController::class, "update"])->name('dashboard.profile.update');
     });

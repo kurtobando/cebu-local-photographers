@@ -40,7 +40,7 @@
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"
-                        href=""
+                        :href="route('dashboard.profile')"
                         @click="toggleVisible">
                         <User2 />
                         <span>My Profile</span>

@@ -9,7 +9,7 @@
             v-if="isAuthenticated"
             class="font-sm inline-flex items-center gap-8 text-sm">
             <Link href="">My Photos</Link>
-            <Link href="">My Profile</Link>
+            <Link :href="route('dashboard.profile')">My Profile</Link>
             <Link
                 as="button"
                 :href="route('dashboard.sign-out')"
