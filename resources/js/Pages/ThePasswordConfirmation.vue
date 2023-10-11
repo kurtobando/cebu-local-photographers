@@ -54,7 +54,6 @@ import { SharedProps } from '@/types';
 
 const email = computed(() => usePage<SharedProps>().props.email as string);
 const token = computed(() => usePage<SharedProps>().props.token as string);
-const { error } = useFlashMessage();
 const toast = useToast();
 const route = useRoute();
 const form = useForm({
@@ -66,17 +65,29 @@ const form = useForm({
 
 function onSubmit() {
     form.post(route('password-confirmation.update'), {
-        onFinish: () => {
-            if (error.value) {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (error) {
                 toast.add({
-                    detail: error.value,
+                    detail: error,
+                    life: 6000,
                     severity: 'error',
+                    summary: 'Error',
                 });
             }
-        },
-        onSuccess: () => {
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
             form.reset();
         },
+        preserveScroll: true,
     });
 }
 

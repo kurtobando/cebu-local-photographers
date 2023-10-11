@@ -1,13 +1,15 @@
 <template>
-    <main class="w-full">
+    <main class="flex min-h-screen w-full flex-col gap-8 bg-slate-50">
         <Header />
-        <section class="p-8">
+        <section class="mx-auto w-full max-w-5xl rounded bg-white p-8 shadow-sm">
             <slot />
         </section>
     </main>
+    <Toast />
 </template>
 
 <script lang="ts" setup>
+import Toast from 'primevue/toast';
 import Header from '@/Components/Header/Header.vue';
 </script>
 

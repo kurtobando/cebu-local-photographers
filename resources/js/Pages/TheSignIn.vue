@@ -57,14 +57,12 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
-import { onMounted } from 'vue';
 import InputError from '@/Components/InputError/InputError.vue';
 import Meta from '@/Components/Meta/Meta.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 
-const { error, success } = useFlashMessage();
 const route = useRoute();
 const toast = useToast();
 const form = useForm({
@@ -74,29 +72,31 @@ const form = useForm({
 
 function onSubmit() {
     form.post(route('sign-in.store'), {
-        onFinish: () => {
-            if (error.value) {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (error) {
                 toast.add({
-                    detail: error.value,
+                    detail: error,
+                    life: 6000,
                     severity: 'error',
+                    summary: 'Error',
                 });
             }
-        },
-        onSuccess: () => {
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
             form.reset();
         },
         preserveScroll: true,
     });
 }
-
-onMounted(() => {
-    if (success.value) {
-        toast.add({
-            detail: success.value,
-            severity: 'success',
-        });
-    }
-});
 
 defineOptions({ layout: PageLayoutAuth });
 </script>

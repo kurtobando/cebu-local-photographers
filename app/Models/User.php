@@ -26,6 +26,7 @@ class User extends Authenticatable
         'provider_token',
         'provider_refresh_token',
         'avatar',
+        'about'
     ];
 
     protected $appends = [

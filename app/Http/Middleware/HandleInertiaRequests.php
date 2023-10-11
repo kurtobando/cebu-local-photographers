@@ -22,7 +22,15 @@ class HandleInertiaRequests extends Middleware
                 'url' => config('app.url'),
             ],
             'auth' => [
-                'user' => $request->user()?->only(['id', 'name', 'email', 'avatar', 'provider', 'role']),
+                'user' => $request->user()?->only([
+                    'id',
+                    'name',
+                    'email',
+                    'avatar',
+                    'provider',
+                    'role',
+                    'about'
+                ]),
                 'can' => [
                     'store' => [
                         'post' => $request->user()?->can('store post'),

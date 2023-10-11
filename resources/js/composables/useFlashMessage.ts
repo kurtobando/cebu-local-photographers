@@ -3,10 +3,10 @@ import { computed } from 'vue';
 import { SharedProps } from '@/types';
 
 function useFlashMessage() {
-    const success = computed(() => usePage<SharedProps>().props.flash.success);
-    const error = computed(() => usePage<SharedProps>().props.flash.error);
-    const warning = computed(() => usePage<SharedProps>().props.flash.warning);
-    const info = computed(() => usePage<SharedProps>().props.flash.info);
+    const success = computed(() => usePage<SharedProps>().props.flash.success).value;
+    const error = computed(() => usePage<SharedProps>().props.flash.error).value;
+    const warning = computed(() => usePage<SharedProps>().props.flash.warning).value;
+    const info = computed(() => usePage<SharedProps>().props.flash.info).value;
 
     return {
         error,

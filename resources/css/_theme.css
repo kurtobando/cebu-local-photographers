@@ -6851,7 +6851,7 @@
 }
 
 .p-toast {
-    opacity: 0.9;
+    /*opacity: 0.9;*/
 }
 
 .p-toast .p-toast-message {
@@ -6867,11 +6867,12 @@
 }
 
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
-    margin: 0 0 0 1rem;
+    /*margin: 0 0 0 1rem;*/
 }
 
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon {
     font-size: 2rem;
+    display: none !important;
 }
 
 .p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon.p-icon {

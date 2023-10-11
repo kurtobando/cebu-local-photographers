@@ -40,7 +40,6 @@ import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 
-const { success } = useFlashMessage();
 const toast = useToast();
 const route = useRoute();
 const form = useForm({
@@ -49,15 +48,26 @@ const form = useForm({
 
 function onSubmit() {
     form.post(route('password-reset.store'), {
-        onFinish: () => {
-            if (success.value) {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
                 toast.add({
-                    detail: success.value,
+                    detail: success,
+                    life: 6000,
                     severity: 'success',
+                    summary: 'Success',
                 });
             }
-        },
-        onSuccess: () => {
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
             form.reset();
         },
         preserveScroll: true,
