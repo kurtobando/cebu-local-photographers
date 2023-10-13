@@ -8,6 +8,9 @@ use App\Events\UserSignUpEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -15,6 +18,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'name',
@@ -50,5 +54,13 @@ class User extends Authenticatable
     public function getRoleAttribute(): string
     {
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
     }
 }

@@ -6,7 +6,7 @@
             @submit.prevent="onSubmit">
             <h1 class="text-center text-3xl font-bold -tracking-wide">Hey, there!</h1>
             <h1 class="text-center text-3xl font-bold -tracking-wide">Welcome back</h1>
-            <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
+            <div class="mt-8 flex flex-col justify-center gap-2 px-8 text-center">
                 <InputText
                     v-model="form.email"
                     placeholder="email address"

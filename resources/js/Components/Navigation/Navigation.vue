@@ -12,6 +12,7 @@
                 <Bell />
             </Link>
             <Avatar
+                class="uppercase"
                 :size="'large'"
                 :label="user?.name.slice(0, 1)"
                 @click="onToggle($event)" />
@@ -20,9 +21,9 @@
                 :model="items"
                 :popup="true">
                 <template #start>
-                    <div class="flex flex-col p-4 px-6">
-                        <p class="font-bold">{{ user?.name }}</p>
-                        <p class="text-sm">{{ user?.role }}</p>
+                    <div class="flex flex-col p-4 px-5">
+                        <p class="font-bold capitalize">{{ user?.name }}</p>
+                        <p class="text-sm capitalize">{{ user?.role }}</p>
                     </div>
                 </template>
             </Menu>

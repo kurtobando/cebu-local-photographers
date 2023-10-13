@@ -20,7 +20,7 @@
     <!-- script  -->
     @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
 </head>
-<body class="font-sans text-primary antialiased">
+<body class="font-sans text-slate-700 antialiased">
 @inertia
 </body>
 </html>

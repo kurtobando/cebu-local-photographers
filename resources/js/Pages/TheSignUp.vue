@@ -4,7 +4,7 @@
         <form class="flex flex-col justify-center gap-2">
             <h1 class="text-center text-3xl font-bold -tracking-wide">Let's get started!</h1>
             <h1 class="text-center text-3xl font-bold -tracking-wide">Create your account</h1>
-            <div class="mt-8 flex flex-col justify-center gap-4 px-8 text-center">
+            <div class="mt-8 flex flex-col justify-center gap-2 px-8 text-center">
                 <div class="flex flex-col gap-2">
                     <InputText
                         v-model="form.email"
@@ -47,11 +47,11 @@
 <script lang="ts" setup>
 import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
-import Meta from '@/Components/Meta/Meta.vue';
-import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 import InputText from 'primevue/inputtext';
 import InputError from '@/Components/InputError/InputError.vue';
+import Meta from '@/Components/Meta/Meta.vue';
 import useRoute from '@/composables/useRoute';
+import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
 
 const route = useRoute();
 const form = useForm({
@@ -61,10 +61,10 @@ const form = useForm({
 
 function onSubmit() {
     form.post(route('sign-up'), {
-        preserveScroll: true,
         onSuccess: () => {
             // form.reset();
         },
+        preserveScroll: true,
     });
 }
 

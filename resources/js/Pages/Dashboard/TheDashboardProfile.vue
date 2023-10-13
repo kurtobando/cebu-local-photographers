@@ -15,6 +15,7 @@
                 <!-- TODO! -->
                 <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
                     <Avatar
+                        class="uppercase"
                         :label="auth.user?.name.slice(0, 1)"
                         :shape="'square'"
                         :size="'xlarge'" />
@@ -79,7 +80,9 @@
                         icon="pi pi-google">
                         <div class="flex items-center">
                             <p class="pl-2 leading-relaxed">
-                                You cant change password, you You opt-in for {{ auth.user?.provider }}
+                                Change password is not available for
+                                <span class="capitalize">{{ auth.user?.provider }}</span>
+                                provider.
                             </p>
                         </div>
                     </Message>
