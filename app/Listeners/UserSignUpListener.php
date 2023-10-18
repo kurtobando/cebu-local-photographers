@@ -16,7 +16,7 @@ class UserSignUpListener implements ShouldQueue
 
     public function handle(UserSignUpEvent $event): void
     {
-        $event->user->assignRole(UserRoleEnum::USER->name);
+        $event->user->assignRole(UserRoleEnum::USER->value);
         $event->user->notify(new SignUpNotification());
     }
 }

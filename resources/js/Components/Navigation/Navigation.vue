@@ -13,8 +13,10 @@
             </Link>
             <Avatar
                 class="uppercase"
+                :shape="'circle'"
                 :size="'large'"
-                :label="user?.name.slice(0, 1)"
+                :image="auth.user?.avatar"
+                :label="auth.user?.avatar ? '' : user?.name.slice(0, 1)"
                 @click="onToggle($event)" />
             <Menu
                 ref="menu"
@@ -23,7 +25,7 @@
                 <template #start>
                     <div class="flex flex-col p-4 px-5">
                         <p class="font-bold capitalize">{{ user?.name }}</p>
-                        <p class="text-sm capitalize">{{ user?.role }}</p>
+                        <p class="text-sm capitalize text-slate-500">{{ user?.role }}</p>
                     </div>
                 </template>
             </Menu>
@@ -51,6 +53,7 @@ import { ref } from 'vue';
 import useAuth from '@/composables/useAuth';
 import useRoute from '@/composables/useRoute';
 
+const auth = useAuth();
 const route = useRoute();
 const { isAuthenticated, user } = useAuth();
 
@@ -74,7 +77,7 @@ const items = ref([
                 label: 'Sign-out',
             },
         ],
-        label: 'Menus',
+        label: 'Options',
     },
 ]);
 

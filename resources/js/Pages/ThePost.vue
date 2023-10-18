@@ -95,34 +95,34 @@
 </template>
 
 <script lang="ts" setup>
+import { Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
-import { Heart, MessageCircle, Eye } from 'lucide-vue-next';
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
-import Meta from '@/Components/Meta/Meta.vue';
 import Comment from '@/Components/Comment/Comment.vue';
 import CommentForm from '@/Components/CommentForm/CommentForm.vue';
+import Meta from '@/Components/Meta/Meta.vue';
+import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
 
 defineOptions({ layout: PageLayoutPublic });
 
 const comments = [
     {
+        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        createdAt: '1 day ago',
+        hearts: 21,
         id: 1,
         imageSource:
             'https://images.unsplash.com/photo-1687579520892-5160c0df4b3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80',
         name: 'John Doe',
-        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        createdAt: '1 day ago',
-        hearts: 21,
     },
     {
-        id: 2,
-        imageSource:
-            'https://images.unsplash.com/photo-1687561114580-66fe98588cde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=683&q=80',
-        name: 'Mary Doe',
         comment:
             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         createdAt: '1 day ago',
         hearts: 21,
+        id: 2,
+        imageSource:
+            'https://images.unsplash.com/photo-1687561114580-66fe98588cde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=683&q=80',
+        name: 'Mary Doe',
     },
 ];
 </script>

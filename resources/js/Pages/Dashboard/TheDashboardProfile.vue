@@ -12,17 +12,14 @@
             <form
                 @submit.prevent="onSubmit"
                 class="flex flex-col gap-2">
-                <!-- TODO! -->
                 <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
                     <Avatar
-                        class="uppercase"
-                        :label="auth.user?.name.slice(0, 1)"
-                        :shape="'square'"
+                        @click="onClickUploadProfileImage"
+                        class="cursor-pointer uppercase"
+                        :image="auth.user?.avatar"
+                        :label="auth.user?.avatar ? '' : auth.user?.name.slice(0, 1)"
+                        :shape="'circle'"
                         :size="'xlarge'" />
-                    <Button
-                        :size="'small'"
-                        label="Change Image"
-                        outlined />
                 </div>
                 <div class="flex flex-col gap-1">
                     <label class="text-sm">Email Address</label>
@@ -49,6 +46,8 @@
                         v-if="form.errors.about"
                         :text="form.errors.about" />
                 </div>
+
+                <!-- TODO! conditionally change password if provide is not Google -->
                 <div
                     v-if="!isProviderGoogle"
                     class="flex flex-col gap-2">
@@ -75,11 +74,12 @@
                 </div>
                 <div v-if="isProviderGoogle">
                     <Message
+                        class="!mt-0"
                         :severity="'success'"
                         :closable="false"
                         icon="pi pi-google">
                         <div class="flex items-center">
-                            <p class="pl-2 leading-relaxed">
+                            <p class="pl-2 text-sm leading-relaxed">
                                 Change password is not available for
                                 <span class="capitalize">{{ auth.user?.provider }}</span>
                                 provider.
@@ -95,11 +95,14 @@
                     label="Save Changes" />
             </form>
         </div>
+
+        <ModalUploadProfileImage />
     </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useForm } from '@inertiajs/vue3';
+import { useEventBus } from '@vueuse/core';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
@@ -109,6 +112,7 @@ import { useToast } from 'primevue/usetoast';
 import { computed, onMounted } from 'vue';
 import InputError from '@/Components/InputError/InputError.vue';
 import Meta from '@/Components/Meta/Meta.vue';
+import ModalUploadProfileImage from '@/Components/ModalUploadProfileImage/ModalUploadProfileImage.vue';
 import SidebarNavigation from '@/Components/SidebarNavigation/SidebarNavigation.vue';
 import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
@@ -155,6 +159,10 @@ function onSubmit() {
         },
         preserveScroll: true,
     });
+}
+
+function onClickUploadProfileImage() {
+    useEventBus('modal:upload-profile-image').emit();
 }
 
 onMounted(() => {

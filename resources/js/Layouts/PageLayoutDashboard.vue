@@ -1,8 +1,10 @@
 <template>
     <main class="flex min-h-screen w-full flex-col gap-8 bg-slate-50">
         <Header />
-        <section class="mx-auto w-full max-w-5xl rounded bg-white p-8 shadow-sm">
-            <slot />
+        <section class="p-8">
+            <div class="mx-auto w-full max-w-5xl rounded bg-white p-8 shadow-sm">
+                <slot />
+            </div>
         </section>
     </main>
     <Toast />

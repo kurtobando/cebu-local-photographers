@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\UserAuthProviderEnum;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 
@@ -48,6 +49,9 @@ class AuthGoogleController extends Controller
 
             return redirect()->route('dashboard');
         } catch (InvalidStateException|Exception $e) {
+            // TODO! find a better way to implement this catch
+            Log::error($e->getMessage());
+
             return redirect()
                 ->route('sign-in')
                 ->withErrors($e->getMessage());

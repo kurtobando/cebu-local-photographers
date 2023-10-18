@@ -17,53 +17,53 @@
 </template>
 
 <script lang="ts" setup>
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
-import LayoutTheFold from '@/Layouts/LayoutTheFold.vue';
-import Meta from '@/Components/Meta/Meta.vue';
 import CardEvent from '@/Components/CardEvent/CardEvent.vue';
+import Meta from '@/Components/Meta/Meta.vue';
+import LayoutTheFold from '@/Layouts/LayoutTheFold.vue';
+import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
 
 const events = [
     {
+        date: 'May 28, Sunday',
         id: 1,
-        title: 'Artificial Light Portrait Photography',
-        date: 'May 28, Sunday',
-        time: '10AM - 4PM',
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
     {
+        date: 'May 28, Sunday',
         id: 2,
-        title: 'Artificial Light Portrait Photography',
-        date: 'May 28, Sunday',
-        time: '10AM - 4PM',
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
     {
+        date: 'May 28, Sunday',
         id: 3,
-        title: 'Artificial Light Portrait Photography',
-        date: 'May 28, Sunday',
-        time: '10AM - 4PM',
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
     {
+        date: 'May 28, Sunday',
         id: 4,
-        title: 'Artificial Light Portrait Photography',
-        date: 'May 28, Sunday',
-        time: '10AM - 4PM',
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
     {
+        date: 'May 28, Sunday',
         id: 5,
-        title: 'Artificial Light Portrait Photography',
-        date: 'May 28, Sunday',
-        time: '10AM - 4PM',
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
     {
-        id: 6,
-        title: 'Artificial Light Portrait Photography',
         date: 'May 28, Sunday',
-        time: '10AM - 4PM',
+        id: 6,
         location: 'Family Park, Talamban',
+        time: '10AM - 4PM',
+        title: 'Artificial Light Portrait Photography',
     },
 ];
 defineOptions({ layout: PageLayoutPublic });
