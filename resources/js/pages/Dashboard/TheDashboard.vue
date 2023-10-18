@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import Meta from '@/Components/Meta/Meta.vue';
-import PageLayoutDashboard from '@/Layouts/PageLayoutDashboard.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
 
 defineOptions({ layout: PageLayoutDashboard });
 </script>

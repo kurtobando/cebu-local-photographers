@@ -17,10 +17,10 @@
 </template>
 
 <script lang="ts" setup>
-import CardEvent from '@/Components/CardEvent/CardEvent.vue';
-import Meta from '@/Components/Meta/Meta.vue';
-import LayoutTheFold from '@/Layouts/LayoutTheFold.vue';
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
+import CardEvent from '@/components/CardEvent/CardEvent.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import LayoutTheFold from '@/layouts/LayoutTheFold.vue';
+import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 
 const events = [
     {

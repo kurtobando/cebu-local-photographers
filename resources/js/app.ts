@@ -20,7 +20,7 @@ createInertiaApp({
         showSpinner: true,
     },
     resolve: (name) =>
-        resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+        resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
     setup({ App, el, plugin, props }) {
         createApp({ render: () => h(App, props) })
             .component('Toast', Toast)

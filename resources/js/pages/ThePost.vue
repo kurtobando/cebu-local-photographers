@@ -97,10 +97,10 @@
 <script lang="ts" setup>
 import { Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
-import Comment from '@/Components/Comment/Comment.vue';
-import CommentForm from '@/Components/CommentForm/CommentForm.vue';
-import Meta from '@/Components/Meta/Meta.vue';
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
+import Comment from '@/components/Comment/Comment.vue';
+import CommentForm from '@/components/CommentForm/CommentForm.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 
 defineOptions({ layout: PageLayoutPublic });
 

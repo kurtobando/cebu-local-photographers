@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import AvatarWithName from '@/Components/AvatarWithName/AvatarWithName.vue';
-import ReactionCount from '@/Components/ReactionCount/ReactionCount.vue';
+import AvatarWithName from '@/components/AvatarWithName/AvatarWithName.vue';
+import ReactionCount from '@/components/ReactionCount/ReactionCount.vue';
 
 defineProps<Props>();
 

@@ -23,11 +23,11 @@
 </template>
 
 <script lang="ts" setup>
-import CardAvatarImage from '@/Components/CardAvatarImage/CardAvatarImage.vue';
-import CardPortfolio from '@/Components/CardPortfolio/CardPortfolio.vue';
-import Meta from '@/Components/Meta/Meta.vue';
-import LayoutTheFold from '@/Layouts/LayoutTheFold.vue';
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
+import CardAvatarImage from '@/components/CardAvatarImage/CardAvatarImage.vue';
+import CardPortfolio from '@/components/CardPortfolio/CardPortfolio.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import LayoutTheFold from '@/layouts/LayoutTheFold.vue';
+import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 
 const images = [
     {

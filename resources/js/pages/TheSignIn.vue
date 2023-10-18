@@ -1,17 +1,16 @@
 <template>
     <section class="w-full max-w-[24rem]">
-        <Meta title="Change Your Password" />
+        <Meta title="Sign In" />
         <form
-            @submit.prevent="onSubmit"
-            class="flex flex-col justify-center gap-2">
-            <h1 class="text-center text-3xl font-bold -tracking-wide">Change your password</h1>
+            class="flex flex-col justify-center gap-2"
+            @submit.prevent="onSubmit">
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Hey, there!</h1>
+            <h1 class="text-center text-3xl font-bold -tracking-wide">Welcome back</h1>
             <div class="mt-8 flex flex-col justify-center gap-2 px-8 text-center">
                 <InputText
                     v-model="form.email"
                     placeholder="email address"
-                    readonly
-                    disabled
-                    type="text" />
+                    type="email" />
                 <InputError
                     :text="form.errors.email"
                     v-if="form.errors.email" />
@@ -22,49 +21,57 @@
                 <InputError
                     :text="form.errors.password"
                     v-if="form.errors.password" />
-                <InputText
-                    v-model="form.password_confirmation"
-                    placeholder="confirm password"
-                    type="password" />
-                <InputError
-                    :text="form.errors.password_confirmation"
-                    v-if="form.errors.password_confirmation" />
                 <Button
-                    :loading="form.processing"
                     type="submit"
-                    label="Change Password" />
+                    label="Sign in" />
+                <a
+                    :href="route('auth.google.redirect')"
+                    class="block">
+                    <Button
+                        :loading="form.processing"
+                        class="w-full"
+                        icon="pi pi-google"
+                        label="Sign in with Google"
+                        outlined />
+                </a>
+                <div class="mt-4 flex flex-col gap-4">
+                    <Link
+                        class="text-sm"
+                        :href="route('sign-up')">
+                        Create an account? Click here
+                    </Link>
+                    <Link
+                        :href="route('password-reset')"
+                        class="text-sm text-slate-600">
+                        Forgot password?
+                    </Link>
+                </div>
             </div>
         </form>
         <Toast />
     </section>
 </template>
 
-<script setup lang="ts">
-import { useForm, usePage } from '@inertiajs/vue3';
+<script lang="ts" setup>
+import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
-import { computed } from 'vue';
-import InputError from '@/Components/InputError/InputError.vue';
-import Meta from '@/Components/Meta/Meta.vue';
+import InputError from '@/components/InputError/InputError.vue';
+import Meta from '@/components/Meta/Meta.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
-import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
-import { SharedProps } from '@/types';
+import PageLayoutAuth from '@/layouts/PageLayoutAuth.vue';
 
-const email = computed(() => usePage<SharedProps>().props.email as string);
-const token = computed(() => usePage<SharedProps>().props.token as string);
-const toast = useToast();
 const route = useRoute();
+const toast = useToast();
 const form = useForm({
-    email: email.value,
+    email: '',
     password: '',
-    password_confirmation: '',
-    token: token.value,
 });
 
 function onSubmit() {
-    form.post(route('password-confirmation.update'), {
+    form.post(route('sign-in.store'), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();

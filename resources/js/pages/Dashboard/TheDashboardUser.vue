@@ -36,8 +36,8 @@
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import { ref } from 'vue';
-import Meta from '@/Components/Meta/Meta.vue';
-import PageLayoutDashboard from '@/Layouts/PageLayoutDashboard.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
 
 const data = ref([
     {

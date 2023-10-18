@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import Toast from 'primevue/toast';
-import Header from '@/Components/Header/Header.vue';
+import Header from '@/components/Header/Header.vue';
 </script>
 
 <style scoped></style>

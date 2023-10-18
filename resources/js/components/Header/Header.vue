@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-import Brand from '@/Components/Brand/Brand.vue';
-import MobileNavigation from '@/Components/MobileNavigation/MobileNavigation.vue';
-import Navigation from '@/Components/Navigation/Navigation.vue';
+import Brand from '@/components/Brand/Brand.vue';
+import MobileNavigation from '@/components/MobileNavigation/MobileNavigation.vue';
+import Navigation from '@/components/Navigation/Navigation.vue';
 </script>
 
 <style scoped></style>

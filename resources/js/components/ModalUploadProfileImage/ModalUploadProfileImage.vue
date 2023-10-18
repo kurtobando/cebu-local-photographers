@@ -31,7 +31,7 @@ import Dialog from 'primevue/dialog';
 import FileUpload, { FileUploadUploaderEvent } from 'primevue/fileupload';
 import { useToast } from 'primevue/usetoast';
 import { ref } from 'vue';
-import InputError from '@/Components/InputError/InputError.vue';
+import InputError from '@/components/InputError/InputError.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 

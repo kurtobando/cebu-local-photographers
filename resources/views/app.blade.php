@@ -18,7 +18,7 @@
           rel="stylesheet">
 
     <!-- script  -->
-    @vite(['resources/js/app.ts', "resources/js/Pages/{$page['component']}.vue"])
+    @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
 </head>
 <body class="font-sans text-slate-700 antialiased">
 @inertia

@@ -17,7 +17,7 @@ createServer((page) => {
         page,
         render: renderToString,
         resolve: (name) =>
-            resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob<DefineComponent>('./Pages/**/*.vue')),
+            resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
         setup({ App, plugin, props }) {
             return createSSRApp({ render: () => h(App, props) })
                 .component('Toast', Toast)

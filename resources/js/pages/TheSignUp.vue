@@ -48,10 +48,10 @@
 import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
-import InputError from '@/Components/InputError/InputError.vue';
-import Meta from '@/Components/Meta/Meta.vue';
+import InputError from '@/components/InputError/InputError.vue';
+import Meta from '@/components/Meta/Meta.vue';
 import useRoute from '@/composables/useRoute';
-import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
+import PageLayoutAuth from '@/layouts/PageLayoutAuth.vue';
 
 const route = useRoute();
 const form = useForm({

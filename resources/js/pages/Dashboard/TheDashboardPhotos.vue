@@ -32,9 +32,9 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
 import FileUpload from 'primevue/fileupload';
-import Meta from '@/Components/Meta/Meta.vue';
-import SidebarNavigation from '@/Components/SidebarNavigation/SidebarNavigation.vue';
-import PageLayoutDashboard from '@/Layouts/PageLayoutDashboard.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import SidebarNavigation from '@/components/SidebarNavigation/SidebarNavigation.vue';
+import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
 
 defineOptions({ layout: PageLayoutDashboard });
 </script>

@@ -34,11 +34,11 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import InputText from 'primevue/inputtext';
 import { useToast } from 'primevue/usetoast';
-import InputError from '@/Components/InputError/InputError.vue';
-import Meta from '@/Components/Meta/Meta.vue';
+import InputError from '@/components/InputError/InputError.vue';
+import Meta from '@/components/Meta/Meta.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
-import PageLayoutAuth from '@/Layouts/PageLayoutAuth.vue';
+import PageLayoutAuth from '@/layouts/PageLayoutAuth.vue';
 
 const toast = useToast();
 const route = useRoute();

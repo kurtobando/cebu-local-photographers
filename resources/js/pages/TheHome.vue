@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import CardImage from '@/Components/CardImage/CardImage.vue';
-import Meta from '@/Components/Meta/Meta.vue';
-import PageLayoutPublic from '@/Layouts/PageLayoutPublic.vue';
+import CardImage from '@/components/CardImage/CardImage.vue';
+import Meta from '@/components/Meta/Meta.vue';
+import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 
 const images = [
     {

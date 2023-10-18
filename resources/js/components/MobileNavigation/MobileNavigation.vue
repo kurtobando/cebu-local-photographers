@@ -102,7 +102,7 @@ import { Bell, HeartHandshake, Image, LogOut, Menu, Star, User2, Users } from 'l
 import Button from 'primevue/button';
 import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
-import Brand from '@/Components/Brand/Brand.vue';
+import Brand from '@/components/Brand/Brand.vue';
 import useAuth from '@/composables/useAuth';
 
 const { isAuthenticated } = useAuth();
