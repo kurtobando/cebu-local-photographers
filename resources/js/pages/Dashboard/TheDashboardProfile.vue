@@ -1,12 +1,12 @@
 <template>
     <Meta title="Manage Profile" />
-    <section class="flex gap-8">
-        <div class="pt-[4.3rem]">
+    <section class="flex gap-12">
+        <div class="">
             <SidebarNavigation />
         </div>
         <div class="flex flex-grow flex-col gap-4">
-            <div>
-                <h2 class="text-2xl font-bold">Profile</h2>
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold">Manage Profile</h2>
                 <p class="text-sm">Manage your profile details here</p>
             </div>
             <form

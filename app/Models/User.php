@@ -55,6 +55,7 @@ class User extends Authenticatable implements HasMedia
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
     }
 
+    // TODO! switch to s3
     public function registerMediaCollections(): void
     {
         $this

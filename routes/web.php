@@ -58,6 +58,7 @@ Route::prefix('dashboard')
         Route::post('/profile-image', [DashboardProfileImageController::class, "store"])->name('dashboard.profile-image.store');
 
         Route::get('/photos', [DashboardPhotosController::class, "create"])->name('dashboard.photos.create');
+        Route::post('/photos', [DashboardPhotosController::class, "store"])->name('dashboard.photos.store');
 
         Route::get('/users', [DashboardUserController::class, "index"])->name('dashboard.users');
     });
