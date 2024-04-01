@@ -6865,7 +6865,7 @@
 
 .p-toast .p-toast-message .p-toast-message-content {
     padding: 1rem;
-    border-width: 0 0 0 6px;
+    border-width: 0 0 0 0px;
     align-items: center;
 }
 
@@ -6911,15 +6911,15 @@
 }
 
 .p-toast .p-toast-message.p-toast-message-info {
-    background: #e9e9ff;
-    border: solid #696cff;
+    background: #f6f6f6;
+    border: solid #383838;
     border-width: 0 0 0 6px;
-    color: #696cff;
+    color: #383838;
 }
 
 .p-toast .p-toast-message.p-toast-message-info .p-toast-message-icon,
 .p-toast .p-toast-message.p-toast-message-info .p-toast-icon-close {
-    color: #696cff;
+    color: #383838;
 }
 
 .p-toast .p-toast-message.p-toast-message-success {

@@ -75,6 +75,8 @@ async function onUpload(event: FileUploadUploaderEvent) {
         onSuccess: () => {
             const { error, success } = useFlashMessage();
 
+            toast.removeAllGroups();
+
             if (success) {
                 toast.add({
                     detail: success,

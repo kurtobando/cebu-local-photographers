@@ -25,14 +25,14 @@ class DashboardProfileController extends Controller
     public function update(DashboardProfileUpdateRequest $request): RedirectResponse
     {
         $user = $this->user->where('id', auth()->id())->firstOrFail();
+
+        if ($request->provider === UserAuthProviderEnum::DEFAULT->value && $request->is_change_password) {
+            $user->password = Hash::make($request->password);
+        }
+
         $user->name = $request->name;
         $user->about = $request->about;
         $user->save();
-
-        if ($request->provider === UserAuthProviderEnum::DEFAULT->value) {
-            $user->password = Hash::make($request->password);
-            $user->save();
-        }
 
         return redirect()
             ->route('dashboard.profile')

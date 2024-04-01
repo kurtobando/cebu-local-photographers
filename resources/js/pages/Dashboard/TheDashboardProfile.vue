@@ -1,11 +1,11 @@
 <template>
     <Meta title="Manage Profile" />
-    <section class="flex gap-20">
-        <div class="">
+    <section class="flex flex-col gap-8 md:flex-row">
+        <div class="md:pr-14 md:pt-20">
             <SidebarNavigation />
         </div>
         <div class="flex flex-grow flex-col gap-4">
-            <div class="mt-8">
+            <div class="">
                 <h2 class="text-2xl font-bold">Manage Profile</h2>
                 <p class="text-sm">Manage your profile details here</p>
             </div>
@@ -15,7 +15,7 @@
                 <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
                     <Avatar
                         @click="onClickUploadProfileImage"
-                        class="cursor-pointer uppercase"
+                        class="custom-avatar cursor-pointer uppercase"
                         :image="auth.user?.avatar"
                         :label="auth.user?.avatar ? '' : auth.user?.name.slice(0, 1)"
                         :shape="'circle'"
@@ -47,31 +47,38 @@
                         v-if="form.errors.about"
                         :text="form.errors.about" />
                 </div>
-
-                <!-- TODO! conditionally change password if provide is not Google -->
                 <div
                     v-if="!isProviderGoogle"
                     class="flex flex-col gap-2">
-                    <div class="flex flex-col gap-1">
-                        <label class="text-sm">New Password</label>
-                        <InputText
-                            type="password"
-                            v-model="form.password"
-                            placeholder="password" />
-                        <InputError
-                            v-if="form.errors.password"
-                            :text="form.errors.password" />
+                    <div class="my-2 flex flex-row items-center gap-1">
+                        <Checkbox
+                            v-model="form.is_change_password"
+                            :binary="true"
+                            label="Change Password" />
+                        <label class="text-sm">Would you like to change your password?</label>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <label class="text-sm">Confirm Password</label>
-                        <InputText
-                            type="password"
-                            v-model="form.password_confirmation"
-                            placeholder="confirm password" />
-                        <InputError
-                            v-if="form.errors.password_confirmation"
-                            :text="form.errors.password_confirmation" />
-                    </div>
+                    <template v-if="form.is_change_password">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm">New Password</label>
+                            <InputText
+                                type="password"
+                                v-model="form.password"
+                                placeholder="password" />
+                            <InputError
+                                v-if="form.errors.password"
+                                :text="form.errors.password" />
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label class="text-sm">Confirm Password</label>
+                            <InputText
+                                type="password"
+                                v-model="form.password_confirmation"
+                                placeholder="confirm password" />
+                            <InputError
+                                v-if="form.errors.password_confirmation"
+                                :text="form.errors.password_confirmation" />
+                        </div>
+                    </template>
                 </div>
                 <div v-if="isProviderGoogle">
                     <Message
@@ -81,22 +88,19 @@
                         icon="pi pi-google">
                         <div class="flex items-center">
                             <p class="pl-2 text-sm leading-relaxed">
-                                Change password is not available, if you use
+                                Your profile is tied to your
                                 <span class="capitalize">{{ auth.user?.provider }}</span>
-                                to sign-in/sign-up an account.
+                                Account.
                             </p>
                         </div>
                     </Message>
                 </div>
-
-                <!-- call to action -->
                 <Button
                     type="submit"
                     :loading="form.processing"
                     label="Save Changes" />
             </form>
         </div>
-
         <ModalUploadProfileImage />
     </section>
 </template>
@@ -106,6 +110,7 @@ import { useForm } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
+import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
 import Message from 'primevue/message';
 import Textarea from 'primevue/textarea';
@@ -125,6 +130,7 @@ const route = useRoutes();
 const auth = useAuth();
 const form = useForm({
     about: '',
+    is_change_password: false,
     name: '',
     password: '',
     password_confirmation: '',
@@ -134,21 +140,20 @@ const form = useForm({
 const isProviderGoogle = computed(() => auth?.user?.provider === 'google');
 
 function onSubmit() {
+    toast.add({
+        detail: 'Saving your changes.',
+        life: 6000,
+        severity: 'info',
+        summary: 'Please wait...',
+    });
+
     form.patch(route('dashboard.profile.update'), {
-        onError: (e) => {
-            console.error(e);
-        },
+        onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();
 
-            if (success) {
-                toast.add({
-                    detail: success,
-                    life: 6000,
-                    severity: 'success',
-                    summary: 'Success',
-                });
-            }
+            toast.removeAllGroups();
+
             if (error) {
                 toast.add({
                     detail: error,
@@ -157,9 +162,19 @@ function onSubmit() {
                     summary: 'Error',
                 });
             }
+            if (success) {
+                form.is_change_password = false;
+                form.password = '';
+                form.password_confirmation = '';
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
         },
         preserveScroll: true,
-        preserveState: false,
     });
 }
 
@@ -177,7 +192,7 @@ defineOptions({ layout: PageLayoutDashboard });
 </script>
 
 <style>
-.p-avatar-image img {
-    object-fit: cover;
+.custom-avatar img {
+    object-fit: cover !important;
 }
 </style>

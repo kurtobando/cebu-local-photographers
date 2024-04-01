@@ -19,8 +19,9 @@ class DashboardProfileUpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             'about' => 'required|string|max:500',
             'provider' => 'required|in:' . implode(',', UserAuthProviderEnum::toArray()),
-            'password' => ['exclude_if:provider,' . UserAuthProviderEnum::GOOGLE->value, Password::defaults(), 'confirmed'],
-            'password_confirmation' => 'exclude_if:provider,' . UserAuthProviderEnum::GOOGLE->value
+            'is_change_password' => 'required|boolean',
+            'password' => ['exclude_if:is_change_password,false', Password::defaults(), 'confirmed'],
+            'password_confirmation' => 'exclude_if:is_change_password,false',
         ];
     }
 }

@@ -12,7 +12,7 @@
                 <Bell />
             </Link>
             <Avatar
-                class="uppercase"
+                class="custom-avatar uppercase"
                 :shape="'circle'"
                 :size="'large'"
                 :image="auth.user?.avatar"
@@ -24,9 +24,15 @@
                 :popup="true">
                 <template #start>
                     <div class="flex flex-col p-4 px-5">
-                        <p class="truncate font-bold capitalize">{{ user?.name }}</p>
-                        <p class="text-sm capitalize text-slate-500">{{ user?.role }}</p>
+                        <p class="truncate font-bold">{{ user?.name }}</p>
+                        <p class="truncate text-sm text-slate-500">{{ user?.email }}</p>
                     </div>
+                </template>
+                <template #item="slotProps">
+                    <p class="flex flex-row items-center gap-2 p-2 px-5">
+                        <span :class="slotProps.item.icon"></span>
+                        <span class="text-sm">{{ slotProps.item.label }}</span>
+                    </p>
                 </template>
             </Menu>
         </nav>
@@ -81,4 +87,8 @@ function onToggle(e: Event) {
 }
 </script>
 
-<style scoped></style>
+<style>
+.custom-avatar img {
+    object-fit: cover !important;
+}
+</style>

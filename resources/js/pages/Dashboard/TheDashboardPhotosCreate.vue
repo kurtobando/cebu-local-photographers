@@ -1,11 +1,11 @@
 <template>
     <Meta title="Manage Photos" />
-    <section class="flex gap-20">
-        <div class="">
+    <section class="flex flex-col gap-8 md:flex-row">
+        <div class="md:pr-14 md:pt-20">
             <SidebarNavigation />
         </div>
         <div class="flex flex-grow flex-col gap-4">
-            <div class="mt-8">
+            <div class="">
                 <h2 class="text-2xl font-bold">Manage Photos</h2>
                 <p class="text-sm">Upload and share your recent work here</p>
             </div>
