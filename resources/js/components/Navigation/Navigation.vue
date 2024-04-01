@@ -24,7 +24,7 @@
                 :popup="true">
                 <template #start>
                     <div class="flex flex-col p-4 px-5">
-                        <p class="font-bold capitalize">{{ user?.name }}</p>
+                        <p class="truncate font-bold capitalize">{{ user?.name }}</p>
                         <p class="text-sm capitalize text-slate-500">{{ user?.role }}</p>
                     </div>
                 </template>
@@ -60,24 +60,19 @@ const { isAuthenticated, user } = useAuth();
 const menu = ref();
 const items = ref([
     {
-        items: [
-            {
-                command: () => router.visit(route('dashboard.profile')),
-                icon: 'pi pi-user',
-                label: 'Profile',
-            },
-            {
-                command: () => router.visit(route('dashboard.photos.create')),
-                icon: 'pi pi-image',
-                label: 'Submit Photo',
-            },
-            {
-                command: () => router.post(route('dashboard.sign-out')),
-                icon: 'pi pi-sign-out',
-                label: 'Sign-out',
-            },
-        ],
-        label: 'Options',
+        command: () => router.visit(route('dashboard.profile')),
+        icon: 'pi pi-user',
+        label: 'Profile',
+    },
+    {
+        command: () => router.visit(route('dashboard.photos.create')),
+        icon: 'pi pi-image',
+        label: 'Submit Photo',
+    },
+    {
+        command: () => router.post(route('dashboard.sign-out')),
+        icon: 'pi pi-sign-out',
+        label: 'Sign-out',
     },
 ]);
 

@@ -22,6 +22,26 @@ export interface FlashMessages {
     info: string;
 }
 
+export interface Category {
+    id: number;
+    name: string;
+}
+
+export interface Post {
+    id: number;
+    title: string;
+    description: string;
+    status: string;
+    tag: string;
+    views: number;
+    likes: number;
+    comments: number;
+    created_at: string;
+    updated_at: string;
+    category_id: number;
+    user_id: number;
+}
+
 export interface SharedProps extends PageProps {
     app: App;
     auth: {

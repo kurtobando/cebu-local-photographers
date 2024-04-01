@@ -1,6 +1,6 @@
 <template>
     <Meta title="Manage Profile" />
-    <section class="flex gap-12">
+    <section class="flex gap-20">
         <div class="">
             <SidebarNavigation />
         </div>
@@ -11,7 +11,7 @@
             </div>
             <form
                 @submit.prevent="onSubmit"
-                class="flex flex-col gap-2">
+                class="mt-4 flex flex-col gap-2">
                 <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
                     <Avatar
                         @click="onClickUploadProfileImage"
@@ -39,6 +39,7 @@
                 <div class="flex flex-col gap-1">
                     <label class="text-sm">Tell me about yourself</label>
                     <Textarea
+                        class="leading-relaxed"
                         :rows="5"
                         v-model="form.about"
                         placeholder="Tell me something interesting about yourself..." />
@@ -80,9 +81,9 @@
                         icon="pi pi-google">
                         <div class="flex items-center">
                             <p class="pl-2 text-sm leading-relaxed">
-                                Change password is not available for
+                                Change password is not available, if you use
                                 <span class="capitalize">{{ auth.user?.provider }}</span>
-                                provider.
+                                to sign-in/sign-up an account.
                             </p>
                         </div>
                     </Message>
@@ -158,6 +159,7 @@ function onSubmit() {
             }
         },
         preserveScroll: true,
+        preserveState: false,
     });
 }
 
@@ -174,4 +176,8 @@ onMounted(() => {
 defineOptions({ layout: PageLayoutDashboard });
 </script>
 
-<style scoped></style>
+<style>
+.p-avatar-image img {
+    object-fit: cover;
+}
+</style>

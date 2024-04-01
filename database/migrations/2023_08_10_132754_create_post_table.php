@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
-            $table->string('status')->default(PostStatusEnum::PUBLISHED->value);
+            $table->string('status')->default(PostStatusEnum::DRAFT->value);
             $table->string('tag');
             $table->bigInteger('views');
             $table->bigInteger('likes');

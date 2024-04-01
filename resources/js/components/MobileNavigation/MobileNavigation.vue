@@ -36,14 +36,14 @@
                         :href="route('dashboard.photos.create')"
                         @click="toggleVisible">
                         <Image />
-                        <span>My Photos</span>
+                        <span>Photos</span>
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"
                         :href="route('dashboard.profile')"
                         @click="toggleVisible">
                         <User2 />
-                        <span>My Profile</span>
+                        <span>Profile</span>
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"

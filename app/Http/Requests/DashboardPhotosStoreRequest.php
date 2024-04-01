@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DashboardPhotosRequest extends FormRequest
+class DashboardPhotosStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {

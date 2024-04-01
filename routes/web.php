@@ -59,6 +59,8 @@ Route::prefix('dashboard')
 
         Route::get('/photos', [DashboardPhotosController::class, "create"])->name('dashboard.photos.create');
         Route::post('/photos', [DashboardPhotosController::class, "store"])->name('dashboard.photos.store');
+        Route::get('/photos/{post}', [DashboardPhotosController::class, "show"])->name('dashboard.photos.show');
+        Route::patch('/photos', [DashboardPhotosController::class, "update"])->name('dashboard.photos.update');
 
         Route::get('/users', [DashboardUserController::class, "index"])->name('dashboard.users');
     });

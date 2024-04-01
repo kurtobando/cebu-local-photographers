@@ -1,5 +1,5 @@
 <template>
-    <div class="border-b border-slate-100 bg-white p-8 shadow-sm">
+    <div class="bg-white p-8 shadow-sm">
         <div class="inline-flex w-full items-center justify-between">
             <Brand />
             <Navigation />

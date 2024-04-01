@@ -832,6 +832,9 @@
     color: #495057;
     padding: 0;
     margin: 0;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .p-chips.p-invalid.p-component > .p-inputtext {

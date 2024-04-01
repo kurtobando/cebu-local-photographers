@@ -1,6 +1,6 @@
 <template>
     <Meta title="Manage Photos" />
-    <section class="flex gap-12">
+    <section class="flex gap-20">
         <div class="">
             <SidebarNavigation />
         </div>
@@ -9,27 +9,29 @@
                 <h2 class="text-2xl font-bold">Manage Photos</h2>
                 <p class="text-sm">Upload and share your recent work here</p>
             </div>
-            <div class="flex gap-2">
-                <FileUpload
-                    class="!py-3 !text-sm"
-                    name="photos"
-                    accept="image/*"
-                    :maxFileSize="10000000"
-                    :mode="'basic'"
-                    :show-upload-button="true"
-                    :show-cancel-button="true"
-                    :custom-upload="true"
-                    @uploader="onUpload"
-                    choose-label="Upload Photos"
-                    multiple />
-                <Button
-                    label="View Gallery"
-                    class="!py-3 !text-sm"
-                    outlined />
+            <div class="mt-4 grid place-content-center gap-4 rounded border border-slate-100 p-8 py-14">
+                <div class="flex justify-center gap-2">
+                    <FileUpload
+                        class="!py-3 !text-sm"
+                        name="photos"
+                        accept="image/*"
+                        :maxFileSize="10000000"
+                        :mode="'basic'"
+                        :show-upload-button="true"
+                        :show-cancel-button="true"
+                        :custom-upload="true"
+                        @uploader="onUpload"
+                        choose-label="Upload Photos"
+                        multiple />
+                    <Button
+                        label="View Gallery"
+                        class="!py-3 !text-sm"
+                        outlined />
+                </div>
+                <p class="mx-auto max-w-md text-center text-sm text-slate-400">
+                    File upload limit is 10mb, and make sure this is a valid image extension.
+                </p>
             </div>
-            <p class="max-w-md text-center text-sm">
-                File upload limit is 10mb, and make sure this is a valid image extension.
-            </p>
         </div>
     </section>
 </template>
