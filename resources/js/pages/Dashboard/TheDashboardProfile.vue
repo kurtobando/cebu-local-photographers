@@ -177,7 +177,6 @@ function onSubmit() {
         preserveScroll: true,
     });
 }
-
 function onClickUploadProfileImage() {
     useEventBus('modal:upload-profile-image').emit();
 }
