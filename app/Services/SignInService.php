@@ -11,4 +11,25 @@ class SignInService
     ) {
         //
     }
+
+    public function signIn(string $email, string $password, $remember = false): bool
+    {
+        if (!$this->isActive($email)) {
+            // TODO! throw exception here
+            return false;
+        }
+
+        return auth()->attempt([
+            'email' => $email,
+            'password' => $password
+        ], $remember);
+    }
+
+    private function isActive(string $email): bool
+    {
+        return $this
+            ->user
+            ->where(['email' => $email, 'is_active' => true])
+            ->exists();
+    }
 }
