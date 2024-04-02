@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
+use App\Enums\UserRoleEnum;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,7 @@ class SignUpController extends Controller
         $this->user->email = $request->email;
         $this->user->password = Hash::make($request->password);
         $this->user->provider = UserAuthProviderEnum::DEFAULT->value;
+        $this->user->assignRole(UserRoleEnum::USER->value);
         $this->user->save();
 
         if (!auth()->attempt($request->only('email', 'password'), true)) {

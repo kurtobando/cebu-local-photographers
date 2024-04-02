@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
+use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -42,6 +43,7 @@ class AuthGoogleController extends Controller
                 $this->user->provider_token = $google->token;
                 $this->user->provider_refresh_token = $google->refreshToken;
                 $this->user->avatar = $google->getAvatar();
+                $this->user->assignRole(UserRoleEnum::USER->value);
                 $this->user->save();
             }
 
