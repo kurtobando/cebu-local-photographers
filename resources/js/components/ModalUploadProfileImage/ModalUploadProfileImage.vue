@@ -35,9 +35,13 @@ import InputError from '@/components/InputError/InputError.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 
+type Form = {
+    file: File | null;
+};
+
 const toast = useToast();
 const route = useRoute();
-const form = useForm<{ file: File | null }>({
+const form = useForm<Form>({
     file: null,
 });
 const isVisible = ref(false);

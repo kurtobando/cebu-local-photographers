@@ -47,9 +47,13 @@ import useFlashMessage from '@/composables/useFlashMessage';
 import useRoutes from '@/composables/useRoute';
 import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
 
+type Form = {
+    file: File | null;
+};
+
 const route = useRoutes();
 const toast = useToast();
-const form = useForm<{ file: File | null }>({
+const form = useForm<Form>({
     file: null,
 });
 

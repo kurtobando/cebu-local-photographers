@@ -63,9 +63,14 @@ import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/layouts/PageLayoutAuth.vue';
 
+type Form = {
+    email: string;
+    password: string;
+};
+
 const route = useRoute();
 const toast = useToast();
-const form = useForm({
+const form = useForm<Form>({
     email: '',
     password: '',
 });
