@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\UserAuthProviderEnum;
 use App\Http\Requests\SignUpRequest;
 use App\Services\SignUpService;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 
 class SignUpController extends Controller
 {
@@ -14,20 +16,18 @@ class SignUpController extends Controller
         //
     }
 
-    public function index()
+    public function index(): Response
     {
         return inertia('TheSignUp');
     }
 
-    public function store(SignUpRequest $request)
+    public function store(SignUpRequest $request): RedirectResponse
     {
         $user = $this->signUpService->signUp($request->all(), UserAuthProviderEnum::DEFAULT->value);
 
         auth()->loginUsingId($user->id);
 
         session()->regenerate();
-
-        // TODO! send outbound welcome email
 
         return redirect()->route('dashboard');
     }

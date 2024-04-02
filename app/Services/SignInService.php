@@ -12,7 +12,7 @@ class SignInService
         //
     }
 
-    public function signIn(string $email, string $password, $remember = false): bool
+    public function signIn(string $email, string $password, bool $remember = false): bool
     {
         if (!$this->isActive($email)) {
             // TODO! throw exception here

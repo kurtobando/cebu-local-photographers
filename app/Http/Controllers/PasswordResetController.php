@@ -7,7 +7,9 @@ use App\Events\PasswordResetEvent;
 use App\Http\Requests\PasswordResetRequest;
 use App\Models\PasswordResetToken;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Response;
 
 class PasswordResetController extends Controller
 {
@@ -19,12 +21,12 @@ class PasswordResetController extends Controller
         //
     }
 
-    public function index()
+    public function index(): Response
     {
         return inertia('ThePasswordReset');
     }
 
-    public function store(PasswordResetRequest $request)
+    public function store(PasswordResetRequest $request): RedirectResponse
     {
         if (
             $this

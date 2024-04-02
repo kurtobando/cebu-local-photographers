@@ -40,7 +40,7 @@ class PostService
             'status' => PostStatusEnum::DRAFT->value,
             'title' => '',
             'description' => '',
-            'tag' => '',
+            'tags' => '',
             'category_id' => Category::first()->id,
             'comments' => 0,
             'views' => 0,

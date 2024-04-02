@@ -6,7 +6,9 @@ use App\Events\PasswordConfirmationEvent;
 use App\Http\Requests\PasswordConfirmationRequest;
 use App\Models\PasswordResetToken;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Response;
 
 class PasswordConfirmationController extends Controller
 {
@@ -18,7 +20,7 @@ class PasswordConfirmationController extends Controller
         //
     }
 
-    public function index()
+    public function index(): Response
     {
         $token = request()->query('token') ?? null;
         $email = request()->query('email') ?? null;
@@ -31,7 +33,7 @@ class PasswordConfirmationController extends Controller
         return inertia('ThePasswordConfirmation', [ 'email' => $email, 'token' => $token ]);
     }
 
-    public function update(PasswordConfirmationRequest $request)
+    public function update(PasswordConfirmationRequest $request): RedirectResponse
     {
         $token = $request->token;
         $email = $request->email;

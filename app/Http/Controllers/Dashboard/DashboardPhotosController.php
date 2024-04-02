@@ -7,6 +7,8 @@ use App\Http\Requests\DashboardPhotosStoreRequest;
 use App\Http\Requests\DashboardPhotosUpdateRequest;
 use App\Models\Post;
 use App\Services\PostService;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -18,12 +20,12 @@ class DashboardPhotosController extends Controller
         //
     }
 
-    public function create()
+    public function create(): Response
     {
         return inertia('Dashboard/TheDashboardPhotosCreate');
     }
 
-    public function store(DashboardPhotosStoreRequest $request)
+    public function store(DashboardPhotosStoreRequest $request): RedirectResponse
     {
         try {
             $post = $this->postService->savePost();
@@ -37,7 +39,7 @@ class DashboardPhotosController extends Controller
         }
     }
 
-    public function show(Post $post)
+    public function show(Post $post): Response
     {
         if (request()->user()->cannot('update', $post)) {
             abort(403);
@@ -50,7 +52,7 @@ class DashboardPhotosController extends Controller
         ]);
     }
 
-    public function update(DashboardPhotosUpdateRequest $request)
+    public function update(DashboardPhotosUpdateRequest $request): RedirectResponse
     {
         $post = $this->postService->getPostById($request->id);
 

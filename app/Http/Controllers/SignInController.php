@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignInRequest;
 use App\Services\SignInService;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Response;
 
 class SignInController extends Controller
 {
@@ -13,7 +15,7 @@ class SignInController extends Controller
 
     }
 
-    public function index()
+    public function index(): Response| RedirectResponse
     {
         if (auth()->check()) {
             return redirect()->route('dashboard');
@@ -22,7 +24,7 @@ class SignInController extends Controller
         return inertia('TheSignIn');
     }
 
-    public function store(SignInRequest $request)
+    public function store(SignInRequest $request): RedirectResponse
     {
         if (!$this->signInService->signIn($request->email, $request->password, true)) {
             return redirect()

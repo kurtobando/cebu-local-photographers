@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DashboardProfileImageRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class DashboardProfileImageController extends Controller
 {
-    public function store(DashboardProfileImageRequest $request)
+    public function store(DashboardProfileImageRequest $request): RedirectResponse
     {
         try {
             $user = User::findOrFail(auth()->id());
