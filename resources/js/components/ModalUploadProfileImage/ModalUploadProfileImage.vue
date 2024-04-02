@@ -53,7 +53,6 @@ async function onUpload(event: FileUploadUploaderEvent) {
         severity: 'info',
         summary: 'Please wait...',
     });
-
     form.file = Array.isArray(event.files) ? event.files[0] : event.files;
     form.post(route('dashboard.profile-image.store'), {
         onBefore: () => {
@@ -67,8 +66,8 @@ async function onUpload(event: FileUploadUploaderEvent) {
                 return false;
             }
         },
-        onError: (e) => {
-            console.error(e);
+        onError: () => {
+            toast.removeAllGroups();
             toast.add({
                 detail: 'Something went wrong, please try again.',
                 life: 6000,

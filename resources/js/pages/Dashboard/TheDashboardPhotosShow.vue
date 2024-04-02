@@ -106,8 +106,8 @@ function onSubmit() {
         summary: 'Please wait...',
     });
     form.patch(route('dashboard.photos.update'), {
-        onError: (e) => {
-            console.error(e);
+        onError: () => {
+            toast.removeAllGroups();
             toast.add({
                 detail: 'Oops! Something went wrong. Please check the form for errors.',
                 life: 6000,
@@ -118,8 +118,9 @@ function onSubmit() {
         onSuccess: () => {
             const { error, success } = useFlashMessage();
 
+            toast.removeAllGroups();
+
             if (success) {
-                toast.removeAllGroups();
                 toast.add({
                     detail: success,
                     life: 6000,

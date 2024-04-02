@@ -155,9 +155,10 @@ function onSubmit() {
         severity: 'info',
         summary: 'Please wait...',
     });
-
     form.patch(route('dashboard.profile.update'), {
-        onError: (e) => console.error(e),
+        onError: () => {
+            toast.removeAllGroups();
+        },
         onSuccess: () => {
             const { error, success } = useFlashMessage();
 
