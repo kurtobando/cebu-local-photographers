@@ -11,15 +11,15 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Category 101',
+            'name' => 'Uncategorized',
             'status' => CategoryStatusEnum::PUBLISHED->value,
         ]);
         Category::create([
-            'name' => 'Category 102',
+            'name' => 'New',
             'status' => CategoryStatusEnum::PUBLISHED->value,
         ]);
         Category::create([
-            'name' => 'Category 103',
+            'name' => 'Unpublished',
             'status' => CategoryStatusEnum::UNPUBLISHED->value,
         ]);
     }
