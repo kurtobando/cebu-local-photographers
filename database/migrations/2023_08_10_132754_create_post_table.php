@@ -10,17 +10,22 @@ return new class () extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
             $table->string('status')->default(PostStatusEnum::DRAFT->value);
-            $table->string('tag');
+            $table->string('tags')->nullable();
             $table->bigInteger('views');
             $table->bigInteger('likes');
             $table->bigInteger('comments');
-
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('category_id')
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
