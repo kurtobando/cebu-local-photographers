@@ -1,5 +1,5 @@
 <template>
-    <Meta title="Submit Photo" />
+    <Meta title="Create a Post" />
     <Header />
     <section class="flex min-h-screen flex-col md:flex-row">
         <div class="grid w-full place-content-center bg-slate-950 md:w-2/3">
@@ -10,36 +10,50 @@
                 alt="media image" />
         </div>
         <div class="flex w-full flex-col gap-4 p-8 md:w-1/3">
-            <InputText
-                v-model="form.title"
-                placeholder="Title" />
-            <InputError
-                :text="form.errors.title"
-                v-if="form.errors.title" />
+            <div>
+                <h1 class="text-2xl font-bold">Create a Post</h1>
+                <p class="leading-relaxed text-slate-400">Tell us more about this photo</p>
+            </div>
+            <div class="flex flex-col gap-1">
+                <InputText
+                    v-model="form.title"
+                    placeholder="Title" />
+                <InputError
+                    :text="form.errors.title"
+                    v-if="form.errors.title" />
+            </div>
+            <div class="flex flex-col gap-1">
+                <Textarea
+                    v-model="form.description"
+                    placeholder="Write a caption"
+                    :rows="8" />
+                <InputError
+                    :text="form.errors.description"
+                    v-if="form.errors.description" />
+            </div>
+            <div class="flex flex-col gap-1">
+                <Chips
+                    class="w-full"
+                    v-model="form.tags"
+                    separator=","
+                    placeholder="Type tags, separate by comma (,)" />
+                <InputError
+                    :text="form.errors.tags"
+                    v-if="form.errors.tags" />
+            </div>
+            <div class="flex flex-col gap-1">
+                <Dropdown
+                    :options="getCategories"
+                    option-label="label"
+                    option-value="value"
+                    placeholder="Choose a category"
+                    v-model="form.category_id" />
+                <InputError
+                    :text="form.errors.category_id"
+                    v-if="form.errors.category_id" />
+            </div>
 
-            <Textarea
-                v-model="form.description"
-                placeholder="description" />
-            <InputError
-                :text="form.errors.description"
-                v-if="form.errors.description" />
-
-            <Chips
-                class="w-full"
-                v-model="form.tags"
-                separator="," />
-            <InputError
-                :text="form.errors.tags"
-                v-if="form.errors.tags" />
-
-            <Dropdown
-                :options="getCategories"
-                option-label="label"
-                option-value="value"
-                v-model="form.category_id" />
-            <InputError
-                :text="form.errors.category_id"
-                v-if="form.errors.category_id" />
+            <!-- TODO! add location input field with geo map -->
 
             <Button
                 label="Post"
@@ -47,6 +61,7 @@
                 :loading="form.processing" />
         </div>
     </section>
+    <Toast />
 </template>
 
 <script setup lang="ts">
@@ -147,8 +162,6 @@ onMounted(() => {
     form.category_id = props.post.category_id;
     form.id = props.post.id;
 });
-
-// defineOptions({ layout: PageLayoutDashboard });
 </script>
 
 <style scoped></style>
