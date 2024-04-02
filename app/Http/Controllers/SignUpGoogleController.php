@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
-use App\Http\Requests\SignUpRequest;
 use App\Services\SignUpService;
+use Laravel\Socialite\Facades\Socialite;
 
-class SignUpController extends Controller
+class SignUpGoogleController extends Controller
 {
     public function __construct(
-        private readonly SignUpService $signUpService
+        private readonly SignUpService $signUpService,
     ) {
         //
     }
 
-    public function index()
+    public function redirect()
     {
-        return inertia('TheSignUp');
+        return Socialite::driver('google')->redirect();
     }
 
-    public function store(SignUpRequest $request)
+    public function callback()
     {
-        $user = $this->signUpService->signUp($request->all(), UserAuthProviderEnum::DEFAULT->value);
+        $user = $this->signUpService->signUp([], UserAuthProviderEnum::GOOGLE->value);
 
         auth()->loginUsingId($user->id);
 
