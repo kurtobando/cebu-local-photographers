@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Enums\CategoryStatusEnum;
-use App\Enums\PostStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DashboardPhotosStoreRequest;
 use App\Http\Requests\DashboardPhotosUpdateRequest;
-use App\Models\Category;
 use App\Models\Post;
+use App\Services\PostService;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class DashboardPhotosController extends Controller
 {
     public function __construct(
-        private readonly Category $category,
-        private readonly Post     $post
+        private readonly PostService $postService
     ) {
         //
     }
@@ -29,20 +26,8 @@ class DashboardPhotosController extends Controller
     public function store(DashboardPhotosStoreRequest $request)
     {
         try {
-            $post = $this->post->create([
-                'user_id' => auth()->user()->id,
-                'status' => PostStatusEnum::DRAFT->value,
-                'title' => '',
-                'description' => '',
-                'tag' => '',
-                'category_id' => 1,
-                'comments' => 0,
-                'views' => 0,
-                'likes' => 0,
-            ]);
-
-            $media = $this->post->find($post->id);
-            $media->addMedia($request->file)->toMediaCollection('photos');
+            $post = $this->postService->savePost();
+            $post->addMedia($request->file)->toMediaCollection('photos');
 
             return redirect()->route('dashboard.photos.show', ['post' => $post->id]);
         } catch (FileDoesNotExist|FileIsTooBig $e) {
@@ -58,22 +43,27 @@ class DashboardPhotosController extends Controller
             abort(403);
         }
 
-        $media = $post->getFirstMedia('photos')->getFullUrl('large');
-        $categories = $this->category->where('status', CategoryStatusEnum::PUBLISHED->value)->get(['id', 'name']);
-
         return inertia('Dashboard/TheDashboardPhotosShow', [
             'post' => $post,
-            'media' => $media,
-            'categories' => $categories,
+            'media' => $post->getFirstMedia('photos')->getFullUrl('large'),
+            'categories' => $this->postService->getPostCategories(),
         ]);
     }
 
     public function update(DashboardPhotosUpdateRequest $request)
     {
-        dd($request->all());
+        $post = $this->postService->getPostById($request->id);
 
-        if (request()->user()->cannot('update', $request->id)) {
+        if (request()->user()->cannot('update', $post)) {
             abort(403);
         }
+
+        $this->postService->updatePostById($request->id, $request->validated());
+
+        // TODO! redirect to news feed, or manage photos page
+
+        return redirect()
+            ->back()
+            ->with(['success' => 'Your post has been successfully saved.']);
     }
 }
