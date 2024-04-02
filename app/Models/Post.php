@@ -21,12 +21,17 @@ class Post extends Model implements HasMedia
         'likes',
         'comments',
         'status',
-        'tag'
+        'tags'
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     // TODO! switch to s3

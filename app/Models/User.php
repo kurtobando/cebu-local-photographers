@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
@@ -49,6 +50,11 @@ class User extends Authenticatable implements HasMedia
     protected $dispatchesEvents = [
         'created' => UserSignUpEvent::class,
     ];
+
+    public function post(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
 
     public function getRoleAttribute(): string
     {
