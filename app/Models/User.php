@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
@@ -19,6 +21,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use HasRoles;
     use InteractsWithMedia;
+    use LogsActivity;
 
     protected $fillable = [
         'name',
@@ -59,6 +62,11 @@ class User extends Authenticatable implements HasMedia
     public function getRoleAttribute(): string
     {
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logFillable();
     }
 
     // TODO! switch to s3
