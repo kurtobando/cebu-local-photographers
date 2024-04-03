@@ -32,14 +32,25 @@ export interface Post {
     title: string;
     description: string;
     status: string;
-    tag: string;
+    tags: string;
+    comments: number;
     views: number;
     likes: number;
-    comments: number;
+    user_id: number;
+    user: ?User;
+    category_id: number;
+    category: ?string;
+    media: ?PostMedia;
     created_at: string;
     updated_at: string;
-    category_id: number;
-    user_id: number;
+}
+
+export interface PostMedia {
+    thumbnail: string;
+    medium: string;
+    large: string;
+    xlarge: string;
+    original: string;
 }
 
 export interface SharedProps extends PageProps {
