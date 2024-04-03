@@ -6,7 +6,7 @@ use App\Enums\CategoryStatusEnum;
 use App\Enums\PostStatusEnum;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class PostService
 {
@@ -23,6 +23,22 @@ class PostService
             ->post
             ->where('id', $id)
             ->first();
+    }
+
+    public function getPostsByUserId(int $id): Collection
+    {
+        return $this
+            ->post
+            ->with(['category', 'media'])
+            ->where(['user_id' => $id])
+            ->latest()
+            ->get()
+            ->map(function (Post $post) {
+                return array_merge($post->toArray(), [
+                    'category' => $post->category->name,
+                    'media' => $post->getMediaThumbnails(),
+                ]);
+            });
     }
 
     public function getPostCategories(): Collection
@@ -61,4 +77,5 @@ class PostService
 
         return $post;
     }
+
 }
