@@ -23,10 +23,12 @@
                         @uploader="onUpload"
                         choose-label="Upload Photos"
                         multiple />
-                    <Button
-                        label="View Gallery"
-                        class="!py-3 !text-sm"
-                        outlined />
+                    <Link :href="route('dashboard.photos-gallery.index')">
+                        <Button
+                            label="View Gallery"
+                            class="!py-3 !text-sm"
+                            outlined />
+                    </Link>
                 </div>
                 <p class="mx-auto max-w-md text-center text-sm text-slate-400">
                     File upload limit is 10mb, and make sure this is a valid image extension.
@@ -37,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import Button from 'primevue/button';
 import FileUpload, { FileUploadUploaderEvent } from 'primevue/fileupload';
 import { useToast } from 'primevue/usetoast';
