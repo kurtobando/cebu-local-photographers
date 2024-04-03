@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\SignUpGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
@@ -61,6 +62,8 @@ Route::prefix('dashboard')
         Route::post('/photos', [DashboardPhotosController::class, "store"])->name('dashboard.photos.store');
         Route::get('/photos/{post}', [DashboardPhotosController::class, "show"])->name('dashboard.photos.show');
         Route::patch('/photos', [DashboardPhotosController::class, "update"])->name('dashboard.photos.update');
+
+        Route::get('/photos-gallery', [DashboardPhotosGalleryController::class, "index"])->name('dashboard.photos-gallery.index');
 
         Route::get('/users', [DashboardUserController::class, "index"])->name('dashboard.users');
     });
