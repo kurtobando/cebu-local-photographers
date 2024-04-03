@@ -37,6 +37,17 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function getMediaThumbnails(): array
+    {
+        return [
+            'thumbnail' => $this->getFirstMediaUrl('photos', 'thumbnail'),
+            'medium' => $this->getFirstMediaUrl('photos', 'medium'),
+            'large' => $this->getFirstMediaUrl('photos', 'large'),
+            'xlarge' => $this->getFirstMediaUrl('photos', 'xlarge'),
+            'original' => $this->getFirstMediaUrl('photos'),
+        ];
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable();
