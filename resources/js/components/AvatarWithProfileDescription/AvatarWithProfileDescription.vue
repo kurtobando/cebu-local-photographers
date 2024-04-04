@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-row gap-8">
-        <div class="flex w-1/3 items-center justify-end">
+    <div class="flex flex-col gap-8 md:flex-row">
+        <div class="flex w-full items-center justify-center md:w-1/3 md:justify-end">
             <img
                 class="h-[12rem] w-[12rem] rounded-full object-cover"
                 width="200"
@@ -8,10 +8,10 @@
                 :src="imageSource"
                 :alt="name" />
         </div>
-        <div class="flex w-2/3 flex-col justify-center gap-2">
+        <div class="flex w-full flex-col items-center justify-center gap-2 md:w-2/3 md:items-start">
             <h2 class="text-2xl font-bold">{{ name }}</h2>
-            <p class="leading-relaxed">{{ about }}</p>
-            <div class="flex flex-col gap-2">
+            <p class="text-center leading-relaxed md:text-left">{{ about }}</p>
+            <div class="flex flex-col items-center gap-2 md:items-start">
                 <ul class="inline-flex gap-4">
                     <li class="font-bold">Follow</li>
                     <li class="font-bold text-accent">Hire Me</li>
