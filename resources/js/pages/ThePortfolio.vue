@@ -13,7 +13,7 @@
             </div>
         </template>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
-            <CardAvatarImage
+            <CardImage
                 v-for="(image, key) in images"
                 :key="key"
                 :image-alt="image.alt"
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import CardAvatarImage from '@/components/CardAvatarImage/CardAvatarImage.vue';
+import CardImage from '@/components/CardImage/CardImage.vue';
 import CardPortfolio from '@/components/CardPortfolio/CardPortfolio.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import LayoutTheFold from '@/layouts/LayoutTheFold.vue';

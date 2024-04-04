@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import CardImage from '@/components/CardImage/CardImage.vue';
+import CardImage from '@/components/CardImageWithAuthor/CardImageWithAuthor.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 

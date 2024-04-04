@@ -5,7 +5,7 @@
             <h1 class="text-center text-4xl font-bold leading-relaxed">Meet the people behind their amazing work</h1>
         </template>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6">
-            <CardAvatarImage
+            <CardImage
                 v-for="(image, key) in images"
                 :key="key"
                 :image-alt="image.alt"
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import CardAvatarImage from '@/components/CardAvatarImage/CardAvatarImage.vue';
+import CardImage from '@/components/CardImage/CardImage.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import LayoutTheFold from '@/layouts/LayoutTheFold.vue';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
