@@ -6,13 +6,15 @@ use App\Enums\CategoryStatusEnum;
 use App\Enums\PostStatusEnum;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class PostService
 {
     public function __construct(
         private readonly Post $post,
-        private readonly Category $category
+        private readonly Category $category,
+        private readonly User $user
     ) {
         //
     }
@@ -39,6 +41,19 @@ class PostService
                     'media' => $post->getMediaThumbnails(),
                 ]);
             });
+    }
+
+    public function getAuthorByUserId(int $id): User
+    {
+        return $this
+            ->user
+            ->where('id', $id)
+            ->first([
+                'id',
+                'name',
+                'avatar',
+                'about'
+            ]);
     }
 
     public function getPostCategories(): Collection
