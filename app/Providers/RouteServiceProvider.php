@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::pattern('post', '[0-9]+');
+        Route::pattern('id', '[0-9]+');
 
         $this->routes(function () {
             Route::middleware('api')
