@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SignUpGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
@@ -30,7 +31,7 @@ Route::get('/', fn () => Inertia::render('TheHome'))->name('home');
 Route::get('/members', fn () => Inertia::render('TheMembers'))->name('members');
 Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
-Route::get('/post', fn () => Inertia::render('ThePost'))->name('post');
+Route::get('/post/{id}', [PostController::class, 'index'])->name('post');
 
 Route::get('/password-reset', [PasswordResetController::class, "index"])->name('password-reset');
 Route::post('/password-reset', [PasswordResetController::class, "store"])->name('password-reset.store');
