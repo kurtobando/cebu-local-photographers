@@ -16,10 +16,12 @@ class DashboardPhotosGalleryController extends Controller
 
     public function index(): Response
     {
-        $post = $this->postService->getPostsByUserId(auth()->id());
+        $posts = $this->postService->getPostsByUserId(auth()->id());
+        $postAuthor = $this->postService->getAuthorByUserId(auth()->id());
 
         return inertia('Dashboard/TheDashboardPhotosGalleryIndex', [
-            'posts' => $post,
+            'posts' => $posts,
+            'post_author' => $postAuthor,
         ]);
     }
 }

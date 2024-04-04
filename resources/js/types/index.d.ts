@@ -45,6 +45,15 @@ export interface Post {
     updated_at: string;
 }
 
+export interface PostAuthor {
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    about: ?string;
+    avatar: ?string;
+}
+
 export interface PostMedia {
     thumbnail: string;
     medium: string;
