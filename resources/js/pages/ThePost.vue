@@ -1,16 +1,16 @@
 <template>
     <section class="-m-8">
-        <Meta title="Post" />
+        <Meta :title="post.title" />
         <div class="flex w-full flex-col lg:flex-row">
             <div class="w-full bg-gray-900 lg:w-7/12">
                 <img
-                    alt=""
                     class="min-h-screen w-full object-contain"
-                    src="https://images.unsplash.com/photo-1687579520892-5160c0df4b3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" />
+                    :alt="post.title"
+                    :src="post.media?.xlarge" />
             </div>
             <div class="flex w-full flex-col gap-8 p-8 md:p-12 lg:w-5/12">
                 <h1 class="text-3xl font-semibold leading-relaxed">
-                    This is a title that tells a short story of this image
+                    {{ post.title }}
                 </h1>
                 <ul class="inline-flex items-center gap-4">
                     <li>
@@ -28,12 +28,10 @@
                     </li>
                 </ul>
                 <p class="leading-relaxed">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged.
+                    {{ post.description }}
                 </p>
                 <p class="flex flex-wrap gap-2 text-sm font-semibold">
+                    {{ post.tags }}
                     <a href="">#photography</a>
                     <a href="">#cebu</a>
                 </p>
@@ -101,7 +99,13 @@ import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
+import { Post } from '@/types';
 
+interface Props {
+    post: Post;
+}
+
+defineProps<Props>();
 defineOptions({ layout: PageLayoutPublic });
 
 const comments = [
