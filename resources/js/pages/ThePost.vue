@@ -9,7 +9,7 @@
                     :src="post.media?.xlarge" />
             </div>
             <div class="flex w-full flex-col gap-8 p-8 md:p-12 lg:w-5/12">
-                <h1 class="text-3xl font-semibold leading-relaxed">
+                <h1 class="text-3xl font-bold capitalize leading-relaxed">
                     {{ post.title }}
                 </h1>
                 <ul class="inline-flex items-center gap-4">
@@ -31,9 +31,7 @@
                     {{ post.description }}
                 </p>
                 <p class="flex flex-wrap gap-2 text-sm font-semibold">
-                    {{ post.tags }}
-                    <a href="">#photography</a>
-                    <a href="">#cebu</a>
+                    {{ helper.parsePostTags(post.tags) }}
                 </p>
                 <div class="flex flex-col items-center justify-between gap-8 xl:flex-row">
                     <div class="inline-flex w-full gap-4">
@@ -48,15 +46,15 @@
                     <div class="inline-flex items-center justify-between gap-8">
                         <p class="inline-flex gap-2 hover:text-accent">
                             <Heart />
-                            <span>1.2k</span>
+                            <span>{{ post.likes }}</span>
                         </p>
                         <p class="inline-flex gap-2 hover:text-accent">
                             <MessageCircle />
-                            1.2k
+                            <span>{{ post.comments }}</span>
                         </p>
                         <p class="inline-flex gap-2 hover:text-accent">
                             <Eye />
-                            1.2k
+                            <span>{{ post.views }}</span>
                         </p>
                     </div>
                 </div>
@@ -98,6 +96,7 @@ import Button from 'primevue/button';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import useHelper from '@/composables/useHelper';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 import { Post } from '@/types';
 
@@ -107,6 +106,8 @@ interface Props {
 
 defineProps<Props>();
 defineOptions({ layout: PageLayoutPublic });
+
+const helper = useHelper();
 
 const comments = [
     {
