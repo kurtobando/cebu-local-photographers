@@ -19,8 +19,9 @@ createInertiaApp({
         delay: 0,
         showSpinner: true,
     },
-    resolve: (name) =>
-        resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
+    resolve: (name) => {
+        return resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue'));
+    },
     setup({ App, el, plugin, props }) {
         createApp({ render: () => h(App, props) })
             .component('Toast', Toast)
@@ -30,5 +31,8 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .mount(el);
     },
-    title: (title) => `${title} - ${APP_NAME}`,
+    title: (title) => {
+        if (!title) return APP_NAME;
+        return `${title} - ${APP_NAME}`;
+    },
 }).then(() => console.log('Application created successfully.'));
