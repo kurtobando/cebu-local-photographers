@@ -1,17 +1,23 @@
 <template>
-    <div class="flex h-full flex-col gap-8 rounded">
-        <div class="flex flex-col gap-4 text-sm">
+    <div class="flex h-full min-w-[16rem] flex-col gap-8 rounded">
+        <div class="flex flex-col text-sm">
             <Link
-                class="flex items-center gap-3"
+                class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
                 :href="route('dashboard.profile')">
                 <User :size="19" />
-                Manage Profile
+                <span>Manage Profile</span>
             </Link>
             <Link
-                class="flex items-center gap-3"
+                class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
                 :href="route('dashboard.photos.create')">
-                <Image :size="19" />
-                Manage Photos
+                <ImagePlus :size="19" />
+                <span>Manage Photos</span>
+            </Link>
+            <Link
+                class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
+                :href="route('dashboard.photos-gallery.index')">
+                <Images :size="19" />
+                <span>Manage Gallery</span>
             </Link>
         </div>
     </div>
@@ -19,7 +25,7 @@
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Image, User } from 'lucide-vue-next';
+import { ImagePlus, Images, User } from 'lucide-vue-next';
 import useRoute from '@/composables/useRoute';
 
 const route = useRoute();
