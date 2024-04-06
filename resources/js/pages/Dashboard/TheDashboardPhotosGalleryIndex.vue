@@ -4,13 +4,13 @@
         <template #title>Manage Gallery</template>
         <template #description>Manage your recent photos, you edit or even archive your photos.</template>
         <div class="grid place-content-center">
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="grid grid-cols-2 gap-2 md:grid-cols-2">
                 <div
                     v-for="(image, key) in posts"
                     :key="key">
                     <Link
                         class="block"
-                        :href="route('post', { id: image.id })">
+                        :href="route('dashboard.photos.edit', { post: image.id })">
                         <CardImage
                             :key="key"
                             :image-alt="image.title"
