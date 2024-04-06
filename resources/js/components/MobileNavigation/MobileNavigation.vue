@@ -104,7 +104,9 @@ import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
 import Brand from '@/components/Brand/Brand.vue';
 import useAuth from '@/composables/useAuth';
+import useRoute from '@/composables/useRoute';
 
+const route = useRoute();
 const { isAuthenticated } = useAuth();
 const visible = ref(false);
 
