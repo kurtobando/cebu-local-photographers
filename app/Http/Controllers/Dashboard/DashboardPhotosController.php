@@ -46,9 +46,15 @@ class DashboardPhotosController extends Controller
         }
 
         return inertia('Dashboard/TheDashboardPhotosShow', [
-            'post' => $post,
-            'media' => $post->getFirstMedia('photos')->getFullUrl('large'),
-            'categories' => $this->postService->getPostCategories(),
+            'post' => array_merge($post->toArray(), [
+                'category' => $post->category->name,
+                'media' => $post->getMediaThumbnails(),
+            ]),
+            'categories' => $this->postService
+                ->getPostCategories()
+                ->map(function ($item) {
+                    return $item->only(['id', 'name']);
+                }),
         ]);
     }
 
@@ -62,10 +68,6 @@ class DashboardPhotosController extends Controller
 
         $this->postService->updatePostById($request->id, $request->validated());
 
-        // TODO! redirect to news feed, or manage photos page
-
-        return redirect()
-            ->back()
-            ->with(['success' => 'Your post has been successfully saved.']);
+        return redirect()->route('dashboard.photos-gallery.index');
     }
 }

@@ -4,7 +4,7 @@
     <section class="flex min-h-screen flex-col md:flex-row">
         <div class="grid w-full place-content-center bg-slate-950 md:w-2/3">
             <Image
-                :src="media"
+                :src="post.media?.large"
                 :preview="true"
                 image-class="w-full shadow-lg"
                 alt="media image" />
@@ -84,7 +84,6 @@ import { Category, Post } from '@/types';
 interface Props {
     categories: Category[];
     post: Post;
-    media: string;
 }
 
 type Form = {

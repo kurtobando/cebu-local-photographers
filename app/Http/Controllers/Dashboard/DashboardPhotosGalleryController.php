@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Services\PostService;
 use Inertia\Response;
 
@@ -20,7 +21,12 @@ class DashboardPhotosGalleryController extends Controller
         $postAuthor = $this->postService->getAuthorByUserId(auth()->id());
 
         return inertia('Dashboard/TheDashboardPhotosGalleryIndex', [
-            'posts' => $posts,
+            'posts' => $posts->map(function (Post $post) {
+                return array_merge($post->toArray(), [
+                    'category' => $post->category->name,
+                    'media' => $post->getMediaThumbnails(),
+                ]);
+            }),
             'post_author' => $postAuthor,
         ]);
     }
