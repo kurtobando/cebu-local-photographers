@@ -1,7 +1,6 @@
 <template>
     <Link :href="route('home')">
         <h1 class="text-xl font-bold">Cebu Local Photographers</h1>
-        2
         <p class="text-sm leading-relaxed text-slate-400">an exclusive club for cebuano photographers</p>
     </Link>
 </template>
