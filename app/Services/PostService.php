@@ -34,13 +34,7 @@ class PostService
             ->with(['category', 'media'])
             ->where(['user_id' => $id])
             ->latest()
-            ->get()
-            ->map(function (Post $post) {
-                return array_merge($post->toArray(), [
-                    'category' => $post->category->name,
-                    'media' => $post->getMediaThumbnails(),
-                ]);
-            });
+            ->get();
     }
 
     public function getAuthorByUserId(int $id): User
@@ -48,12 +42,7 @@ class PostService
         return $this
             ->user
             ->where('id', $id)
-            ->first([
-                'id',
-                'name',
-                'avatar',
-                'about'
-            ]);
+            ->first();
     }
 
     public function getPostCategories(): Collection
@@ -61,7 +50,7 @@ class PostService
         return $this
             ->category
             ->where('status', CategoryStatusEnum::PUBLISHED->value)
-            ->get(['id', 'name']);
+            ->get();
     }
 
     public function savePost(): Post
@@ -93,4 +82,21 @@ class PostService
         return $post;
     }
 
+    public function isPostPublished(int $id): bool
+    {
+        return $this
+            ->post
+            ->where('id', $id)
+            ->where('status', PostStatusEnum::PUBLISHED->value)
+            ->exists();
+    }
+
+    public function isPostAuthorCurrentUser(int $id): bool
+    {
+        return $this
+            ->post
+            ->where('id', $id)
+            ->where('user_id', auth()->id())
+            ->exists();
+    }
 }
