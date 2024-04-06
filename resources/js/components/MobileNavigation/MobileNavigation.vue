@@ -65,7 +65,7 @@
                         href=""
                         @click="toggleVisible">
                         <Button
-                            :label="'Submit a Photo'"
+                            :label="'Upload Photo'"
                             class="w-full" />
                     </Link>
                 </nav>

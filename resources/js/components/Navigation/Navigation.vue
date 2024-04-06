@@ -72,8 +72,8 @@ const items = ref([
     },
     {
         command: () => router.visit(route('dashboard.photos.create')),
-        icon: 'pi pi-image',
-        label: 'Manage Photos',
+        icon: 'pi pi-upload',
+        label: 'Upload Photo',
     },
     {
         command: () => router.post(route('dashboard.sign-out')),

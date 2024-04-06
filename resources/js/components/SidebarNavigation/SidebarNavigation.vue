@@ -10,8 +10,8 @@
             <Link
                 class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
                 :href="route('dashboard.photos.create')">
-                <ImagePlus :size="19" />
-                <span>Manage Photos</span>
+                <Upload :size="19" />
+                <span>Upload Photo</span>
             </Link>
             <Link
                 class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { ImagePlus, Images, User } from 'lucide-vue-next';
+import { Images, Upload, User } from 'lucide-vue-next';
 import useRoute from '@/composables/useRoute';
 
 const route = useRoute();

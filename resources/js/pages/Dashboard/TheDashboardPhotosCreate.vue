@@ -1,8 +1,8 @@
 <template>
     <Meta title="Manage Photos" />
     <PageLayoutDashboard>
-        <template #title>Manage Photos</template>
-        <template #description>Manage and upload photos to your gallery.</template>
+        <template #title>Upload Photo</template>
+        <template #description>Start uploading your photos to your gallery.</template>
         <div class="grid place-content-center gap-4 rounded border border-slate-100 p-8 py-14">
             <div class="flex justify-center gap-2">
                 <FileUpload
