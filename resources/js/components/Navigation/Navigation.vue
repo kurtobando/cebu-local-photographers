@@ -25,7 +25,7 @@
                 <template #start>
                     <div class="flex flex-col p-4 px-5">
                         <p class="truncate font-bold">{{ user?.name }}</p>
-                        <p class="truncate text-sm text-slate-500">{{ user?.email }}</p>
+                        <p class="truncate text-sm text-slate-400">{{ user?.email }}</p>
                     </div>
                 </template>
                 <template #item="slotProps">
@@ -73,7 +73,7 @@ const items = ref([
     {
         command: () => router.visit(route('dashboard.photos.create')),
         icon: 'pi pi-image',
-        label: 'Submit Photo',
+        label: 'Manage Photos',
     },
     {
         command: () => router.post(route('dashboard.sign-out')),
