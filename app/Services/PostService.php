@@ -33,7 +33,7 @@ class PostService
             ->post
             ->with(['category', 'media'])
             ->where(['user_id' => $id])
-            ->latest()
+            ->orderByDesc('updated_at')
             ->get();
     }
 
