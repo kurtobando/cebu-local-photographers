@@ -1,108 +1,103 @@
 <template>
     <Meta title="Manage Profile" />
-    <section class="flex flex-col gap-8 md:flex-row">
-        <div class="md:pr-14 md:pt-20">
-            <SidebarNavigation />
-        </div>
-        <div class="flex flex-grow flex-col gap-4">
-            <div class="">
-                <h2 class="text-2xl font-bold">Manage Profile</h2>
-                <p class="text-sm">Manage your profile details here</p>
+    <PageLayoutDashboard>
+        <template #title>Manage Profile</template>
+        <template #description>Manage your profile details.</template>
+        <form
+            @submit.prevent="onSubmit"
+            class="flex w-full flex-col gap-2">
+            <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
+                <Avatar
+                    @click="onClickUploadProfileImage"
+                    class="custom-avatar cursor-pointer uppercase"
+                    :image="auth.user?.avatar"
+                    :label="auth.user?.avatar ? '' : auth.user?.name.slice(0, 1)"
+                    :shape="'circle'"
+                    :size="'xlarge'" />
             </div>
-            <form
-                @submit.prevent="onSubmit"
-                class="mt-4 flex flex-col gap-2">
-                <div class="flex items-center gap-2 rounded border border-slate-100 p-4">
-                    <Avatar
-                        @click="onClickUploadProfileImage"
-                        class="custom-avatar cursor-pointer uppercase"
-                        :image="auth.user?.avatar"
-                        :label="auth.user?.avatar ? '' : auth.user?.name.slice(0, 1)"
-                        :shape="'circle'"
-                        :size="'xlarge'" />
+            <div class="flex flex-col gap-1">
+                <label class="text-sm">Email Address</label>
+                <InputText
+                    readonly
+                    :value="auth.user?.email" />
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-sm">Name</label>
+                <InputText
+                    v-model="form.name"
+                    placeholder="name" />
+                <InputError
+                    v-if="form.errors.name"
+                    :text="form.errors.name" />
+            </div>
+            <div class="flex flex-col gap-1">
+                <label class="text-sm">Tell me about yourself</label>
+                <Textarea
+                    class="leading-relaxed"
+                    :rows="5"
+                    v-model="form.about"
+                    placeholder="Tell me something interesting about yourself..." />
+                <InputError
+                    v-if="form.errors.about"
+                    :text="form.errors.about" />
+            </div>
+            <div
+                v-if="!isProviderGoogle"
+                class="flex flex-col gap-2">
+                <div class="my-2 flex flex-row items-center gap-1">
+                    <Checkbox
+                        v-model="form.is_change_password"
+                        :binary="true"
+                        label="Change Password" />
+                    <label class="text-sm">Would you like to change your password?</label>
                 </div>
-                <div class="flex flex-col gap-1">
-                    <label class="text-sm">Email Address</label>
-                    <InputText
-                        readonly
-                        :value="auth.user?.email" />
-                </div>
-                <div class="flex flex-col gap-1">
-                    <label class="text-sm">Name</label>
-                    <InputText
-                        v-model="form.name"
-                        placeholder="name" />
-                    <InputError
-                        v-if="form.errors.name"
-                        :text="form.errors.name" />
-                </div>
-                <div class="flex flex-col gap-1">
-                    <label class="text-sm">Tell me about yourself</label>
-                    <Textarea
-                        class="leading-relaxed"
-                        :rows="5"
-                        v-model="form.about"
-                        placeholder="Tell me something interesting about yourself..." />
-                    <InputError
-                        v-if="form.errors.about"
-                        :text="form.errors.about" />
-                </div>
-                <div
-                    v-if="!isProviderGoogle"
-                    class="flex flex-col gap-2">
-                    <div class="my-2 flex flex-row items-center gap-1">
-                        <Checkbox
-                            v-model="form.is_change_password"
-                            :binary="true"
-                            label="Change Password" />
-                        <label class="text-sm">Would you like to change your password?</label>
+                <template v-if="form.is_change_password">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-sm">New Password</label>
+                        <InputText
+                            type="password"
+                            v-model="form.password"
+                            placeholder="password" />
+                        <InputError
+                            v-if="form.errors.password"
+                            :text="form.errors.password" />
                     </div>
-                    <template v-if="form.is_change_password">
-                        <div class="flex flex-col gap-1">
-                            <label class="text-sm">New Password</label>
-                            <InputText
-                                type="password"
-                                v-model="form.password"
-                                placeholder="password" />
-                            <InputError
-                                v-if="form.errors.password"
-                                :text="form.errors.password" />
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <label class="text-sm">Confirm Password</label>
-                            <InputText
-                                type="password"
-                                v-model="form.password_confirmation"
-                                placeholder="confirm password" />
-                            <InputError
-                                v-if="form.errors.password_confirmation"
-                                :text="form.errors.password_confirmation" />
-                        </div>
-                    </template>
-                </div>
-                <div v-if="isProviderGoogle">
-                    <Message
-                        class="!mt-0"
-                        :severity="'success'"
-                        :closable="false"
-                        icon="pi pi-google">
-                        <div class="flex items-center">
-                            <p class="pl-2 text-sm leading-relaxed">
-                                Your profile is tied to your
-                                <span class="capitalize">{{ auth.user?.provider }}</span>
-                                Account.
-                            </p>
-                        </div>
-                    </Message>
-                </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-sm">Confirm Password</label>
+                        <InputText
+                            type="password"
+                            v-model="form.password_confirmation"
+                            placeholder="confirm password" />
+                        <InputError
+                            v-if="form.errors.password_confirmation"
+                            :text="form.errors.password_confirmation" />
+                    </div>
+                </template>
+            </div>
+            <div v-if="isProviderGoogle">
+                <Message
+                    class="!mt-0"
+                    :severity="'success'"
+                    :closable="false"
+                    icon="pi pi-google">
+                    <div class="flex items-center">
+                        <p class="pl-2 text-sm leading-relaxed">
+                            Your profile is tied to your
+                            <span class="capitalize">{{ auth.user?.provider }}</span>
+                            Account.
+                        </p>
+                    </div>
+                </Message>
+            </div>
+            <div>
                 <Button
                     type="submit"
                     :loading="form.processing"
                     label="Save Changes" />
-            </form>
-        </div>
-        <ModalUploadProfileImage />
-    </section>
+            </div>
+        </form>
+    </PageLayoutDashboard>
+    <ModalUploadProfileImage />
 </template>
 
 <script lang="ts" setup>
@@ -119,7 +114,6 @@ import { computed, onMounted } from 'vue';
 import InputError from '@/components/InputError/InputError.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import ModalUploadProfileImage from '@/components/ModalUploadProfileImage/ModalUploadProfileImage.vue';
-import SidebarNavigation from '@/components/SidebarNavigation/SidebarNavigation.vue';
 import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoutes from '@/composables/useRoute';
@@ -196,8 +190,6 @@ onMounted(() => {
     form.about = auth?.user?.about as string;
     form.provider = auth?.user?.provider as string;
 });
-
-defineOptions({ layout: PageLayoutDashboard });
 </script>
 
 <style>
