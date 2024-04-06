@@ -58,6 +58,25 @@ class DashboardPhotosController extends Controller
         ]);
     }
 
+    public function edit(Post $post): Response
+    {
+        if (request()->user()->cannot('update', $post)) {
+            abort(403);
+        }
+
+        return inertia('Dashboard/TheDashboardPhotosEdit', [
+            'post' => array_merge($post->toArray(), [
+                'category' => $post->category->name,
+                'media' => $post->getMediaThumbnails(),
+            ]),
+            'categories' => $this->postService
+                ->getPostCategories()
+                ->map(function ($item) {
+                    return $item->only(['id', 'name']);
+                }),
+        ]);
+    }
+
     public function update(DashboardPhotosUpdateRequest $request): RedirectResponse
     {
         $post = $this->postService->getPostById($request->id);

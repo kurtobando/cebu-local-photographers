@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\SignUpGoogleController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
+use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardProfileImageController;
 use App\Http\Controllers\Dashboard\DashboardUserController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\SignUpGoogleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -62,6 +62,7 @@ Route::prefix('dashboard')
         Route::get('/photos', [DashboardPhotosController::class, "create"])->name('dashboard.photos.create');
         Route::post('/photos', [DashboardPhotosController::class, "store"])->name('dashboard.photos.store');
         Route::get('/photos/{post}', [DashboardPhotosController::class, "show"])->name('dashboard.photos.show');
+        Route::get('/photos/{post}/edit', [DashboardPhotosController::class, "edit"])->name('dashboard.photos.edit');
         Route::patch('/photos', [DashboardPhotosController::class, "update"])->name('dashboard.photos.update');
 
         Route::get('/photos-gallery', [DashboardPhotosGalleryController::class, "index"])->name('dashboard.photos-gallery.index');

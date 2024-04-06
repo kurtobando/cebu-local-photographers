@@ -1,17 +1,17 @@
 <template>
-    <Meta title="Create a Post" />
+    <Meta title="Edit A Post" />
     <Header />
     <section class="flex max-h-screen min-h-[90vh] flex-col md:flex-row">
         <div class="grid w-full place-content-center bg-[#171717] md:w-2/3">
             <Image
                 :src="post.media?.xlarge"
                 :preview="true"
-                image-class="w-full max-h-screen "
+                image-class="w-full  max-h-screen"
                 alt="media image" />
         </div>
         <div class="flex w-full flex-col gap-4 p-8 md:w-1/3">
             <div>
-                <h1 class="text-2xl font-bold">Create a Post</h1>
+                <h1 class="text-2xl font-bold">Edit a Post</h1>
                 <p class="leading-relaxed text-slate-400">Tell us more about this photo</p>
             </div>
             <div class="flex flex-col gap-1">
@@ -56,7 +56,7 @@
             <!-- TODO! add location input field with geo map -->
 
             <Button
-                label="Post"
+                label="Save Changes"
                 @click="onSubmit"
                 :loading="form.processing" />
         </div>
@@ -160,6 +160,12 @@ onMounted(() => {
     form.description = props.post.description;
     form.category_id = props.post.category_id;
     form.id = props.post.id;
+
+    try {
+        form.tags = JSON.parse(props.post.tags);
+    } catch (e) {
+        form.tags = [];
+    }
 });
 </script>
 
