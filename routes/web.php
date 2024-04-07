@@ -45,7 +45,6 @@ Route::post('/sign-in', [SignInController::class, 'store'])->name('sign-in.store
 Route::get('/sign-up', [SignUpController::class, 'index'])->name('sign-up');
 Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store');
 
-// socialite
 Route::get('/auth/google/redirect', [SignUpGoogleController::class, "redirect"])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [SignUpGoogleController::class, "callback"])->name('auth.google.callback');
 
