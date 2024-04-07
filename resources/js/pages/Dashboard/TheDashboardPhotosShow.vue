@@ -47,10 +47,10 @@
                     option-label="label"
                     option-value="value"
                     placeholder="Choose a category"
-                    v-model="form.category_id" />
+                    v-model="form.post_category_id" />
                 <InputError
-                    :text="form.errors.category_id"
-                    v-if="form.errors.category_id" />
+                    :text="form.errors.post_category_id"
+                    v-if="form.errors.post_category_id" />
             </div>
 
             <!-- TODO! add location input field with geo map -->
@@ -90,7 +90,7 @@ type Form = {
     id: number | null;
     title: string;
     description: string;
-    category_id: number | null;
+    post_category_id: number | null;
     tags: string[];
 };
 
@@ -98,9 +98,9 @@ const props = defineProps<Props>();
 const route = useRoute();
 const toast = useToast();
 const form = useForm<Form>({
-    category_id: null,
     description: '',
     id: null,
+    post_category_id: null,
     tags: [],
     title: '',
 });
@@ -158,7 +158,7 @@ function onSubmit() {
 onMounted(() => {
     form.title = props.post.title;
     form.description = props.post.description;
-    form.category_id = props.post.category_id;
+    form.post_category_id = props.post.post_category_id;
     form.id = props.post.id;
 });
 </script>

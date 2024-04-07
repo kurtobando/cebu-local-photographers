@@ -42,7 +42,7 @@ class PostController extends Controller
                 'created_at' => $post->created_at,
                 'updated_at' => $post->updated_at,
                 'user_id' => $post->user_id,
-                'category_id' => $post->category_id,
+                'post_category_id' => $post->post_category_id,
             ],
             'post_author' => [
                 'id' => $postAuthor->id,

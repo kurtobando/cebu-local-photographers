@@ -17,7 +17,7 @@ class DashboardPhotosUpdateRequest extends FormRequest
             'id' => 'required|integer|exists:posts,id',
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
-            'category_id' => 'required|integer|exists:categories,id',
+            'post_category_id' => 'required|integer',
             'tags' => 'required|array',
         ];
     }

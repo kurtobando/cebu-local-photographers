@@ -38,7 +38,7 @@ export interface Post {
     likes: number;
     user_id: number;
     user: ?User;
-    category_id: number;
+    post_category_id: number;
     category: ?string;
     media: ?PostMedia;
     created_at: string;

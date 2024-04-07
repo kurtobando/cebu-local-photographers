@@ -18,7 +18,7 @@ class Post extends Model implements HasMedia
     protected $fillable = [
         'title',
         'description',
-        'category_id',
+        'post_category_id',
         'user_id',
         'views',
         'likes',
@@ -29,7 +29,7 @@ class Post extends Model implements HasMedia
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(PostCategory::class, 'post_category_id');
     }
 
     public function user(): BelongsTo

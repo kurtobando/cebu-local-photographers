@@ -4,17 +4,17 @@ namespace App\Services;
 
 use App\Enums\CategoryStatusEnum;
 use App\Enums\PostStatusEnum;
-use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Support\Collection;
 
 class PostService
 {
     public function __construct(
-        private readonly Post $post,
-        private readonly Category $category,
-        private readonly User $user
+        private readonly Post         $post,
+        private readonly PostCategory $category,
+        private readonly User         $user
     ) {
         //
     }
@@ -61,7 +61,7 @@ class PostService
             'title' => '',
             'description' => '',
             'tags' => '',
-            'category_id' => Category::first()->id,
+            'post_category_id' => PostCategory::first()->id,
             'comments' => 0,
             'views' => 0,
             'likes' => 0,
@@ -75,7 +75,7 @@ class PostService
         $post->title = $data['title'];
         $post->description = $data['description'];
         $post->tags = $data['tags'];
-        $post->category_id = $data['category_id'];
+        $post->post_category_id = $data['post_category_id'];
         $post->status = PostStatusEnum::PUBLISHED->value;
         $post->save();
 
