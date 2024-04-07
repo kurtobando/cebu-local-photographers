@@ -6,6 +6,7 @@ use App\Enums\CategoryStatusEnum;
 use App\Enums\PostStatusEnum;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\PostLike;
 use App\Models\User;
 use Illuminate\Support\Collection;
 
@@ -13,7 +14,8 @@ class PostService
 {
     public function __construct(
         private readonly Post         $post,
-        private readonly PostCategory $category,
+        private readonly PostCategory $postCategory,
+        private readonly PostLike     $postLike,
         private readonly User         $user
     ) {
         //
@@ -48,7 +50,7 @@ class PostService
     public function getPostCategories(): Collection
     {
         return $this
-            ->category
+            ->postCategory
             ->where('status', CategoryStatusEnum::PUBLISHED->value)
             ->get();
     }
@@ -65,6 +67,14 @@ class PostService
             'comments' => 0,
             'views' => 0,
             'likes' => 0,
+        ]);
+    }
+
+    public function savePostLike(int $postId, int $userId): PostLike
+    {
+        return $this->postLike->updateOrCreate([
+            'post_id' => $postId,
+            'user_id' => $userId,
         ]);
     }
 
@@ -103,10 +113,19 @@ class PostService
     public function incrementPostViews(int $id): void
     {
         Post::withoutTimestamps(function () use ($id) {
-            $this
-                ->post
-                ->where('id', $id)
-                ->increment('views');
+            // TODO! lets increment only once per IP/session
+            $this->post->where('id', $id)->increment('views');
+        });
+    }
+
+    public function incrementLikeCount(int $id): void
+    {
+        Post::withoutTimestamps(function () use ($id) {
+            $count = $this->postLike->where('post_id', $id)->count();
+
+            $post = $this->post->where('id', $id)->first();
+            $post->likes = $count;
+            $post->save();
         });
     }
 }

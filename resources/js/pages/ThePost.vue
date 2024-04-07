@@ -45,7 +45,8 @@
                     <div class="inline-flex w-full gap-2">
                         <Button
                             class="!p-4"
-                            outlined>
+                            outlined
+                            @click="onPostLike(post.id)">
                             <Heart />
                         </Button>
                         <Button
@@ -100,16 +101,21 @@
             </div>
         </div>
     </section>
+    <Toast />
 </template>
 
 <script lang="ts" setup>
+import { useForm } from '@inertiajs/vue3';
 import { Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
+import { useToast } from 'primevue/usetoast';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
+import useRoute from '@/composables/useRoute';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 import { Post, PostAuthor } from '@/types';
 
@@ -121,8 +127,9 @@ interface Props {
 defineProps<Props>();
 defineOptions({ layout: PageLayoutPublic });
 
+const toast = useToast();
+const route = useRoute();
 const helper = useHelper();
-
 const comments = [
     {
         comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -144,6 +151,33 @@ const comments = [
         name: 'Mary Doe',
     },
 ];
+
+function onPostLike(id: number) {
+    useForm({ post_id: id }).post(route('post.like.store', { id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveState: true,
+    });
+}
 </script>
 
 <style scoped></style>
