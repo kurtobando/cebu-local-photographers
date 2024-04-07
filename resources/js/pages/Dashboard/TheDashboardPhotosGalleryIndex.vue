@@ -3,20 +3,41 @@
     <PageLayoutDashboard>
         <template #title>Manage Gallery</template>
         <template #description>Manage your recent photos, you edit or even archive your photos.</template>
-        <div class="grid place-content-center">
-            <div class="grid grid-cols-2 gap-2 md:grid-cols-2">
-                <div
-                    v-for="(image, key) in posts"
-                    :key="key">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            <div
+                v-for="image in posts"
+                :key="image.id">
+                <template v-if="image?.status === 'draft'">
                     <Link
-                        class="block"
+                        class="relative"
                         :href="route('dashboard.photos.edit', { post: image.id })">
                         <CardImage
-                            :key="key"
+                            :show-stats="true"
                             :image-alt="image.title"
-                            :image-source="image?.media?.medium ?? ''" />
+                            :image-source="image?.media?.medium ?? ''"
+                            :stats="{
+                                likes: 0,
+                                comments: 0,
+                                views: 0,
+                            }" />
+                        <div class="absolute bottom-0 left-0 w-full bg-black p-2 text-center text-white">
+                            {{ image.status.toUpperCase() }}
+                        </div>
                     </Link>
-                </div>
+                </template>
+                <template v-else>
+                    <Link :href="route('post', { id: image.id })">
+                        <CardImage
+                            :show-stats="true"
+                            :image-alt="image.title"
+                            :image-source="image?.media?.medium ?? ''"
+                            :stats="{
+                                likes: image.likes,
+                                comments: image.comments,
+                                views: image.views,
+                            }" />
+                    </Link>
+                </template>
             </div>
         </div>
     </PageLayoutDashboard>
