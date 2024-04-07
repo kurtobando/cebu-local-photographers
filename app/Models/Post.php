@@ -38,6 +38,11 @@ class Post extends Model implements HasMedia
         return $this->hasMany(PostLike::class);
     }
 
+    public function saveForLater(): HasMany
+    {
+        return $this->hasMany(PostSaveForLater::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

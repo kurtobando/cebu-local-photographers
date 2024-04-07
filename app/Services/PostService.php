@@ -7,6 +7,7 @@ use App\Enums\PostStatusEnum;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostLike;
+use App\Models\PostSaveForLater;
 use App\Models\User;
 use Illuminate\Support\Collection;
 
@@ -16,6 +17,7 @@ class PostService
         private readonly Post         $post,
         private readonly PostCategory $postCategory,
         private readonly PostLike     $postLike,
+        private readonly PostSaveForLater $postSaveForLater,
         private readonly User         $user
     ) {
         //
@@ -73,6 +75,14 @@ class PostService
     public function savePostLike(int $postId, int $userId): PostLike
     {
         return $this->postLike->updateOrCreate([
+            'post_id' => $postId,
+            'user_id' => $userId,
+        ]);
+    }
+
+    public function savePostForLater(int $postId, int $userId): PostSaveForLater
+    {
+        return $this->postSaveForLater->updateOrCreate([
             'post_id' => $postId,
             'user_id' => $userId,
         ]);

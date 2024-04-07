@@ -60,7 +60,8 @@
                         </template>
                         <Button
                             class="!p-4 !px-6"
-                            outlined>
+                            outlined
+                            @click="onPostSaveForLater(post.id)">
                             <span class="text-sm font-semibold">Save for later</span>
                         </Button>
                     </div>
@@ -190,6 +191,32 @@ function onPostLike(id: number) {
 }
 function onPostUnlike(id: number) {
     useForm({ post_id: id }).post(route('post.unlike.store', { id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveState: true,
+    });
+}
+function onPostSaveForLater(id: number) {
+    useForm({ post_id: id }).post(route('post.save-for-later.store', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();
