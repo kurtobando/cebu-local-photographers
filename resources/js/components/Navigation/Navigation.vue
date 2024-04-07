@@ -29,7 +29,7 @@
                     </div>
                 </template>
                 <template #item="slotProps">
-                    <p class="flex flex-row items-center gap-2 p-2 px-5">
+                    <p class="flex flex-row items-center gap-2 p-2 px-5 py-3">
                         <span :class="slotProps.item.icon"></span>
                         <span class="text-sm">{{ slotProps.item.label }}</span>
                     </p>
