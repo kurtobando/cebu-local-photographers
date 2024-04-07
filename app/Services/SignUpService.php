@@ -6,6 +6,7 @@ use App\Enums\UserAuthProviderEnum;
 use App\Enums\UserRoleEnum;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class SignUpService
@@ -27,7 +28,7 @@ class SignUpService
 
     private function signUpDefault(array $data): User
     {
-        $this->user->name = $data['email'];
+        $this->user->name = Str::before($data['email'], "@");
         $this->user->email = $data['email'];
         $this->user->password = Hash::make($data['password']);
         $this->user->provider = UserAuthProviderEnum::DEFAULT->value;
