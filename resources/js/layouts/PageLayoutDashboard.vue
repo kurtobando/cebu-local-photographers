@@ -2,8 +2,8 @@
     <main class="flex min-h-screen w-full flex-col bg-slate-50">
         <Header />
         <section class="p-8">
-            <div class="mx-auto flex w-full max-w-6xl flex-col gap-8 rounded bg-white p-8 shadow md:flex-row">
-                <div class="md:pt-10">
+            <div class="mx-auto flex w-full max-w-7xl flex-col gap-10 rounded bg-white p-8 shadow md:flex-row md:gap-8">
+                <div class="md:pt-6">
                     <SidebarNavigation />
                 </div>
                 <div class="flex w-full flex-col gap-4">
