@@ -21,7 +21,7 @@
                                 :alt="post_author.name"
                                 :src="post_author?.avatar || ''" />
                         </li>
-                        <li class="mr-1 list-none">{{ post_author.name }}</li>
+                        <li class="mr-1 list-none capitalize">{{ post_author.name }}</li>
                         <li class="mr-1">
                             <a href="">Follow</a>
                         </li>
