@@ -1,72 +1,84 @@
 <template>
     <section class="-m-8">
         <Meta :title="post.title" />
-        <div class="flex w-full flex-col lg:flex-row">
-            <div class="w-full bg-gray-900 lg:w-7/12">
-                <img
-                    class="min-h-screen w-full object-contain"
-                    :alt="post.title"
-                    :src="post.media?.xlarge" />
+        <div class="flex w-full flex-col lg:max-h-screen lg:flex-row">
+            <div class="grid w-full place-content-center bg-[#171717] lg:w-7/12">
+                <Image
+                    :src="post.media?.xlarge"
+                    :preview="true"
+                    image-class="w-full lg:max-h-screen"
+                    alt="media image" />
             </div>
-            <div class="flex w-full flex-col gap-8 p-8 md:p-12 lg:w-5/12">
-                <h1 class="text-3xl font-bold capitalize leading-relaxed">
-                    {{ post.title }}
-                </h1>
-                <ul class="inline-flex items-center gap-4">
-                    <li>
-                        <img
-                            alt="avatar image"
-                            class="h-16 w-16 rounded-full object-cover"
-                            src="https://images.unsplash.com/photo-1687579520892-5160c0df4b3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80" />
-                    </li>
-                    <li class="font-semibold">John Doe</li>
-                    <li>
-                        <a href="">Follow</a>
-                    </li>
-                    <li>
-                        <a href="">Hire Me</a>
-                    </li>
-                </ul>
-                <p class="leading-relaxed">
-                    {{ post.description }}
-                </p>
-                <p class="flex flex-wrap gap-2 text-sm font-semibold">
-                    {{ helper.parsePostTags(post.tags) }}
-                </p>
-                <div class="flex flex-col items-center justify-between gap-8 xl:flex-row">
-                    <div class="inline-flex w-full gap-4">
-                        <Button>
+            <div class="flex w-full flex-col gap-8 overflow-y-scroll p-8 md:p-12 lg:w-5/12">
+                <div class="flex flex-col gap-4">
+                    <h1 class="text-3xl font-bold capitalize leading-snug">
+                        {{ post.title }}
+                    </h1>
+                    <ul class="inline-flex list-disc items-center gap-4 text-sm">
+                        <li class="list-none">
+                            <img
+                                class="h-10 w-10 rounded-full object-cover"
+                                :alt="post_author.name"
+                                :src="post_author?.avatar || ''" />
+                        </li>
+                        <li class="mr-1 list-none">{{ post_author.name }}</li>
+                        <li class="mr-1">
+                            <a href="">Follow</a>
+                        </li>
+                        <li class="">
+                            <a
+                                href=""
+                                class="text-accent">
+                                Hire Me
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="leading-relaxed text-slate-500">
+                        {{ post.description }}
+                    </p>
+                    <p class="flex flex-wrap gap-2 text-sm font-semibold">
+                        {{ helper.parsePostTags(post.tags) }}
+                    </p>
+                </div>
+
+                <div class="flex flex-row items-center justify-end gap-4 2xl:justify-between">
+                    <div class="inline-flex w-full gap-2">
+                        <Button
+                            class="!p-4"
+                            outlined>
                             <Heart />
                         </Button>
                         <Button
-                            class="flex-grow xl:flex-grow-0"
-                            label="Save for later"
-                            outlined />
+                            class="!p-4 !px-6"
+                            outlined>
+                            <span class="text-sm font-semibold">Save for later</span>
+                        </Button>
                     </div>
-                    <div class="inline-flex items-center justify-between gap-8">
-                        <p class="inline-flex gap-2 hover:text-accent">
+                    <div class="inline-flex items-center justify-between gap-4">
+                        <div class="inline-flex gap-2 hover:text-accent">
                             <Heart />
                             <span>{{ post.likes }}</span>
-                        </p>
-                        <p class="inline-flex gap-2 hover:text-accent">
+                        </div>
+                        <div class="inline-flex gap-2 hover:text-accent">
                             <MessageCircle />
                             <span>{{ post.comments }}</span>
-                        </p>
-                        <p class="inline-flex gap-2 hover:text-accent">
+                        </div>
+                        <div class="inline-flex gap-2 hover:text-accent">
                             <Eye />
                             <span>{{ post.views }}</span>
-                        </p>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-16">
+
+                <div class="">
                     <div class="inline-flex w-full justify-between">
                         <a
-                            class="text-lg font-semibold"
+                            class="font-semibold"
                             href="">
                             Recent Comments
                         </a>
                         <a
-                            class="text-lg font-semibold"
+                            class="font-semibold"
                             href="">
                             Leave Comment
                         </a>
@@ -93,15 +105,17 @@
 <script lang="ts" setup>
 import { Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
+import Image from 'primevue/image';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import useHelper from '@/composables/useHelper';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
-import { Post } from '@/types';
+import { Post, PostAuthor } from '@/types';
 
 interface Props {
     post: Post;
+    post_author: PostAuthor;
 }
 
 defineProps<Props>();
