@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserAuthProviderEnum;
 use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,12 +65,29 @@ class User extends Authenticatable implements HasMedia
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
     }
 
+    public function getDefaultAvatar(): string
+    {
+        return 'https://ui-avatars.com/api/?name=' . $this->name . '&color=383838&background=dee2e6&length=1';
+    }
+
+    public function getAvatar(): string
+    {
+        if ($this->provider === UserAuthProviderEnum::GOOGLE->value) {
+            return $this->avatar;
+        }
+
+        if (!empty($this->getFirstMediaUrl('avatar'))) {
+            return $this->avatar;
+        }
+
+        return  $this->getDefaultAvatar();
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logFillable();
     }
 
-    // TODO! switch to s3
     public function registerMediaCollections(): void
     {
         $this
