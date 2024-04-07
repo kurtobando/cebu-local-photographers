@@ -23,6 +23,7 @@ class PostController extends Controller
             abort(ResponseAlias::HTTP_NOT_FOUND);
         }
 
+        $this->postService->incrementPostViews($request->id);
         $post = $this->postService->getPostById($request->id);
         $postAuthor = $this->postService->getAuthorByUserId($post->user_id);
 
@@ -43,7 +44,14 @@ class PostController extends Controller
                 'user_id' => $post->user_id,
                 'category_id' => $post->category_id,
             ],
-            'post_author' => $postAuthor
+            'post_author' => [
+                'id' => $postAuthor->id,
+                'name' => $postAuthor->name,
+                'email' => $postAuthor->email,
+                'role' => $postAuthor->role,
+                'about' => $postAuthor->about,
+                'avatar' => $postAuthor->getAvatar(),
+            ]
         ]);
     }
 }

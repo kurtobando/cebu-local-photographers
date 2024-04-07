@@ -99,4 +99,14 @@ class PostService
             ->where('user_id', auth()->id())
             ->exists();
     }
+
+    public function incrementPostViews(int $id): void
+    {
+        Post::withoutTimestamps(function () use ($id) {
+            $this
+                ->post
+                ->where('id', $id)
+                ->increment('views');
+        });
+    }
 }
