@@ -62,7 +62,7 @@
                         <span>Sign-out</span>
                     </Link>
                     <Link
-                        href=""
+                        :href="route('dashboard.photos.create')"
                         @click="toggleVisible">
                         <Button
                             :label="'Upload Photo'"
