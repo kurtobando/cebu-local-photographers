@@ -16,7 +16,7 @@ class DashboardPhotosUpdateRequest extends FormRequest
         return [
             'id' => 'required|integer|exists:posts,id',
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'required|array',
         ];
