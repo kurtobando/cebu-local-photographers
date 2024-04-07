@@ -51,7 +51,8 @@ class PostController extends Controller
                 'role' => $postAuthor->role,
                 'about' => $postAuthor->about,
                 'avatar' => $postAuthor->getAvatar(),
-            ]
+            ],
+            'post_is_like' => $this->postService->isPostLikedByCurrentUser($request->id, auth()->id()),
         ]);
     }
 }

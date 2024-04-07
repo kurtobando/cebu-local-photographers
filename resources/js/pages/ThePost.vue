@@ -43,12 +43,21 @@
 
                 <div class="flex flex-row items-center justify-end gap-4 2xl:justify-between">
                     <div class="inline-flex w-full gap-2">
-                        <Button
-                            class="!p-4"
-                            outlined
-                            @click="onPostLike(post.id)">
-                            <Heart />
-                        </Button>
+                        <template v-if="post_is_like">
+                            <Button
+                                class="!p-4"
+                                @click="onPostUnlike(post.id)">
+                                <Heart />
+                            </Button>
+                        </template>
+                        <template v-else>
+                            <Button
+                                class="!p-4"
+                                outlined
+                                @click="onPostLike(post.id)">
+                                <Heart />
+                            </Button>
+                        </template>
                         <Button
                             class="!p-4 !px-6"
                             outlined>
@@ -122,6 +131,7 @@ import { Post, PostAuthor } from '@/types';
 interface Props {
     post: Post;
     post_author: PostAuthor;
+    post_is_like: boolean;
 }
 
 defineProps<Props>();
@@ -154,6 +164,32 @@ const comments = [
 
 function onPostLike(id: number) {
     useForm({ post_id: id }).post(route('post.like.store', { id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveState: true,
+    });
+}
+function onPostUnlike(id: number) {
+    useForm({ post_id: id }).post(route('post.unlike.store', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();

@@ -10,6 +10,7 @@ use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\PostUnlikeController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
@@ -34,6 +35,7 @@ Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
 Route::get('/post/{id}', [PostController::class, 'index'])->name('post');
 Route::post('/post/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
+Route::post('/post/{id}/unlike', [PostUnlikeController::class, 'store'])->name('post.unlike.store');
 
 Route::get('/password-reset', [PasswordResetController::class, "index"])->name('password-reset');
 Route::post('/password-reset', [PasswordResetController::class, "store"])->name('password-reset.store');

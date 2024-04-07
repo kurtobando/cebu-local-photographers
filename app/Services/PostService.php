@@ -92,6 +92,15 @@ class PostService
         return $post;
     }
 
+    public function deletePostLike(int $postId, int $userId): ?bool
+    {
+        return $this
+            ->postLike
+            ->where('post_id', $postId)
+            ->where('user_id', $userId)
+            ->delete();
+    }
+
     public function isPostPublished(int $id): bool
     {
         return $this
@@ -110,6 +119,19 @@ class PostService
             ->exists();
     }
 
+    public function isPostLikedByCurrentUser(int $id, int|null $userId): bool
+    {
+        if (is_null($userId)) {
+            return false;
+        }
+
+        return $this
+            ->postLike
+            ->where('post_id', $id)
+            ->where('user_id', $userId)
+            ->exists();
+    }
+
     public function incrementPostViews(int $id): void
     {
         Post::withoutTimestamps(function () use ($id) {
@@ -124,6 +146,17 @@ class PostService
             $count = $this->postLike->where('post_id', $id)->count();
 
             $post = $this->post->where('id', $id)->first();
+            $post->likes = $count;
+            $post->save();
+        });
+    }
+
+    public function decrementLikeCount(mixed $post_id): void
+    {
+        Post::withoutTimestamps(function () use ($post_id) {
+            $count = $this->postLike->where('post_id', $post_id)->count();
+
+            $post = $this->post->where('id', $post_id)->first();
             $post->likes = $count;
             $post->save();
         });
