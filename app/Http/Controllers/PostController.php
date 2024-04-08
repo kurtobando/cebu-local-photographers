@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PostComment;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -25,7 +26,8 @@ class PostController extends Controller
 
         $this->postService->incrementPostViews($request->id);
         $post = $this->postService->getPostById($request->id);
-        $postAuthor = $this->postService->getAuthorByUserId($post->user_id);
+        $postAuthor = $this->postService->getPostAuthorByUserId($post->user_id);
+        $postComments = $this->postService->getPostCommentsByPostId($request->id);
 
         return inertia('ThePost', [
             'post' => [
@@ -52,6 +54,21 @@ class PostController extends Controller
                 'about' => $postAuthor->about,
                 'avatar' => $postAuthor->getAvatar(),
             ],
+            'post_comments' => $postComments->map(function(PostComment $comment) {
+                return [
+                    'id' => $comment->id,
+                    'comment' => $comment->comment,
+                    'created_at' => $comment->created_at,
+                    'updated_at' => $comment->updated_at,
+                    'likes' => $comment->likes,
+                    'views' => $comment->views,
+                    'user' => [
+                        'id' => $comment->user->id,
+                        'name' => $comment->user->name,
+                        'avatar' => $comment->user->getAvatar(),
+                    ],
+                ];
+            }),
             'post_is_like' => $this->postService->isPostLikedByCurrentUser($request->id, auth()->id()),
         ]);
     }

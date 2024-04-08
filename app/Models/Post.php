@@ -28,6 +28,16 @@ class Post extends Model implements HasMedia
         'tags'
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comment(): HasMany
+    {
+        return $this->hasMany(PostComment::class);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(PostCategory::class, 'post_category_id');
@@ -41,11 +51,6 @@ class Post extends Model implements HasMedia
     public function saveForLater(): HasMany
     {
         return $this->hasMany(PostSaveForLater::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 
     public function getMediaThumbnails(): array

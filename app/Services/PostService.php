@@ -6,6 +6,7 @@ use App\Enums\CategoryStatusEnum;
 use App\Enums\PostStatusEnum;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\PostComment;
 use App\Models\PostLike;
 use App\Models\PostSaveForLater;
 use App\Models\User;
@@ -18,11 +19,12 @@ class PostService
         private readonly PostCategory $postCategory,
         private readonly PostLike     $postLike,
         private readonly PostSaveForLater $postSaveForLater,
+        private readonly PostComment $postComment,
         private readonly User         $user
     ) {
         //
     }
-    
+
     public function getPosts(): Collection
     {
         return $this
@@ -51,7 +53,7 @@ class PostService
             ->get();
     }
 
-    public function getAuthorByUserId(int $id): User
+    public function getPostAuthorByUserId(int $id): User
     {
         return $this
             ->user
@@ -64,6 +66,15 @@ class PostService
         return $this
             ->postCategory
             ->where('status', CategoryStatusEnum::PUBLISHED->value)
+            ->get();
+    }
+
+    public function getPostCommentsByPostId(int $id): Collection
+    {
+        return $this
+            ->postComment
+            ->where('post_id', $id)
+            ->orderByDesc('created_at')
             ->get();
     }
 
@@ -95,6 +106,18 @@ class PostService
         return $this->postSaveForLater->updateOrCreate([
             'post_id' => $postId,
             'user_id' => $userId,
+        ]);
+    }
+
+    public function savePostCommentByPostId(int $postId, int $userId, string $comment): PostComment
+    {
+        return $this->postComment->create([
+            'post_id' => $postId,
+            'user_id' => $userId,
+            'comment' => $comment,
+            'status' => PostStatusEnum::PUBLISHED->value,
+            'views' => 0,
+            'likes' => 0,
         ]);
     }
 

@@ -1,12 +1,16 @@
 <template>
-    <p class="text-left text-sm text-red-600">{{ text }}</p>
+    <p
+        v-if="text"
+        class="text-left text-sm text-red-600">
+        {{ text }}
+    </p>
 </template>
 
 <script setup lang="ts">
 defineProps<Props>();
 
 interface Props {
-    text: string;
+    text: string | null;
 }
 </script>
 

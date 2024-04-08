@@ -13,9 +13,13 @@ function useHelper() {
     function formatDate(date: string): string {
         return moment(date).format('MMMM Do YYYY');
     }
+    function formatDateFromNow(date: string): string {
+        return moment(date).fromNow();
+    }
 
     return {
         formatDate,
+        formatDateFromNow,
         parsePostTags,
     };
 }

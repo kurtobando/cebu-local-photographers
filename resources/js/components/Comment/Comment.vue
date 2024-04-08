@@ -1,18 +1,20 @@
 <template>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
         <div class="inline-flex items-center gap-4">
             <img
-                :src="imageSource"
+                :src="avatar"
                 alt="avatar image"
-                class="h-16 w-16 rounded-full" />
-            <p>{{ name }}</p>
+                class="h-12 w-12 rounded-full" />
+            <div class="flex flex-col">
+                <p class="text-sm">{{ name }}</p>
+                <span class="text-sm text-accent"> {{ helper.formatDateFromNow(createdAt) }}</span>
+            </div>
         </div>
         <p class="text-sm leading-relaxed">
             {{ comment }}
-            <span class="block text-accent">{{ createdAt }}</span>
         </p>
-        <p class="inline-flex gap-2">
-            <Heart />
+        <p class="inline-flex items-center gap-2">
+            <Heart :size="20" />
             <span>{{ heart }}</span>
         </p>
     </div>
@@ -20,16 +22,19 @@
 
 <script lang="ts" setup>
 import { Heart } from 'lucide-vue-next';
+import useHelper from '@/composables/useHelper';
 
 defineProps<Props>();
 
 interface Props {
-    imageSource: string;
+    avatar: string;
     name: string;
     comment: string;
     createdAt: string;
     heart: number;
 }
+
+const helper = useHelper();
 </script>
 
 <style scoped></style>

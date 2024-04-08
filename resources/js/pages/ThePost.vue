@@ -16,7 +16,7 @@
                     </h1>
                     <div class="inline-flex items-center gap-4">
                         <img
-                            class="h-10 w-10 rounded-full object-cover"
+                            class="h-14 w-14 rounded-full object-cover"
                             :alt="post_author.name"
                             :src="post_author?.avatar || ''" />
                         <div>
@@ -33,16 +33,21 @@
                                     </a>
                                 </li>
                             </ul>
-                            <p class="text-sm text-slate-400">{{ helper.formatDate(post.created_at) }}</p>
+                            <p class="text-sm text-slate-400">
+                                {{ helper.formatDate(post.created_at) }},
+                                {{ helper.formatDateFromNow(post.created_at) }}.
+                            </p>
                         </div>
                     </div>
 
-                    <p class="leading-relaxed text-slate-500">
-                        {{ post.description }}
-                    </p>
-                    <p class="flex flex-wrap gap-2 text-sm font-semibold">
-                        {{ helper.parsePostTags(post.tags) }}
-                    </p>
+                    <div class="flex flex-col gap-2">
+                        <p class="mt-4 leading-relaxed text-slate-500">
+                            {{ post.description }}
+                        </p>
+                        <p class="flex flex-wrap gap-2 text-sm font-semibold">
+                            {{ helper.parsePostTags(post.tags) }}
+                        </p>
+                    </div>
                 </div>
 
                 <div class="flex flex-row items-center justify-end gap-4 2xl:justify-between">
@@ -85,32 +90,27 @@
                     </div>
                 </div>
 
-                <div class="">
+                <div class="flex flex-col gap-2">
                     <div class="inline-flex w-full justify-between">
-                        <a
-                            class="font-semibold"
-                            href="">
-                            Recent Comments
-                        </a>
-                        <a
-                            class="font-semibold"
-                            href="">
-                            Leave Comment
-                        </a>
+                        <p class="font-semibold">Leave Comment</p>
                     </div>
+                    <CommentForm :post-id="post.id" />
                 </div>
-                <div>
-                    <CommentForm />
-                </div>
-                <div class="flex flex-col gap-8">
+
+                <div
+                    class="flex flex-col gap-8"
+                    v-if="post_comments.length">
+                    <div class="inline-flex w-full justify-between">
+                        <p class="font-semibold">Recent Comment</p>
+                    </div>
                     <Comment
-                        v-for="comment in comments"
+                        v-for="comment in post_comments"
                         :key="comment.id"
                         :comment="comment.comment"
-                        :created-at="'6 days ago'"
-                        :heart="12"
-                        :image-source="comment.imageSource"
-                        :name="comment.name" />
+                        :created-at="comment.created_at"
+                        :heart="comment.likes"
+                        :avatar="comment?.user?.avatar || ''"
+                        :name="comment?.user?.name || ''" />
                 </div>
             </div>
         </div>
@@ -131,11 +131,12 @@ import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoute from '@/composables/useRoute';
 import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
-import { Post, PostAuthor } from '@/types';
+import { Post, PostAuthor, PostComment } from '@/types';
 
 interface Props {
     post: Post;
     post_author: PostAuthor;
+    post_comments: PostComment[];
     post_is_like: boolean;
 }
 
@@ -145,27 +146,6 @@ defineOptions({ layout: PageLayoutPublic });
 const toast = useToast();
 const route = useRoute();
 const helper = useHelper();
-const comments = [
-    {
-        comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        createdAt: '1 day ago',
-        hearts: 21,
-        id: 1,
-        imageSource:
-            'https://images.unsplash.com/photo-1687579520892-5160c0df4b3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&q=80',
-        name: 'John Doe',
-    },
-    {
-        comment:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        createdAt: '1 day ago',
-        hearts: 21,
-        id: 2,
-        imageSource:
-            'https://images.unsplash.com/photo-1687561114580-66fe98588cde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=683&q=80',
-        name: 'Mary Doe',
-    },
-];
 
 function onPostLike(id: number) {
     useForm({ post_id: id }).post(route('post.like.store', { id }), {

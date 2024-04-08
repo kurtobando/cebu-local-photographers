@@ -62,6 +62,18 @@ export interface PostMedia {
     original: string;
 }
 
+export interface PostComment {
+    id: number;
+    comment: string;
+    likes: number;
+    views: number;
+    user_id: number;
+    user: ?User;
+    post_id: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface SharedProps extends PageProps {
     app: App;
     auth: {
