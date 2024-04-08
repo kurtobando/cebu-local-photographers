@@ -1,3 +1,5 @@
+import moment from 'moment-timezone';
+
 function useHelper() {
     function parsePostTags(tags: string): string {
         try {
@@ -8,8 +10,12 @@ function useHelper() {
             return tags.toString();
         }
     }
+    function formatDate(date: string): string {
+        return moment(date).format('MMMM Do YYYY');
+    }
 
     return {
+        formatDate,
         parsePostTags,
     };
 }
