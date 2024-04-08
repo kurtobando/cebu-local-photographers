@@ -1,5 +1,5 @@
 <template>
-    <section class="-m-8">
+    <section class="">
         <Meta :title="post.title" />
         <div class="flex w-full flex-col lg:max-h-screen lg:flex-row">
             <div class="grid w-full place-content-center bg-[#171717] lg:w-7/12">
@@ -14,25 +14,29 @@
                     <h1 class="text-3xl font-bold capitalize leading-snug">
                         {{ post.title }}
                     </h1>
-                    <ul class="inline-flex list-disc items-center gap-4 text-sm">
-                        <li class="list-none">
-                            <img
-                                class="h-10 w-10 rounded-full object-cover"
-                                :alt="post_author.name"
-                                :src="post_author?.avatar || ''" />
-                        </li>
-                        <li class="mr-1 list-none capitalize">{{ post_author.name }}</li>
-                        <li class="mr-1">
-                            <a href="">Follow</a>
-                        </li>
-                        <li class="">
-                            <a
-                                href=""
-                                class="text-accent">
-                                Hire Me
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="inline-flex items-center gap-4">
+                        <img
+                            class="h-10 w-10 rounded-full object-cover"
+                            :alt="post_author.name"
+                            :src="post_author?.avatar || ''" />
+                        <div>
+                            <ul class="inline-flex list-disc items-center gap-4 text-sm">
+                                <li class="mr-1 list-none capitalize">{{ post_author.name }}</li>
+                                <li class="mr-1">
+                                    <a href="">Follow</a>
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        class="text-accent">
+                                        Hire Me
+                                    </a>
+                                </li>
+                            </ul>
+                            <p class="text-sm text-slate-400">{{ helper.formatDate(post.created_at) }}</p>
+                        </div>
+                    </div>
+
                     <p class="leading-relaxed text-slate-500">
                         {{ post.description }}
                     </p>
