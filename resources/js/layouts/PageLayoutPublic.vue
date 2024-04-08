@@ -1,7 +1,7 @@
 <template>
     <main class="w-full">
         <Header />
-        <section class="p-8">
+        <section class="">
             <slot />
         </section>
     </main>
