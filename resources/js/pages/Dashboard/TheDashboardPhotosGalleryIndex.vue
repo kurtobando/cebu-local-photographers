@@ -5,7 +5,7 @@
         <template #description>Manage your recent photos, you edit or even archive your photos.</template>
 
         <template v-if="posts.length">
-            <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <div
                     v-for="image in posts"
                     :key="image.id">
@@ -22,7 +22,7 @@
                                     comments: 0,
                                     views: 0,
                                 }" />
-                            <div class="absolute bottom-0 left-0 w-full bg-black p-2 text-center text-white">
+                            <div class="absolute bottom-0 left-0 w-full bg-black p-4 text-center text-sm text-white">
                                 {{ image.status.toUpperCase() }}
                             </div>
                         </Link>
