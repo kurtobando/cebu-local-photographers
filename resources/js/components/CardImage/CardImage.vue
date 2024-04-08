@@ -1,8 +1,8 @@
 <template>
-    <div class="relative">
+    <div class="relative h-[25rem] rounded">
         <template v-if="showStats">
             <div
-                class="absolute left-0 top-0 grid h-full w-full place-content-center rounded bg-black bg-opacity-60 transition-opacity hover:opacity-0">
+                class="absolute left-0 top-0 grid h-full w-full place-content-center bg-black bg-opacity-60 transition-opacity hover:opacity-0">
                 <div class="inline-flex items-center justify-between gap-4">
                     <div class="inline-flex gap-2 text-white">
                         <Heart />
@@ -22,7 +22,8 @@
         <img
             :alt="imageAlt"
             :src="imageSource"
-            class="h-[25rem] w-full rounded object-cover" />
+            :class="$attrs"
+            class="h-full w-full object-cover" />
     </div>
 </template>
 
