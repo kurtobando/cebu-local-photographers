@@ -22,6 +22,16 @@ class PostService
     ) {
         //
     }
+    
+    public function getPosts(): Collection
+    {
+        return $this
+            ->post
+            ->with(['category', 'media', 'user'])
+            ->where('status', PostStatusEnum::PUBLISHED->value)
+            ->orderByDesc('created_at')
+            ->get();
+    }
 
     public function getPostById(int $id): Post
     {
@@ -171,4 +181,5 @@ class PostService
             $post->save();
         });
     }
+
 }

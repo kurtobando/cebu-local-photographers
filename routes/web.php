@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardProfileImageController;
 use App\Http\Controllers\Dashboard\DashboardUserController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostController;
@@ -30,7 +31,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', fn () => Inertia::render('TheHome'))->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/members', fn () => Inertia::render('TheMembers'))->name('members');
 Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
