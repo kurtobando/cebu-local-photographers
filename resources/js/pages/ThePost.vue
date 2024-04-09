@@ -42,7 +42,11 @@
                             :src="post_author?.avatar || ''" />
                         <div>
                             <ul class="inline-flex list-disc items-center gap-4 text-sm">
-                                <li class="mr-1 list-none capitalize">{{ post_author.name }}</li>
+                                <li class="mr-1 list-none capitalize">
+                                    <Link :href="route('members.show', { user: post.user_id })">
+                                        {{ post_author.name }}
+                                    </Link>
+                                </li>
                                 <li class="mr-1">
                                     <a href="">Follow</a>
                                 </li>
@@ -127,6 +131,7 @@
                     <Comment
                         v-for="comment in post_comments"
                         :key="comment.id"
+                        :user-id="comment.user?.id || 0"
                         :comment="comment.comment"
                         :created-at="comment.created_at"
                         :heart="comment.likes"
@@ -140,7 +145,7 @@
 </template>
 
 <script lang="ts" setup>
-import { router, useForm } from '@inertiajs/vue3';
+import { Link, router, useForm } from '@inertiajs/vue3';
 import { EllipsisVertical, Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
