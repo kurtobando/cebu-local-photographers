@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="py-20 pt-[18rem]">
+        <div class="py-8 pt-[12rem]">
             <slot name="header" />
         </div>
         <div>
