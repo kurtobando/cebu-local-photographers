@@ -7115,6 +7115,7 @@
 
 .p-image-toolbar {
     padding: 1rem;
+    z-index: 9999;
 }
 
 .p-image-action.p-link {
