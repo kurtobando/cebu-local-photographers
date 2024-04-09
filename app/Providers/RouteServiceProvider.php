@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
+        Route::pattern('user', '[0-9]+');
         Route::pattern('post', '[0-9]+');
         Route::pattern('id', '[0-9]+');
 
