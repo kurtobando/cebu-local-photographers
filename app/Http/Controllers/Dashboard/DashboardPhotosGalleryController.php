@@ -18,7 +18,7 @@ class DashboardPhotosGalleryController extends Controller
     public function index(): Response
     {
         $posts = $this->postService->getPostsByUserId(auth()->id());
-        $postAuthor = $this->postService->getAuthorByUserId(auth()->id());
+        $postAuthor = $this->postService->getPostAuthorByUserId(auth()->id());
 
         return inertia('Dashboard/TheDashboardPhotosGalleryIndex', [
             'posts' => $posts->map(function (Post $post) {
