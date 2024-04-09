@@ -1,7 +1,7 @@
 <template>
     <section class="">
         <Meta :title="post.title" />
-        <div class="flex w-full flex-col lg:max-h-screen lg:flex-row">
+        <div class="flex w-full flex-col lg:max-h-screen lg:min-h-screen lg:flex-row">
             <div class="grid w-full place-content-center bg-[#171717] lg:w-7/12">
                 <Image
                     :src="post.media?.xlarge"
@@ -11,9 +11,30 @@
             </div>
             <div class="flex w-full flex-col gap-8 overflow-y-scroll p-8 md:p-12 lg:w-5/12">
                 <div class="flex flex-col gap-4">
-                    <h1 class="text-3xl font-bold capitalize leading-snug">
-                        {{ post.title }}
-                    </h1>
+                    <div class="inline-flex items-center justify-between gap-2">
+                        <h1 class="text-2xl font-bold capitalize leading-snug">
+                            {{ post.title }}
+                        </h1>
+                        <template v-if="post.user_id === auth.user?.id">
+                            <div>
+                                <a @click="onPostMenuToggle($event)">
+                                    <EllipsisVertical :size="20" />
+                                </a>
+                                <Menu
+                                    ref="menu"
+                                    :model="menuItems"
+                                    :popup="true">
+                                    <template #item="slotProps">
+                                        <p class="flex flex-row items-center gap-2 p-2 px-5 py-3">
+                                            <span :class="slotProps.item.icon"></span>
+                                            <span class="text-sm">{{ slotProps.item.label }}</span>
+                                        </p>
+                                    </template>
+                                </Menu>
+                            </div>
+                        </template>
+                    </div>
+
                     <div class="inline-flex items-center gap-4">
                         <img
                             class="h-14 w-14 rounded-full object-cover"
@@ -119,14 +140,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useForm } from '@inertiajs/vue3';
-import { Eye, Heart, MessageCircle } from 'lucide-vue-next';
+import { router, useForm } from '@inertiajs/vue3';
+import { EllipsisVertical, Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
+import Menu from 'primevue/menu';
 import { useToast } from 'primevue/usetoast';
+import { ref } from 'vue';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoute from '@/composables/useRoute';
@@ -140,12 +164,22 @@ interface Props {
     post_is_like: boolean;
 }
 
-defineProps<Props>();
 defineOptions({ layout: PageLayoutPublic });
 
+const props = defineProps<Props>();
+const auth = useAuth();
 const toast = useToast();
 const route = useRoute();
 const helper = useHelper();
+
+const menu = ref();
+const menuItems = ref([
+    {
+        command: () => router.visit(route('dashboard.photos.edit', { post: props.post.id })),
+        icon: 'pi pi-file-edit',
+        label: 'Edit Post',
+    },
+]);
 
 function onPostLike(id: number) {
     useForm({ post_id: id }).post(route('post.like.store', { id }), {
@@ -224,6 +258,9 @@ function onPostSaveForLater(id: number) {
         },
         preserveState: true,
     });
+}
+function onPostMenuToggle(e: Event) {
+    menu.value.toggle(e);
 }
 </script>
 

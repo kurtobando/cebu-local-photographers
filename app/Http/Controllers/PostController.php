@@ -54,7 +54,7 @@ class PostController extends Controller
                 'about' => $postAuthor->about,
                 'avatar' => $postAuthor->getAvatar(),
             ],
-            'post_comments' => $postComments->map(function(PostComment $comment) {
+            'post_comments' => $postComments->map(function (PostComment $comment) {
                 return [
                     'id' => $comment->id,
                     'comment' => $comment->comment,
