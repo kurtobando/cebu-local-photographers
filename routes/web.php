@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardProfileImageController;
 use App\Http\Controllers\Dashboard\DashboardUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostCommentController;
@@ -33,9 +34,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/members', fn () => Inertia::render('TheMembers'))->name('members');
+
+Route::get('/members', [MemberController::class, "index"])->name('members');
+Route::get('/members/{user}', [MemberController::class, "show"])->name('members.show');
+
 Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
+
 Route::get('/post/{id}', [PostController::class, 'index'])->name('post');
 Route::post('/post/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
 Route::post('/post/{id}/unlike', [PostUnlikeController::class, 'store'])->name('post.unlike.store');

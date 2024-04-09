@@ -6,7 +6,11 @@
                 alt="avatar image"
                 class="h-12 w-12 rounded-full" />
             <div class="flex flex-col">
-                <p class="text-sm">{{ name }}</p>
+                <Link
+                    :href="route('members.show', { user: userId })"
+                    class="text-sm">
+                    {{ name }}
+                </Link>
                 <span class="text-sm text-accent"> {{ helper.formatDateFromNow(createdAt) }}</span>
             </div>
         </div>
@@ -21,19 +25,23 @@
 </template>
 
 <script lang="ts" setup>
+import { Link } from '@inertiajs/vue3';
 import { Heart } from 'lucide-vue-next';
 import useHelper from '@/composables/useHelper';
+import useRoutes from '@/composables/useRoute';
 
 defineProps<Props>();
 
 interface Props {
     avatar: string;
+    userId: number;
     name: string;
     comment: string;
     createdAt: string;
     heart: number;
 }
 
+const route = useRoutes();
 const helper = useHelper();
 </script>
 
