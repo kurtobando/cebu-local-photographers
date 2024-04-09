@@ -14,6 +14,7 @@
                             class="relative"
                             :href="route('dashboard.photos.edit', { post: image.id })">
                             <CardImage
+                                class="h-[30rem] md:h-[18rem]"
                                 :show-stats="true"
                                 :image-alt="image.title"
                                 :image-source="image?.media?.medium ?? ''"
@@ -30,6 +31,7 @@
                     <template v-else>
                         <Link :href="route('post', { id: image.id })">
                             <CardImage
+                                class="h-[30rem] md:h-[18rem]"
                                 :show-stats="true"
                                 :image-alt="image.title"
                                 :image-source="image?.media?.medium ?? ''"
