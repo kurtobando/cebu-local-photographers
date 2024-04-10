@@ -35,9 +35,6 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/members', [MemberController::class, "index"])->name('members');
-Route::get('/members/{user}', [MemberController::class, "show"])->name('members.show');
-
 Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
 
@@ -47,20 +44,47 @@ Route::post('/post/{id}/unlike', [PostUnlikeController::class, 'store'])->name('
 Route::post('/post/{id}/save-for-later', [PostSaveForLaterController::class, 'store'])->name('post.save-for-later.store');
 Route::post('/post/{id}/comment', [PostCommentController::class, 'store'])->name('post.comment.store');
 
-Route::get('/password-reset', [PasswordResetController::class, "index"])->name('password-reset');
-Route::post('/password-reset', [PasswordResetController::class, "store"])->name('password-reset.store');
+Route::controller(MemberController::class)
+    ->prefix('members')
+    ->group(function () {
+        Route::get('/', "index")->name('members');
+        Route::get('/{user}', "show")->name('members.show');
+    });
 
-Route::get('/password-confirmation', [PasswordConfirmationController::class, "index"])->name('password-confirmation');
-Route::post('/password-confirmation', [PasswordConfirmationController::class, "update"])->name('password-confirmation.update');
+Route::controller(PasswordResetController::class)
+    ->prefix('password-reset')
+    ->group(function () {
+        Route::get('/', 'index')->name('password-reset');
+        Route::post('/', 'store')->name('password-reset.store');
+    });
 
-Route::get('/sign-in', [SignInController::class, 'index'])->name('sign-in');
-Route::post('/sign-in', [SignInController::class, 'store'])->name('sign-in.store');
+Route::controller(PasswordConfirmationController::class)
+    ->prefix('password-confirmation')
+    ->group(function () {
+        Route::get('/', 'index')->name('password-confirmation');
+        Route::post('/', 'update')->name('password-confirmation.update');
+    });
 
-Route::get('/sign-up', [SignUpController::class, 'index'])->name('sign-up');
-Route::post('/sign-up', [SignUpController::class, 'store'])->name('sign-up.store');
+Route::controller(SignInController::class)
+    ->prefix('sign-in')
+    ->group(function () {
+        Route::get('/', 'index')->name('sign-in');
+        Route::post('/', 'store')->name('sign-in.store');
+    });
 
-Route::get('/auth/google/redirect', [SignUpGoogleController::class, "redirect"])->name('auth.google.redirect');
-Route::get('/auth/google/callback', [SignUpGoogleController::class, "callback"])->name('auth.google.callback');
+Route::controller(SignUpController::class)
+    ->prefix('sign-up')
+    ->group(function () {
+        Route::get('/', 'index')->name('sign-up');
+        Route::post('/', 'store')->name('sign-up.store');
+    });
+
+Route::controller(SignUpGoogleController::class)
+    ->prefix('auth/google')
+    ->group(function () {
+        Route::get('/redirect', "redirect")->name('auth.google.redirect');
+        Route::get('/callback', "callback")->name('auth.google.callback');
+    });
 
 Route::prefix('dashboard')
     ->middleware(['auth'])
