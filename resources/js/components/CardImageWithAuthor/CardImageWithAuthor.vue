@@ -1,6 +1,7 @@
 <template>
     <div>
         <img
+            referrerpolicy="no-referrer"
             :src="imageSource"
             :alt="imageAlt"
             class="h-[25rem] w-full rounded object-cover" />

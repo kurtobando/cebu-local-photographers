@@ -37,6 +37,7 @@
 
                     <div class="inline-flex items-center gap-4">
                         <img
+                            referrerpolicy="no-referrer"
                             class="h-14 w-14 rounded-full object-cover"
                             :alt="post_author.name"
                             :src="post_author?.avatar || ''" />

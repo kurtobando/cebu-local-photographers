@@ -1,6 +1,7 @@
 <template>
     <div class="inline-flex items-center gap-4">
         <img
+            referrerpolicy="no-referrer"
             class="h-12 w-12 rounded-full object-cover"
             :src="imageSource"
             alt="avatar" />

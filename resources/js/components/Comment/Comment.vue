@@ -2,9 +2,10 @@
     <div class="flex flex-col gap-2">
         <div class="inline-flex items-center gap-4">
             <img
+                referrerpolicy="no-referrer"
                 :src="avatar"
                 alt="avatar image"
-                class="h-12 w-12 rounded-full" />
+                class="h-12 w-12 rounded-full object-cover" />
             <div class="flex flex-col">
                 <Link
                     :href="route('members.show', { user: userId })"

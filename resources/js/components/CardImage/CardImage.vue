@@ -20,6 +20,7 @@
             </div>
         </template>
         <img
+            referrerpolicy="no-referrer"
             :alt="imageAlt"
             :src="imageSource"
             :class="$attrs"

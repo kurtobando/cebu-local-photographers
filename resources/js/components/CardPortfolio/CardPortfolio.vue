@@ -1,6 +1,7 @@
 <template>
     <div class="flex max-w-3xl flex-col items-center justify-center gap-8 text-center md:flex-row md:text-left">
         <img
+            referrerpolicy="no-referrer"
             :alt="name"
             :src="imageSource"
             class="mx-auto h-52 w-52 rounded-full object-cover" />

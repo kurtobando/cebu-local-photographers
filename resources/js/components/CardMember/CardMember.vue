@@ -3,8 +3,9 @@
         :href="route('members.show', { user: id })"
         class="inline-block">
         <img
-            class="h-20 w-20 rounded-full object-cover"
+            referrerpolicy="no-referrer"
             :src="avatar"
+            class="h-20 w-20 rounded-full object-cover"
             :alt="name" />
     </Link>
 </template>

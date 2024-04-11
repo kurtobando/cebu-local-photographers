@@ -2,6 +2,7 @@
     <div class="flex flex-col gap-8 md:flex-row">
         <div class="flex w-full items-center justify-center md:w-1/3 md:justify-end">
             <img
+                referrerpolicy="no-referrer"
                 class="h-[12rem] w-[12rem] rounded-full object-cover"
                 width="200"
                 height="200"
@@ -37,6 +38,7 @@
 
 <script setup lang="ts">
 import { Award, Camera, Users } from 'lucide-vue-next';
+
 interface Props {
     imageSource: string;
     name: string;
