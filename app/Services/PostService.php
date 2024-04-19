@@ -47,7 +47,7 @@ class PostService
     {
         return $this
             ->post
-            ->with(['category', 'media'])
+            ->with(['category', 'media', 'user'])
             ->where(['user_id' => $id])
             ->orderByDesc('updated_at')
             ->get();
