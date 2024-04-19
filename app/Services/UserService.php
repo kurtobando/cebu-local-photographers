@@ -29,11 +29,11 @@ class UserService
             ->findOrFail($id);
     }
 
-    public function isUserActive(int $id): bool
+    public function isUserActive(int $userId): bool
     {
         return $this
             ->user
-            ->where('id', $id)
+            ->where('id', $userId)
             ->where('is_active', true)
             ->exists();
     }

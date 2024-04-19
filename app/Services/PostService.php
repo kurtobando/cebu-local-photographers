@@ -174,12 +174,12 @@ class PostService
             ->exists();
     }
 
-    public function isPostAuthorCurrentUser(int $postId): bool
+    public function isPostAuthorCurrentUser(int $postId, int $userId): bool
     {
         return $this
             ->post
             ->where('id', $postId)
-            ->where('user_id', auth()->id())
+            ->where('user_id', $userId)
             ->exists();
     }
 

@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index(Request $request): Response
     {
         if (!$this->postService->isPostPublished($request->id) &&
-            !$this->postService->isPostAuthorCurrentUser($request->id)
+            !$this->postService->isPostAuthorCurrentUser($request->id, auth()->id())
         ) {
             abort(ResponseAlias::HTTP_NOT_FOUND);
         }
