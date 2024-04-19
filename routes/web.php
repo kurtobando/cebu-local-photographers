@@ -20,7 +20,6 @@ use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SignUpGoogleController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +34,16 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
-Route::get('/portfolio', fn () => Inertia::render('ThePortfolio'))->name('portfolio');
+//Route::get('/events', fn () => Inertia::render('TheEvents'))->name('events');
 
-Route::get('/post/{id}', [PostController::class, 'index'])->name('post');
-Route::post('/post/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
-Route::post('/post/{id}/unlike', [PostUnlikeController::class, 'store'])->name('post.unlike.store');
-Route::post('/post/{id}/save-for-later', [PostSaveForLaterController::class, 'store'])->name('post.save-for-later.store');
-Route::post('/post/{id}/comment', [PostCommentController::class, 'store'])->name('post.comment.store');
+Route::prefix('post')
+    ->group(function () {
+        Route::get('/{id}', [PostController::class, 'index'])->name('post');
+        Route::post('/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
+        Route::post('/{id}/unlike', [PostUnlikeController::class, 'store'])->name('post.unlike.store');
+        Route::post('/{id}/save-for-later', [PostSaveForLaterController::class, 'store'])->name('post.save-for-later.store');
+        Route::post('/{id}/comment', [PostCommentController::class, 'store'])->name('post.comment.store');
+    });
 
 Route::controller(MemberController::class)
     ->prefix('members')
