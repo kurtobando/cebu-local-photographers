@@ -3,7 +3,7 @@
         <LayoutTheFold>
             <Meta title="Members" />
             <template v-slot:header>
-                <h1 class="text-center text-2xl font-bold leading-relaxed">
+                <h1 class="px-8 text-center text-2xl font-bold leading-relaxed">
                     Meet the people behind their amazing work
                 </h1>
             </template>

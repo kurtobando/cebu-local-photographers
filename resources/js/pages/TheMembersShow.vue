@@ -2,18 +2,18 @@
     <PageLayoutPublic>
         <Meta :title="`${user.name}`" />
         <LayoutTheFold>
-            <section class="flex flex-col gap-8">
-                <div class="mx-auto flex w-[50rem] flex-row gap-8">
-                    <div class="flex w-1/3 flex-row items-center justify-end">
+            <section class="-mt-20 flex flex-col items-center gap-16 md:mt-0">
+                <div class="mx-auto flex w-full flex-col gap-8 px-8 md:w-[50rem] md:flex-row">
+                    <div class="flex w-full flex-row items-center justify-center md:w-1/3 md:justify-end">
                         <img
-                            class="h-40 w-40 rounded-full object-cover"
+                            class="h-48 w-48 rounded-full object-cover"
                             referrerpolicy="no-referrer"
                             :src="user.avatar.replace('=s96-c', '')"
                             :alt="user.name" />
                     </div>
-                    <div class="flex w-2/3 flex-col gap-1">
-                        <h2 class="text-2xl font-bold">{{ user.name }}</h2>
-                        <p class="text-sm leading-relaxed text-slate-400">{{ user.about }}</p>
+                    <div class="flex w-full flex-col items-center justify-center gap-1 md:w-2/3 md:items-start">
+                        <h2 class="text-2xl font-bold capitalize">{{ user.name }}</h2>
+                        <p class="text-center text-sm leading-relaxed text-slate-400 md:text-left">{{ user.about }}</p>
                         <ul class="mt-4 inline-flex gap-2 text-sm">
                             <li>
                                 <a href="">Follow</a>
