@@ -7,6 +7,7 @@ use App\Enums\PostStatusEnum;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\PostComment;
+use App\Models\PostCommentLike;
 use App\Models\PostLike;
 use App\Models\PostSaveForLater;
 use App\Models\User;
@@ -20,6 +21,7 @@ class PostService
         private readonly PostLike     $postLike,
         private readonly PostSaveForLater $postSaveForLater,
         private readonly PostComment $postComment,
+        private readonly PostCommentLike $postCommentLike,
         private readonly User         $user
     ) {
         //
@@ -121,6 +123,15 @@ class PostService
         ]);
     }
 
+    public function savePostCommentLike(int $postId, int $commentId, int $userId): PostCommentLike
+    {
+        return $this->postCommentLike->updateOrCreate([
+            'post_id' => $postId,
+            'post_comment_id' => $commentId,
+            'user_id' => $userId,
+        ]);
+    }
+
     public function updatePostById(int $id, array $data): Post
     {
         $post = $this->getPostById($id);
@@ -144,25 +155,35 @@ class PostService
             ->delete();
     }
 
-    public function isPostPublished(int $id): bool
+    public function deletePostCommentLike(int $postId, int $commentId, int $userId): ?bool
+    {
+        return $this
+            ->postCommentLike
+            ->where('post_id', $postId)
+            ->where('post_comment_id', $commentId)
+            ->where('user_id', $userId)
+            ->delete();
+    }
+
+    public function isPostPublished(int $postId): bool
     {
         return $this
             ->post
-            ->where('id', $id)
+            ->where('id', $postId)
             ->where('status', PostStatusEnum::PUBLISHED->value)
             ->exists();
     }
 
-    public function isPostAuthorCurrentUser(int $id): bool
+    public function isPostAuthorCurrentUser(int $postId): bool
     {
         return $this
             ->post
-            ->where('id', $id)
+            ->where('id', $postId)
             ->where('user_id', auth()->id())
             ->exists();
     }
 
-    public function isPostLikedByCurrentUser(int $id, int|null $userId): bool
+    public function isPostLikedByCurrentUser(int $postId, int|null $userId): bool
     {
         if (is_null($userId)) {
             return false;
@@ -170,39 +191,71 @@ class PostService
 
         return $this
             ->postLike
-            ->where('post_id', $id)
+            ->where('post_id', $postId)
             ->where('user_id', $userId)
             ->exists();
     }
 
-    public function incrementPostViews(int $id): void
+    public function isPostCommentLikedByCurrentUser(int $commentId, int $userId): bool
     {
-        Post::withoutTimestamps(function () use ($id) {
+        return $this
+            ->postCommentLike
+            ->where('post_comment_id', $commentId)
+            ->where('user_id', $userId)
+            ->exists();
+    }
+
+    public function incrementPostViews(int $postId): void
+    {
+        Post::withoutTimestamps(function () use ($postId) {
             // TODO! lets increment only once per IP/session
-            $this->post->where('id', $id)->increment('views');
+            $this->post->where('id', $postId)->increment('views');
         });
     }
 
-    public function incrementLikeCount(int $id): void
+    public function incrementLikeCount(int $postId): void
     {
-        Post::withoutTimestamps(function () use ($id) {
-            $count = $this->postLike->where('post_id', $id)->count();
+        Post::withoutTimestamps(function () use ($postId) {
+            $count = $this->postLike->where('post_id', $postId)->count();
 
-            $post = $this->post->where('id', $id)->first();
+            $post = $this->post->where('id', $postId)->first();
             $post->likes = $count;
             $post->save();
         });
     }
 
-    public function decrementLikeCount(mixed $post_id): void
+    public function incrementLikeCommentCount(int $commentId): void
     {
-        Post::withoutTimestamps(function () use ($post_id) {
-            $count = $this->postLike->where('post_id', $post_id)->count();
+        PostComment::withoutTimestamps(function () use ($commentId) {
+            $count = $this->postCommentLike->where('post_comment_id', $commentId)->count();
 
-            $post = $this->post->where('id', $post_id)->first();
+            $comment = $this->postComment->where('id', $commentId)->first();
+            $comment->likes = $count;
+            $comment->save();
+        });
+    }
+
+    public function decrementLikeCount(int $postId): void
+    {
+        Post::withoutTimestamps(function () use ($postId) {
+            $count = $this->postLike->where('post_id', $postId)->count();
+
+            $post = $this->post->where('id', $postId)->first();
             $post->likes = $count;
             $post->save();
         });
     }
+
+    public function decrementLikeCommentCount(int $commentId): void
+    {
+        PostComment::withoutTimestamps(function () use ($commentId) {
+            $count = $this->postCommentLike->where('post_comment_id', $commentId)->count();
+
+            $comment = $this->postComment->where('id', $commentId)->first();
+            $comment->likes = $count;
+            $comment->save();
+        });
+    }
+
 
 }

@@ -80,7 +80,7 @@
                     <div class="inline-flex w-full gap-2">
                         <template v-if="post_is_like">
                             <Button
-                                class="!p-4"
+                                class="!border-accent !bg-accent !p-4"
                                 @click="onPostUnlike(post.id)">
                                 <Heart />
                             </Button>
@@ -132,12 +132,15 @@
                     <Comment
                         v-for="comment in post_comments"
                         :key="comment.id"
+                        :id="comment.id"
+                        :post-id="post.id"
                         :user-id="comment.user?.id || 0"
                         :comment="comment.comment"
                         :created-at="comment.created_at"
                         :heart="comment.likes"
                         :avatar="comment?.user?.avatar || ''"
-                        :name="comment?.user?.name || ''" />
+                        :name="comment?.user?.name || ''"
+                        :is-comment-like="comment.comment_is_like" />
                 </div>
             </div>
         </div>
@@ -210,11 +213,12 @@ function onPostLike(id: number) {
                 });
             }
         },
+        preserveScroll: true,
         preserveState: true,
     });
 }
 function onPostUnlike(id: number) {
-    useForm({ post_id: id }).post(route('post.unlike.store', { id }), {
+    useForm({ post_id: id }).post(route('post.like.destroy', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();
@@ -236,6 +240,7 @@ function onPostUnlike(id: number) {
                 });
             }
         },
+        preserveScroll: true,
         preserveState: true,
     });
 }
@@ -262,6 +267,7 @@ function onPostSaveForLater(id: number) {
                 });
             }
         },
+        preserveScroll: true,
         preserveState: true,
     });
 }

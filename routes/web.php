@@ -11,10 +11,10 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\PostCommentLikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\PostSaveForLaterController;
-use App\Http\Controllers\PostUnlikeController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
@@ -40,9 +40,11 @@ Route::prefix('post')
     ->group(function () {
         Route::get('/{id}', [PostController::class, 'index'])->name('post');
         Route::post('/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
-        Route::post('/{id}/unlike', [PostUnlikeController::class, 'store'])->name('post.unlike.store');
+        Route::post('/{id}/unlike', [PostLikeController::class, 'destroy'])->name('post.like.destroy');
         Route::post('/{id}/save-for-later', [PostSaveForLaterController::class, 'store'])->name('post.save-for-later.store');
         Route::post('/{id}/comment', [PostCommentController::class, 'store'])->name('post.comment.store');
+        Route::post('/{id}/comment/{commentId}', [PostCommentLikeController::class, 'store'])->name('post.comments.like.store');
+        Route::post('/{id}/comment/{commentId}/unlike', [PostCommentLikeController::class, 'destroy'])->name('post.comments.like.destroy');
     });
 
 Route::controller(MemberController::class)

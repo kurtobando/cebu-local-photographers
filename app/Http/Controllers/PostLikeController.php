@@ -27,4 +27,18 @@ class PostLikeController extends Controller
             ->back()
             ->with(['success' => 'Post liked successfully']);
     }
+
+    public function destroy(PostLikeRequest $request): RedirectResponse
+    {
+        if (auth()->check()) {
+            $this->postService->deletePostLike($request->post_id, auth()->id());
+            $this->postService->decrementLikeCount($request->post_id);
+        }
+
+        // TODO! if not signed in, redirect to login page or a modal component
+
+        return redirect()
+            ->back()
+            ->with(['success' => 'Post unliked successfully']);
+    }
 }
