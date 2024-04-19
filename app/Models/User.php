@@ -65,6 +65,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(PostComment::class);
     }
 
+    public function commentLike(): HasMany
+    {
+        return $this->hasMany(PostCommentLike::class);
+    }
+
     public function getRoleAttribute(): string
     {
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;

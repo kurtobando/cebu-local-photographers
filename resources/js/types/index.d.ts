@@ -72,6 +72,7 @@ export interface PostComment {
     post_id: number;
     created_at: string;
     updated_at: string;
+    comment_is_like: boolean;
 }
 
 export interface SharedProps extends PageProps {

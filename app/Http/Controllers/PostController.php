@@ -67,6 +67,7 @@ class PostController extends Controller
                         'name' => $comment->user->name,
                         'avatar' => $comment->user->getAvatar(),
                     ],
+                    'comment_is_like' => $this->postService->isPostCommentLikedByCurrentUser($comment->id, auth()->id()),
                 ];
             }),
             'post_is_like' => $this->postService->isPostLikedByCurrentUser($request->id, auth()->id()),

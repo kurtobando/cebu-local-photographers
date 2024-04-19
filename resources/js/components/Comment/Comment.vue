@@ -19,31 +19,106 @@
             {{ comment }}
         </p>
         <p class="inline-flex items-center gap-2">
-            <Heart :size="20" />
+            <template v-if="isCommentLike">
+                <a @click="onPostCommentUnlike()">
+                    <Heart
+                        :color="'#ff7d00'"
+                        :size="20" />
+                </a>
+            </template>
+            <template v-else>
+                <a @click="onPostCommentLike()">
+                    <Heart :size="20" />
+                </a>
+            </template>
             <span>{{ heart }}</span>
         </p>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import { Heart } from 'lucide-vue-next';
+import { useToast } from 'primevue/usetoast';
+import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoutes from '@/composables/useRoute';
 
-defineProps<Props>();
-
 interface Props {
     avatar: string;
+    postId: number;
     userId: number;
     name: string;
     comment: string;
     createdAt: string;
     heart: number;
+    id: number;
+    isCommentLike: boolean;
 }
 
+const props = defineProps<Props>();
+const toast = useToast();
 const route = useRoutes();
 const helper = useHelper();
+
+function onPostCommentLike() {
+    useForm({
+        comment_id: props.id,
+        post_id: props.postId,
+    }).post(route('post.comments.like.store', { commentId: props.id, id: props.postId }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+    });
+}
+function onPostCommentUnlike() {
+    useForm({
+        comment_id: props.id,
+        post_id: props.postId,
+    }).post(route('post.comments.like.destroy', { commentId: props.id, id: props.postId }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+    });
+}
 </script>
 
 <style scoped></style>

@@ -38,6 +38,11 @@ class Post extends Model implements HasMedia
         return $this->hasMany(PostComment::class);
     }
 
+    public function commentLike(): HasMany
+    {
+        return $this->hasMany(PostCommentLike::class);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(PostCategory::class, 'post_category_id');
