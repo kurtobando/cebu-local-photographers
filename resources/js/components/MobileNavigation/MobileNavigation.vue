@@ -13,13 +13,13 @@
                         <HeartHandshake />
                         <span>Discover</span>
                     </Link>
-                    <Link
-                        :href="route('events')"
-                        class="inline-flex items-center gap-3"
-                        @click="toggleVisible">
-                        <Star />
-                        <span>Events</span>
-                    </Link>
+                    <!--                    <Link-->
+                    <!--                        :href="route('events')"-->
+                    <!--                        class="inline-flex items-center gap-3"-->
+                    <!--                        @click="toggleVisible">-->
+                    <!--                        <Star />-->
+                    <!--                        <span>Events</span>-->
+                    <!--                    </Link>-->
                     <Link
                         :href="route('members')"
                         class="inline-flex items-center gap-3"
@@ -31,13 +31,6 @@
                 <nav
                     v-if="isAuthenticated"
                     class="flex flex-col gap-8">
-                    <Link
-                        class="inline-flex items-center gap-3"
-                        :href="route('dashboard.photos.create')"
-                        @click="toggleVisible">
-                        <Image />
-                        <span>Photos</span>
-                    </Link>
                     <Link
                         class="inline-flex items-center gap-3"
                         :href="route('dashboard.profile')"
@@ -98,7 +91,7 @@
 
 <script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
-import { Bell, HeartHandshake, Image, LogOut, Menu, Star, User2, Users } from 'lucide-vue-next';
+import { Bell, HeartHandshake, LogOut, Menu, User2, Users } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
