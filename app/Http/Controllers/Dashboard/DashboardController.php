@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
 class DashboardController extends Controller
 {
-    public function index(): Response
+    public function index(): RedirectResponse
     {
-        return inertia('Dashboard/TheDashboard');
+        return redirect()->route('dashboard.profile');
     }
 }
