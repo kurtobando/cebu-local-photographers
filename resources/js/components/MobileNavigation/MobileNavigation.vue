@@ -33,7 +33,7 @@
                     class="flex flex-col gap-8">
                     <Link
                         class="inline-flex items-center gap-3"
-                        :href="route('dashboard.profile')"
+                        :href="route('dashboard.profile.index')"
                         @click="toggleVisible">
                         <User2 />
                         <span>Profile</span>

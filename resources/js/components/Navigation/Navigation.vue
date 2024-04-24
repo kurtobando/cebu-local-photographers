@@ -66,7 +66,7 @@ const { isAuthenticated, user } = useAuth();
 const menu = ref();
 const items = ref([
     {
-        command: () => router.visit(route('dashboard.profile')),
+        command: () => router.visit(route('dashboard.profile.index')),
         icon: 'pi pi-user',
         label: 'Profile',
     },

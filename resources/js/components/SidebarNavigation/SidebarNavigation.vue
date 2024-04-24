@@ -3,7 +3,7 @@
         <div class="flex flex-col text-sm">
             <Link
                 class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
-                :href="route('dashboard.profile')">
+                :href="route('dashboard.profile.index')">
                 <User :size="19" />
                 <span>Manage Profile</span>
             </Link>

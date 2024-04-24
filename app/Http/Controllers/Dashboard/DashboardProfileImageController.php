@@ -19,11 +19,11 @@ class DashboardProfileImageController extends Controller
             $user->save();
 
             return redirect()
-                ->route('dashboard.profile')
+                ->route('dashboard.profile.index')
                 ->with(['success' => 'Profile image uploaded successfully.']);
         } catch (FileDoesNotExist|FileIsTooBig $e) {
             return redirect()
-                ->route('dashboard.profile')
+                ->route('dashboard.profile.index')
                 ->with(['error' => $e->getMessage()]);
         }
     }

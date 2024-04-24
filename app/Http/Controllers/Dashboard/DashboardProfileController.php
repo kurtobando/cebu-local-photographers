@@ -35,7 +35,7 @@ class DashboardProfileController extends Controller
         $user->save();
 
         return redirect()
-            ->route('dashboard.profile')
+            ->route('dashboard.profile.index')
             ->with(['success' => 'Profile updated successfully.']);
     }
 }

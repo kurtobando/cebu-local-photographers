@@ -218,7 +218,7 @@ function onPostLike(id: number) {
     });
 }
 function onPostUnlike(id: number) {
-    useForm({ post_id: id }).post(route('post.like.destroy', { id }), {
+    useForm({ post_id: id }).delete(route('post.like.destroy', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();

@@ -5,9 +5,9 @@ use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardProfileImageController;
-use App\Http\Controllers\Dashboard\DashboardUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberFollowController;
 use App\Http\Controllers\PasswordConfirmationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostCommentController;
@@ -39,12 +39,32 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('post')
     ->group(function () {
         Route::get('/{id}', [PostController::class, 'index'])->name('post');
-        Route::post('/{id}/like', [PostLikeController::class, 'store'])->name('post.like.store');
-        Route::post('/{id}/unlike', [PostLikeController::class, 'destroy'])->name('post.like.destroy');
-        Route::post('/{id}/save-for-later', [PostSaveForLaterController::class, 'store'])->name('post.save-for-later.store');
-        Route::post('/{id}/comment', [PostCommentController::class, 'store'])->name('post.comment.store');
-        Route::post('/{id}/comment/{commentId}', [PostCommentLikeController::class, 'store'])->name('post.comments.like.store');
-        Route::post('/{id}/comment/{commentId}/unlike', [PostCommentLikeController::class, 'destroy'])->name('post.comments.like.destroy');
+
+        Route::controller(PostSaveForLaterController::class)
+            ->prefix('/{id}/save-for-later')
+            ->group(function() {
+                Route::post('/', 'store')->name('post.save-for-later.store');
+            });
+
+        Route::controller(PostLikeController::class)
+            ->prefix('/{id}/like')
+            ->group(function () {
+                Route::post('/', 'store')->name('post.like.store');
+                Route::delete('/', 'destroy')->name('post.like.destroy');
+            });
+
+        Route::controller(PostCommentController::class)
+            ->prefix('/{id}/comment')
+            ->group(function () {
+                Route::post('/', "store")->name('post.comment.store');
+            });
+
+        Route::controller(PostCommentLikeController::class)
+            ->prefix('/{id}/comment/{commentId}/like')
+            ->group(function () {
+                Route::post('/', 'store')->name('post.comment.like.store');
+                Route::delete('/', 'destroy')->name('post.comment.like.destroy');
+            });
     });
 
 Route::controller(MemberController::class)
@@ -52,6 +72,12 @@ Route::controller(MemberController::class)
     ->group(function () {
         Route::get('/', "index")->name('members');
         Route::get('/{user}', "show")->name('members.show');
+    });
+
+Route::controller(MemberFollowController::class)
+    ->prefix('members/{user}/follow')
+    ->group(function () {
+        Route::post('/', "store")->name('members.follow.store');
     });
 
 Route::controller(PasswordResetController::class)
@@ -95,17 +121,32 @@ Route::prefix('dashboard')
         Route::get('/', [DashboardController::class, "index"])->name('dashboard');
         Route::post('/sign-out', [SignOutController::class, "store"])->name('dashboard.sign-out');
 
-        Route::get('/profile', [DashboardProfileController::class, "index"])->name('dashboard.profile');
-        Route::patch('/profile', [DashboardProfileController::class, "update"])->name('dashboard.profile.update');
-        Route::post('/profile-image', [DashboardProfileImageController::class, "store"])->name('dashboard.profile-image.store');
+        Route::controller(DashboardProfileController::class)
+            ->prefix('profile')
+            ->group(function () {
+                Route::get('/', 'index')->name('dashboard.profile.index');
+                Route::patch('/', 'update')->name('dashboard.profile.update');
+            });
 
-        Route::get('/photos', [DashboardPhotosController::class, "create"])->name('dashboard.photos.create');
-        Route::post('/photos', [DashboardPhotosController::class, "store"])->name('dashboard.photos.store');
-        Route::get('/photos/{post}', [DashboardPhotosController::class, "show"])->name('dashboard.photos.show');
-        Route::get('/photos/{post}/edit', [DashboardPhotosController::class, "edit"])->name('dashboard.photos.edit');
-        Route::patch('/photos', [DashboardPhotosController::class, "update"])->name('dashboard.photos.update');
+        Route::controller(DashboardProfileImageController::class)
+            ->prefix('profile-image')
+            ->group(function () {
+                Route::post('/', 'store')->name('dashboard.profile-image.store');
+            });
 
-        Route::get('/photos-gallery', [DashboardPhotosGalleryController::class, "index"])->name('dashboard.photos-gallery.index');
+        Route::controller(DashboardPhotosController::class)
+            ->prefix('photos')
+            ->group(function () {
+                Route::get('/', 'create')->name('dashboard.photos.create');
+                Route::post('/', 'store')->name('dashboard.photos.store');
+                Route::get('/{post}', 'show')->name('dashboard.photos.show');
+                Route::get('/{post}/edit', 'edit')->name('dashboard.photos.edit');
+                Route::patch('/', 'update')->name('dashboard.photos.update');
+            });
 
-        Route::get('/users', [DashboardUserController::class, "index"])->name('dashboard.users');
+        Route::controller(DashboardPhotosGalleryController::class)
+            ->prefix('photos-gallery')
+            ->group(function () {
+                Route::get('/', 'index')->name('dashboard.photos-gallery.index');
+            });
     });

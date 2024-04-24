@@ -65,7 +65,7 @@ function onPostCommentLike() {
     useForm({
         comment_id: props.id,
         post_id: props.postId,
-    }).post(route('post.comments.like.store', { commentId: props.id, id: props.postId }), {
+    }).post(route('post.comment.like.store', { commentId: props.id, id: props.postId }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();
@@ -94,7 +94,7 @@ function onPostCommentUnlike() {
     useForm({
         comment_id: props.id,
         post_id: props.postId,
-    }).post(route('post.comments.like.destroy', { commentId: props.id, id: props.postId }), {
+    }).delete(route('post.comment.like.destroy', { commentId: props.id, id: props.postId }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();

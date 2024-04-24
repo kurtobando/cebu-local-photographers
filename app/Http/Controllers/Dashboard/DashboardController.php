@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index(): RedirectResponse
     {
-        return redirect()->route('dashboard.profile');
+        return redirect()->route('dashboard.profile.index');
     }
 }
