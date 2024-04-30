@@ -74,6 +74,7 @@ class Post extends Model implements HasMedia
         return LogOptions::defaults()->logFillable();
     }
 
+    // TODO! move to s3 object storage once in production
     public function registerMediaCollections(): void
     {
         $this

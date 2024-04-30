@@ -55,6 +55,11 @@ class User extends Authenticatable implements HasMedia
         'created' => UserSignUpEvent::class,
     ];
 
+    public function follower(): HasMany
+    {
+        return $this->hasMany(UserFollower::class);
+    }
+
     public function post(): HasMany
     {
         return $this->hasMany(Post::class);
@@ -98,6 +103,7 @@ class User extends Authenticatable implements HasMedia
         return LogOptions::defaults()->logFillable();
     }
 
+    // TODO! move to s3 object storage once in production
     public function registerMediaCollections(): void
     {
         $this
