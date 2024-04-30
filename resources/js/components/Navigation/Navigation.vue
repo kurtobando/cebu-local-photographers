@@ -76,7 +76,16 @@ const items = ref([
         label: 'Upload Photo',
     },
     {
-        command: () => router.post(route('dashboard.sign-out')),
+        command: () => {
+            router.post(
+                route('dashboard.sign-out'),
+                {},
+                {
+                    preserveScroll: false,
+                    preserveState: false,
+                }
+            );
+        },
         icon: 'pi pi-sign-out',
         label: 'Sign-out',
     },
