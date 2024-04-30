@@ -1,7 +1,6 @@
 <template>
     <Dialog
-        :close-on-escape="true"
-        class="w-full !rounded md:w-1/3"
+        class="mx-8 w-full md:w-1/3"
         :draggable="false"
         :modal="true"
         :closable="false"
