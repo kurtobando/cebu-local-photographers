@@ -2,7 +2,9 @@
     <section class="">
         <Meta :title="post.title" />
         <div class="flex w-full flex-col lg:max-h-screen lg:min-h-screen lg:flex-row">
-            <div class="grid w-full place-content-center bg-[#171717] lg:w-7/12">
+            <div
+                class="grid w-full place-content-center bg-[#171717] bg-center bg-blend-overlay lg:w-7/12"
+                :style="`background-image: url('${post.media?.xlarge}')`">
                 <Image
                     :src="post.media?.xlarge"
                     :preview="true"
