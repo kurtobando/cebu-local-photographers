@@ -56,7 +56,7 @@ class PostController extends Controller
                 'about' => $postAuthor->about,
                 'avatar' => $postAuthor->getAvatar(),
             ],
-            'post_author_is_followed' => $this->userFollowerService->isCurrentUserFollowPostAuthor($postAuthor->id, auth()->id()),
+            'post_author_is_followed' => $this->userFollowerService->isCurrentUserFollower($postAuthor->id, auth()->id()),
             'post_comments' => $postComments->map(function (PostComment $comment) {
                 return [
                     'id' => $comment->id,

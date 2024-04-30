@@ -12,6 +12,14 @@ class UserFollowerService
         //
     }
 
+    public function getFollowerCountByUserId(int $userId): int
+    {
+        return $this
+            ->userFollower
+            ->where('user_id', $userId)
+            ->count();
+    }
+
     public function saveFollowerUserByUserId(int $userId, int $userIdFollower): UserFollower
     {
         return $this->userFollower->updateOrCreate([
@@ -28,7 +36,7 @@ class UserFollowerService
             ->delete();
     }
 
-    public function isCurrentUserFollowPostAuthor(int $userId, int|null $userIdFollower): bool
+    public function isCurrentUserFollower(int $userId, int|null $userIdFollower): bool
     {
         if (is_null($userIdFollower)) {
             return false;

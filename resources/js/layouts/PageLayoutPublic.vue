@@ -5,6 +5,7 @@
             <slot />
         </section>
     </main>
+    <Toast />
 </template>
 
 <script setup lang="ts">

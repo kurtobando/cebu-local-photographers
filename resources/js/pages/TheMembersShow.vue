@@ -15,9 +15,16 @@
                         <h2 class="text-2xl font-bold capitalize">{{ user.name }}</h2>
                         <p class="text-center text-sm leading-relaxed text-slate-400 md:text-left">{{ user.about }}</p>
                         <ul class="mt-4 inline-flex gap-2 text-sm">
-                            <li>
-                                <a href="">Follow</a>
-                            </li>
+                            <template v-if="auth.isAuthenticated && auth.user?.id !== user.id">
+                                <li>
+                                    <template v-if="user_is_followed">
+                                        <a @click="onMemberUnfollow(user.id)">Unfollow</a>
+                                    </template>
+                                    <template v-else>
+                                        <a @click="onMemberFollow(user.id)">Follow</a>
+                                    </template>
+                                </li>
+                            </template>
                             <li>
                                 <a
                                     href=""
@@ -76,10 +83,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import { Award, Image, Users } from 'lucide-vue-next';
+import { useToast } from 'primevue/usetoast';
 import CardImage from '@/components/CardImage/CardImage.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import useAuth from '@/composables/useAuth';
+import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoute from '@/composables/useRoute';
 import LayoutTheFold from '@/layouts/LayoutTheFold.vue';
@@ -88,13 +98,71 @@ import { Post, User } from '@/types';
 
 interface Props {
     user: User;
+    user_is_followed: boolean;
     posts: Post[];
 }
 
 defineProps<Props>();
 
+const auth = useAuth();
+const toast = useToast();
 const route = useRoute();
 const helper = useHelper();
+
+function onMemberFollow(id: number) {
+    useForm({}).post(route('members.follow.store', { user: id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+        preserveState: false,
+    });
+}
+function onMemberUnfollow(id: number) {
+    useForm({}).delete(route('members.follow.destroy', { user: id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+        preserveState: false,
+    });
+}
 </script>
 
 <style>
