@@ -20,14 +20,18 @@
         </p>
         <p class="inline-flex items-center gap-2">
             <template v-if="isCommentLike">
-                <a @click="onPostCommentUnlike()">
+                <a
+                    class="cursor-pointer"
+                    @click="onPostCommentUnlike()">
                     <Heart
                         :color="'#ff7d00'"
                         :size="20" />
                 </a>
             </template>
             <template v-else>
-                <a @click="onPostCommentLike()">
+                <a
+                    class="cursor-pointer"
+                    @click="onPostCommentLike()">
                     <Heart :size="20" />
                 </a>
             </template>
@@ -38,8 +42,10 @@
 
 <script lang="ts" setup>
 import { Link, useForm } from '@inertiajs/vue3';
+import { useEventBus } from '@vueuse/core';
 import { Heart } from 'lucide-vue-next';
 import { useToast } from 'primevue/usetoast';
+import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoutes from '@/composables/useRoute';
@@ -57,11 +63,15 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const auth = useAuth();
 const toast = useToast();
 const route = useRoutes();
 const helper = useHelper();
 
 function onPostCommentLike() {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({
         comment_id: props.id,
         post_id: props.postId,
@@ -91,6 +101,9 @@ function onPostCommentLike() {
     });
 }
 function onPostCommentUnlike() {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({
         comment_id: props.id,
         post_id: props.postId,

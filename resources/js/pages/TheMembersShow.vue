@@ -92,6 +92,7 @@
 
 <script lang="ts" setup>
 import { Link, useForm } from '@inertiajs/vue3';
+import { useEventBus } from '@vueuse/core';
 import { Award, Image, Users } from 'lucide-vue-next';
 import { useToast } from 'primevue/usetoast';
 import CardImage from '@/components/CardImage/CardImage.vue';
@@ -120,6 +121,9 @@ const route = useRoute();
 const helper = useHelper();
 
 function onMemberFollow(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({}).post(route('members.follow.store', { user: id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
@@ -147,6 +151,9 @@ function onMemberFollow(id: number) {
     });
 }
 function onMemberUnfollow(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({}).delete(route('members.follow.destroy', { user: id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {

@@ -167,6 +167,7 @@
 
 <script lang="ts" setup>
 import { Link, router, useForm } from '@inertiajs/vue3';
+import { useEventBus } from '@vueuse/core';
 import { EllipsisVertical, Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
@@ -209,6 +210,9 @@ const menuItems = ref([
 ]);
 
 function onPostLike(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({ post_id: id }).post(route('post.like.store', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
@@ -236,6 +240,9 @@ function onPostLike(id: number) {
     });
 }
 function onPostUnlike(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({ post_id: id }).delete(route('post.like.destroy', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
@@ -263,6 +270,9 @@ function onPostUnlike(id: number) {
     });
 }
 function onPostSaveForLater(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({ post_id: id }).post(route('post.save-for-later.store', { id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
@@ -293,6 +303,9 @@ function onPostMenuToggle(e: Event) {
     menu.value.toggle(e);
 }
 function onMemberFollow(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({}).post(route('members.follow.store', { user: id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {
@@ -320,6 +333,9 @@ function onMemberFollow(id: number) {
     });
 }
 function onMemberUnfollow(id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     useForm({}).delete(route('members.follow.destroy', { user: id }), {
         onError: (e) => console.error(e),
         onSuccess: () => {

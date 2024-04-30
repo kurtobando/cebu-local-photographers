@@ -33,9 +33,11 @@
 
 <script lang="ts" setup>
 import { useForm } from '@inertiajs/vue3';
+import { useEventBus } from '@vueuse/core';
 import Button from 'primevue/button';
 import { useToast } from 'primevue/usetoast';
 import InputError from '@/components/InputError/InputError.vue';
+import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 
@@ -49,6 +51,7 @@ type Form = {
 };
 
 const props = defineProps<Props>();
+const auth = useAuth();
 const toast = useToast();
 const route = useRoute();
 const form = useForm<Form>({
@@ -57,6 +60,9 @@ const form = useForm<Form>({
 });
 
 function onSubmit() {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
     form.post(route('post.comment.store', { id: props.postId }), {
         onError: () => {
             toast.removeAllGroups();
