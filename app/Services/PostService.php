@@ -196,8 +196,12 @@ class PostService
             ->exists();
     }
 
-    public function isPostCommentLikedByCurrentUser(int $commentId, int $userId): bool
+    public function isPostCommentLikedByCurrentUser(int $commentId, int|null $userId): bool
     {
+        if (is_null($userId)) {
+            return false;
+        }
+
         return $this
             ->postCommentLike
             ->where('post_comment_id', $commentId)

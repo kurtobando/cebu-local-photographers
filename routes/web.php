@@ -42,7 +42,7 @@ Route::prefix('post')
 
         Route::controller(PostSaveForLaterController::class)
             ->prefix('/{id}/save-for-later')
-            ->group(function() {
+            ->group(function () {
                 Route::post('/', 'store')->name('post.save-for-later.store');
             });
 
@@ -78,6 +78,7 @@ Route::controller(MemberFollowController::class)
     ->prefix('members/{user}/follow')
     ->group(function () {
         Route::post('/', "store")->name('members.follow.store');
+        Route::delete('/', "destroy")->name('members.follow.destroy');
     });
 
 Route::controller(PasswordResetController::class)

@@ -48,9 +48,24 @@
                                         {{ post_author.name }}
                                     </Link>
                                 </li>
-                                <li class="mr-1">
-                                    <a href="">Follow</a>
-                                </li>
+                                <template v-if="auth.isAuthenticated && auth.user?.id !== post.user_id">
+                                    <li class="mr-1">
+                                        <template v-if="post_author_is_followed">
+                                            <a
+                                                class="cursor-pointer"
+                                                @click="onMemberUnfollow(post_author.id)">
+                                                Unfollow
+                                            </a>
+                                        </template>
+                                        <template v-else>
+                                            <a
+                                                class="cursor-pointer"
+                                                @click="onMemberFollow(post_author.id)">
+                                                Follow
+                                            </a>
+                                        </template>
+                                    </li>
+                                </template>
                                 <li class="">
                                     <a
                                         href=""
@@ -169,6 +184,7 @@ import { Post, PostAuthor, PostComment } from '@/types';
 interface Props {
     post: Post;
     post_author: PostAuthor;
+    post_author_is_followed: boolean;
     post_comments: PostComment[];
     post_is_like: boolean;
 }
@@ -273,6 +289,60 @@ function onPostSaveForLater(id: number) {
 }
 function onPostMenuToggle(e: Event) {
     menu.value.toggle(e);
+}
+function onMemberFollow(id: number) {
+    useForm({}).post(route('members.follow.store', { user: id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+        preserveState: false,
+    });
+}
+function onMemberUnfollow(id: number) {
+    useForm({}).delete(route('members.follow.destroy', { user: id }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+        },
+        preserveScroll: true,
+        preserveState: false,
+    });
 }
 </script>
 

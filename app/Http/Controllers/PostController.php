@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PostComment;
 use App\Services\PostService;
+use App\Services\UserFollowerService;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
@@ -11,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class PostController extends Controller
 {
     public function __construct(
-        private readonly PostService $postService
+        private readonly PostService $postService,
+        private readonly UserFollowerService $userFollowerService
     ) {
         //
     }
@@ -54,6 +56,7 @@ class PostController extends Controller
                 'about' => $postAuthor->about,
                 'avatar' => $postAuthor->getAvatar(),
             ],
+            'post_author_is_followed' => $this->userFollowerService->isCurrentUserFollowPostAuthor($postAuthor->id, auth()->id()),
             'post_comments' => $postComments->map(function (PostComment $comment) {
                 return [
                     'id' => $comment->id,
