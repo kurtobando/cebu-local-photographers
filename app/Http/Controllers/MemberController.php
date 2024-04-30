@@ -28,6 +28,7 @@ class MemberController extends Controller
         ]);
     }
 
+    // TODO! show slug + user id {id}?name={name}
     public function show(User $user): Response
     {
         if (!$this->userService->isUserActive($user->id)) {
@@ -44,7 +45,11 @@ class MemberController extends Controller
                 'avatar' => $user->getAvatar(),
                 'role' => $user->role
             ],
+            'user_follower_count' => $this->userFollowerService->getFollowerCountByUserId($user->id),
             'user_is_followed' => $this->userFollowerService->isCurrentUserFollower($user->id, auth()->id()),
+            'posts_count' => $posts
+                ->filter(fn (Post $post) => $post->status === PostStatusEnum::PUBLISHED->value)
+                ->count(),
             'posts' => $posts
                 ->filter(fn (Post $post) => $post->status === PostStatusEnum::PUBLISHED->value)
                 ->map(function (Post $post) {

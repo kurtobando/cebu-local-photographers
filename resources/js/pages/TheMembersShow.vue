@@ -11,17 +11,25 @@
                             :src="user.avatar.replace('=s96-c', '')"
                             :alt="user.name" />
                     </div>
-                    <div class="flex w-full flex-col items-center justify-center gap-1 md:w-2/3 md:items-start">
+                    <div class="flex w-full flex-col items-center justify-center gap-2 md:w-2/3 md:items-start">
                         <h2 class="text-2xl font-bold capitalize">{{ user.name }}</h2>
                         <p class="text-center text-sm leading-relaxed text-slate-400 md:text-left">{{ user.about }}</p>
-                        <ul class="mt-4 inline-flex gap-2 text-sm">
+                        <ul class="mt-4 inline-flex gap-2">
                             <template v-if="auth.isAuthenticated && auth.user?.id !== user.id">
                                 <li>
                                     <template v-if="user_is_followed">
-                                        <a @click="onMemberUnfollow(user.id)">Unfollow</a>
+                                        <a
+                                            class="cursor-pointer"
+                                            @click="onMemberUnfollow(user.id)">
+                                            Unfollow
+                                        </a>
                                     </template>
                                     <template v-else>
-                                        <a @click="onMemberFollow(user.id)">Follow</a>
+                                        <a
+                                            class="cursor-pointer"
+                                            @click="onMemberFollow(user.id)">
+                                            Follow
+                                        </a>
                                     </template>
                                 </li>
                             </template>
@@ -33,18 +41,18 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="inline-flex gap-2 text-sm">
+                        <ul class="inline-flex gap-3 text-sm">
                             <li class="inline-flex items-center gap-1">
-                                <Image :size="18" />
-                                {{ posts.length }}
+                                <Image :size="20" />
+                                {{ posts_count }}
                             </li>
                             <li class="inline-flex items-center gap-1">
-                                <Users :size="18" />
-                                0
+                                <Users :size="20" />
+                                {{ user_follower_count }}
                             </li>
                             <li class="inline-flex items-center gap-1">
-                                <Award :size="18" />
-                                {{ user.role }}
+                                <Award :size="20" />
+                                <span class="capitalize"> {{ user.role }}</span>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +107,9 @@ import { Post, User } from '@/types';
 interface Props {
     user: User;
     user_is_followed: boolean;
+    user_follower_count: number;
     posts: Post[];
+    posts_count: number;
 }
 
 defineProps<Props>();
