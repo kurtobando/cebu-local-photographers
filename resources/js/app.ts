@@ -7,6 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import PrimeVue from 'primevue/config';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
+import Tooltip from 'primevue/tooltip';
 import { createApp, DefineComponent, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { Ziggy } from './ziggy';
@@ -25,6 +26,7 @@ createInertiaApp({
     setup({ App, el, plugin, props }) {
         createApp({ render: () => h(App, props) })
             .component('Toast', Toast)
+            .directive('tooltip', Tooltip)
             .use(plugin)
             .use(PrimeVue)
             .use(ToastService)
