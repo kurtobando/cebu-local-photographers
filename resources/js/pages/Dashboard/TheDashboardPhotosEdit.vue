@@ -1,6 +1,5 @@
 <template>
     <Meta title="Edit A Post" />
-    <Header />
     <section class="flex max-h-screen min-h-[90vh] flex-col md:flex-row">
         <div class="grid w-full place-content-center bg-[#171717] md:w-2/3">
             <Image
@@ -74,7 +73,6 @@ import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
 import { useToast } from 'primevue/usetoast';
 import { computed, onMounted } from 'vue';
-import Header from '@/components/Header/Header.vue';
 import InputError from '@/components/InputError/InputError.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import useFlashMessage from '@/composables/useFlashMessage';

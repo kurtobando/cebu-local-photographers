@@ -93,17 +93,19 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center justify-end gap-4 2xl:justify-between">
-                    <div class="inline-flex w-full gap-2">
+                <div class="flex flex-col items-center gap-4 md:flex-row md:justify-end 2xl:justify-between">
+                    <div class="inline-flex w-full justify-center gap-2 md:justify-start">
                         <template v-if="post_is_like">
                             <Button
-                                class="!border-accent !bg-accent !p-4"
+                                v-tooltip.top="'Unlike'"
+                                class="!border-accent !bg-white !p-4 !text-accent"
                                 @click="onPostUnlike(post.id)">
                                 <Heart />
                             </Button>
                         </template>
                         <template v-else>
                             <Button
+                                v-tooltip.top="'Like'"
                                 class="!p-4"
                                 outlined
                                 @click="onPostLike(post.id)">
@@ -111,10 +113,11 @@
                             </Button>
                         </template>
                         <Button
-                            class="!p-4 !px-6"
+                            v-tooltip.top="'Save for later'"
+                            class="!p-4"
                             outlined
                             @click="onPostSaveForLater(post.id)">
-                            <span class="text-sm font-semibold">Save for later</span>
+                            <Bookmark />
                         </Button>
                     </div>
                     <div class="inline-flex items-center justify-between gap-4">
@@ -168,7 +171,7 @@
 <script lang="ts" setup>
 import { Link, router, useForm } from '@inertiajs/vue3';
 import { useEventBus } from '@vueuse/core';
-import { EllipsisVertical, Eye, Heart, MessageCircle } from 'lucide-vue-next';
+import { Bookmark, EllipsisVertical, Eye, Heart, MessageCircle } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Image from 'primevue/image';
 import Menu from 'primevue/menu';
@@ -181,7 +184,6 @@ import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoute from '@/composables/useRoute';
-import PageLayoutPublic from '@/layouts/PageLayoutPublic.vue';
 import { Post, PostAuthor, PostComment } from '@/types';
 
 interface Props {
@@ -191,8 +193,6 @@ interface Props {
     post_comments: PostComment[];
     post_is_like: boolean;
 }
-
-defineOptions({ layout: PageLayoutPublic });
 
 const props = defineProps<Props>();
 const auth = useAuth();
