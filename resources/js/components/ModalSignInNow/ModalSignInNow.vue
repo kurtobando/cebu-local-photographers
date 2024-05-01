@@ -1,6 +1,6 @@
 <template>
     <Dialog
-        class="mx-8 w-full md:w-1/3"
+        class="mx-8 w-full md:w-[35rem]"
         :draggable="false"
         :modal="true"
         :closable="false"
