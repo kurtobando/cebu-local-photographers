@@ -18,6 +18,7 @@ class PostCommentController extends Controller
     {
         if (auth()->check()) {
             $this->postService->savePostCommentByPostId($request->post_id, $request->user()->id, $request->comment);
+            $this->postService->incrementPostCommentCount($request->post_id);
             // TODO! add notification to post author
         }
 

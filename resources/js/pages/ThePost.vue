@@ -166,6 +166,7 @@
         </div>
     </section>
     <Toast />
+    <ModalSignInNow />
 </template>
 
 <script lang="ts" setup>
@@ -180,6 +181,7 @@ import { ref } from 'vue';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import ModalSignInNow from '@/components/ModalSignInNow/ModalSignInNow.vue';
 import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
@@ -191,6 +193,7 @@ interface Props {
     post_author: PostAuthor;
     post_author_is_followed: boolean;
     post_comments: PostComment[];
+    post_comments_count: number;
     post_is_like: boolean;
 }
 

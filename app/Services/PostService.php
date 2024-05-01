@@ -217,6 +217,17 @@ class PostService
         });
     }
 
+    public function incrementPostCommentCount(int $postId): void
+    {
+        Post::withoutTimestamps(function () use ($postId) {
+            $count = $this->postComment->where('post_id', $postId)->count();
+
+            $post = $this->post->where('id', $postId)->first();
+            $post->comments = $count;
+            $post->save();
+        });
+    }
+
     public function incrementLikeCount(int $postId): void
     {
         Post::withoutTimestamps(function () use ($postId) {
