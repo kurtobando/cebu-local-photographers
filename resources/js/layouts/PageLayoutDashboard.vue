@@ -20,11 +20,13 @@
             </div>
         </section>
     </main>
+    <Footer />
     <Toast />
 </template>
 
 <script lang="ts" setup>
 import Toast from 'primevue/toast';
+import Footer from '@/components/Footer/Footer.vue';
 import Header from '@/components/Header/Header.vue';
 import SidebarNavigation from '@/components/SidebarNavigation/SidebarNavigation.vue';
 </script>
