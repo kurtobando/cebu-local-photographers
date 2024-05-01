@@ -67,14 +67,14 @@
                                             </a>
                                         </template>
                                     </li>
+                                    <li class="">
+                                        <a
+                                            href=""
+                                            class="text-accent">
+                                            Hire Me
+                                        </a>
+                                    </li>
                                 </template>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        class="text-accent">
-                                        Hire Me
-                                    </a>
-                                </li>
                             </ul>
                             <p class="text-sm text-slate-400">
                                 {{ helper.formatDate(post.created_at) }},
