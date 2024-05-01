@@ -1,5 +1,5 @@
 <template>
-    <footer class="w-full p-8">
+    <footer class="w-full border-t border-slate-100 p-8">
         <div class="flex flex-col justify-center gap-4 text-sm text-slate-600 md:flex-row">
             <p class="text-center"><a href="">Privacy Policy</a></p>
             <p class="text-center"><a href="">Terms of Service</a></p>
