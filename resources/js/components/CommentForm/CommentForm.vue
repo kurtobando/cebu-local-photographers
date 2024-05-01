@@ -13,7 +13,7 @@
             <template v-if="form.isDirty">
                 <Button
                     type="reset"
-                    class="text-sm"
+                    size="small"
                     :icon="'pi pi-times'"
                     :label="'Cancel'"
                     :loading="form.processing"
@@ -22,7 +22,8 @@
             </template>
             <Button
                 type="submit"
-                class="text-sm"
+                size="small"
+                :outlined="true"
                 :icon="'pi pi-send'"
                 :loading="form.processing"
                 :disabled="!form.isDirty || form.processing"
