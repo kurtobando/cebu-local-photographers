@@ -7,7 +7,7 @@
                     Meet the people behind their amazing work
                 </h1>
             </template>
-            <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-8">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-2 px-8 pb-8">
                 <CardMember
                     v-for="user in users"
                     :key="user.id"

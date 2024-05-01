@@ -2,7 +2,7 @@
     <PageLayoutPublic>
         <Meta :title="`${user.name}`" />
         <LayoutTheFold>
-            <section class="-mt-20 flex flex-col items-center gap-16 md:mt-0">
+            <section class="flex flex-col items-center gap-16">
                 <div class="mx-auto flex w-full flex-col gap-8 px-8 md:w-[50rem] md:flex-row">
                     <div class="flex w-full flex-row items-center justify-center md:w-1/3 md:justify-end">
                         <img
