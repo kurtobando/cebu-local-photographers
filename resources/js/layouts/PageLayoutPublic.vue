@@ -1,5 +1,5 @@
 <template>
-    <main class="min-h-screen w-full">
+    <main class="flex min-h-screen w-full flex-col justify-between">
         <Header />
         <section class="">
             <slot />
