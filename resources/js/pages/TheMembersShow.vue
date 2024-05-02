@@ -35,8 +35,8 @@
                             </template>
                             <li>
                                 <a
-                                    href=""
-                                    class="text-accent">
+                                    @click="onHireMe(user.id)"
+                                    class="cursor-pointer text-accent">
                                     Hire Me
                                 </a>
                             </li>
@@ -51,6 +51,8 @@
                                 {{ user_follower_count }}
                             </li>
                             <li class="inline-flex items-center gap-1">
+                                h
+
                                 <Award :size="20" />
                                 <span class="capitalize"> {{ user.role }}</span>
                             </li>
@@ -70,7 +72,7 @@
                                 :image-alt="post.title" />
                             <div
                                 class="custom-card-image-caption absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 transition-opacity">
-                                <div class="inline-flex items-center gap-4 p-6 pt-14">
+                                <div class="inline-flex items-center gap-4 p-6 pt-28">
                                     <img
                                         referrerpolicy="no-referrer"
                                         class="h-12 w-12 rounded-full bg-slate-50 object-cover"
@@ -178,6 +180,14 @@ function onMemberUnfollow(id: number) {
         },
         preserveScroll: true,
         preserveState: false,
+    });
+}
+function onHireMe(user_id: number) {
+    if (!auth.isAuthenticated) {
+        return useEventBus('modal:sign-in-now').emit();
+    }
+    useEventBus('modal:hire-me').emit(null, {
+        user_id,
     });
 }
 </script>

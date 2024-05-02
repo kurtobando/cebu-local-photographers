@@ -69,8 +69,8 @@
                                     </li>
                                     <li class="">
                                         <a
-                                            href=""
-                                            class="text-accent">
+                                            @click="onHireMe(post.user_id)"
+                                            class="cursor-pointer text-accent">
                                             Hire Me
                                         </a>
                                     </li>
@@ -167,6 +167,7 @@
     </section>
     <Toast />
     <ModalSignInNow />
+    <ModalHireMe />
 </template>
 
 <script lang="ts" setup>
@@ -181,6 +182,7 @@ import { ref } from 'vue';
 import Comment from '@/components/Comment/Comment.vue';
 import CommentForm from '@/components/CommentForm/CommentForm.vue';
 import Meta from '@/components/Meta/Meta.vue';
+import ModalHireMe from '@/components/ModalHireMe/ModalHireMe.vue';
 import ModalSignInNow from '@/components/ModalSignInNow/ModalSignInNow.vue';
 import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
@@ -363,6 +365,11 @@ function onMemberUnfollow(id: number) {
         },
         preserveScroll: true,
         preserveState: false,
+    });
+}
+function onHireMe(user_id: number) {
+    useEventBus('modal:hire-me').emit(null, {
+        user_id,
     });
 }
 </script>

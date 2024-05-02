@@ -14,7 +14,7 @@
                         :image-source="post.media?.large || ''" />
                     <div
                         class="custom-card-image-caption absolute bottom-0 left-0 w-full bg-gradient-to-t from-gray-950 transition-opacity">
-                        <div class="inline-flex items-center gap-4 p-6 pt-14">
+                        <div class="inline-flex items-center gap-4 p-6 pt-28">
                             <img
                                 referrerpolicy="no-referrer"
                                 class="h-12 w-12 rounded-full bg-slate-50 object-cover"

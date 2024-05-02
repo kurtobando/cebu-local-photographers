@@ -8,11 +8,13 @@
     </main>
     <Toast />
     <ModalSignInNow />
+    <ModalHireMe />
 </template>
 
 <script setup lang="ts">
 import Footer from '@/components/Footer/Footer.vue';
 import Header from '@/components/Header/Header.vue';
+import ModalHireMe from '@/components/ModalHireMe/ModalHireMe.vue';
 import ModalSignInNow from '@/components/ModalSignInNow/ModalSignInNow.vue';
 </script>
 
