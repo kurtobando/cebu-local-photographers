@@ -13,6 +13,7 @@ export interface User {
     provider: string;
     about: string;
     avatar: string;
+    message_limit: number;
 }
 
 export interface FlashMessages {

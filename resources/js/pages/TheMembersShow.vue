@@ -33,7 +33,7 @@
                                     </template>
                                 </li>
                             </template>
-                            <li>
+                            <li v-if="auth.user?.id !== user.id">
                                 <a
                                     @click="onHireMe(user.id)"
                                     class="cursor-pointer text-accent">

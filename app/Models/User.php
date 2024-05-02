@@ -39,6 +39,7 @@ class User extends Authenticatable implements HasMedia
 
     protected $appends = [
         'role',
+        'message_limit'
     ];
 
     protected $hidden = [
@@ -75,9 +76,34 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(PostCommentLike::class);
     }
 
+    public function message(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function messageLimit(): HasMany
+    {
+        return $this->hasMany(MessageLimit::class);
+    }
+
+    public function messageThreadSender(): HasMany
+    {
+        return $this->hasMany(MessageThread::class, 'user_id_sender');
+    }
+
+    public function messageThreadReceiver(): HasMany
+    {
+        return $this->hasMany(MessageThread::class, 'user_id_receiver');
+    }
+
     public function getRoleAttribute(): string
     {
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
+    }
+
+    public function getMessageLimitAttribute(): int
+    {
+        return $this->messageLimit()->first()->limit ?? 0;
     }
 
     public function getDefaultAvatar(): string

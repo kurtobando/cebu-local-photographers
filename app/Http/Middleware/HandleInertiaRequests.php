@@ -29,7 +29,8 @@ class HandleInertiaRequests extends Middleware
                     'avatar',
                     'provider',
                     'role',
-                    'about'
+                    'about',
+                    'message_limit'
                 ]),
                 'can' => [
                     'store' => [

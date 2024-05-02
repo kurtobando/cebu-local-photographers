@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardMessageController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
@@ -150,4 +151,11 @@ Route::prefix('dashboard')
             ->group(function () {
                 Route::get('/', 'index')->name('dashboard.photos-gallery.index');
             });
+
+        Route::controller(DashboardMessageController::class)
+        ->prefix('message')
+        ->group(function () {
+            Route::post('/', 'store')->name('dashboard.message.store');
+
+        });
     });
