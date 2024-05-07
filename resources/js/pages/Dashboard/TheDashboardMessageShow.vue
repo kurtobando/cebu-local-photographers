@@ -4,7 +4,9 @@
         <template #title>View Messages</template>
         <template #description>See your recent conversation here.</template>
         <section>
-            <div class="flex flex-col gap-4">
+            <form
+                @submit.prevent="onSubmit"
+                class="flex flex-col gap-4">
                 <div class="flex justify-between">
                     <Link
                         :href="route('dashboard.message.index')"
@@ -29,7 +31,7 @@
                     :data-key="'uuid'">
                     <template #list="slotProps">
                         <div
-                            class="mr-8 mt-4 rounded !border p-4"
+                            class="ml-8 mt-4 rounded !border p-4"
                             v-if="slotProps.data.sender.id === auth.user?.id">
                             <p class="text-sm leading-relaxed">{{ slotProps.data.message }}</p>
                             <p class="text-xs leading-relaxed text-slate-400">
@@ -37,7 +39,7 @@
                             </p>
                         </div>
                         <div
-                            class="ml-8 mt-4 rounded !border !border-r-4 !border-r-accent p-4"
+                            class="mr-8 mt-4 rounded !border !border-l-4 !border-l-accent p-4"
                             v-else>
                             <p class="text-sm leading-relaxed">{{ slotProps.data.message }}</p>
                             <p class="text-xs leading-relaxed text-slate-400">
@@ -53,14 +55,18 @@
                     placeholder="Reply to this message..."
                     :rows="8">
                 </textarea>
+                <InputError
+                    :text="form.errors.message"
+                    v-if="form.errors.message" />
                 <div class="flex justify-end">
                     <Button
+                        type="submit"
                         :loading="form.processing"
                         :size="'small'"
                         :outlined="true"
                         :label="'Send Message'" />
                 </div>
-            </div>
+            </form>
         </section>
     </PageLayoutDashboard>
 </template>
@@ -70,8 +76,11 @@ import { Link, useForm } from '@inertiajs/vue3';
 import { Archive, MoveLeft } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import DataView from 'primevue/dataview';
+import { useToast } from 'primevue/usetoast';
+import InputError from '@/components/InputError/InputError.vue';
 import Meta from '@/components/Meta/Meta.vue';
 import useAuth from '@/composables/useAuth';
+import useFlashMessage from '@/composables/useFlashMessage';
 import useHelper from '@/composables/useHelper';
 import useRoute from '@/composables/useRoute';
 import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
@@ -80,20 +89,51 @@ import { MessageThread } from '@/types';
 interface Props {
     message_uuid: string;
     messages_thread: MessageThread[];
+    message_user_id_receiver: number;
+    message_thread_mark_as_read: boolean;
 }
 
-defineProps<Props>();
-
+const props = defineProps<Props>();
+const toast = useToast();
 const helper = useHelper();
 const route = useRoute();
 const auth = useAuth();
 const form = useForm({
     message: '',
+    message_user_id_receiver: props.message_user_id_receiver,
+    message_uuid: props.message_uuid,
 });
 
 function onArchive(uuid: string) {
     useForm({}).patch(route('dashboard.message-archive.update', { uuid }), {
         onError: (e) => console.error(e),
+        preserveScroll: true,
+    });
+}
+function onSubmit() {
+    form.post(route('dashboard.message-thread.store', { uuid: props.message_uuid }), {
+        onError: (e) => console.error(e),
+        onSuccess: () => {
+            const { error, success } = useFlashMessage();
+
+            if (error) {
+                toast.add({
+                    detail: error,
+                    life: 6000,
+                    severity: 'error',
+                    summary: 'Error',
+                });
+            }
+            if (success) {
+                toast.add({
+                    detail: success,
+                    life: 6000,
+                    severity: 'success',
+                    summary: 'Success',
+                });
+            }
+            form.reset();
+        },
         preserveScroll: true,
     });
 }

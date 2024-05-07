@@ -32,6 +32,14 @@ class MessageService
             ->get();
     }
 
+    public function getMessageByUuid(string $uuid): Collection
+    {
+        return $this
+            ->message
+            ->where('uuid', $uuid)
+            ->get();
+    }
+
     public function getMessageThreadByUuid(string $uuid): Collection
     {
         return $this
@@ -71,8 +79,10 @@ class MessageService
         ]);
     }
 
-    public function markMessageAsArchivedById(int $messageId, int $userId): int
-    {
+    public function markMessageAsArchivedById(
+        int $messageId,
+        int $userId
+    ): int {
         return $this
             ->message
             ->where('id', $messageId)
@@ -82,8 +92,10 @@ class MessageService
             ]);
     }
 
-    public function markMessageAsArchivedByUuid(string $uuid, int $userId): int
-    {
+    public function markMessageAsArchivedByUuid(
+        string $uuid,
+        int $userId
+    ): int {
         return $this
             ->message
             ->where('uuid', $uuid)
@@ -103,12 +115,37 @@ class MessageService
             ]);
     }
 
+    public function markMessageThreadReadByUuid(
+        string $messageUuid,
+        int $userId
+    ): int {
+        return $this
+            ->messageThread
+            ->where('uuid', $messageUuid)
+            ->where('user_id_receiver', $userId)
+            ->update([
+                'is_read' => true
+            ]);
+    }
+
     public function decreaseMessageLimitByUserId(int $id): int
     {
         return $this
             ->messageLimit
             ->where('user_id', $id)
             ->decrement('limit');
+    }
+
+    public function isMessageHasUnreadThreadByUserId(
+        int $id,
+        string $messageUuid
+    ): bool {
+        return $this
+            ->messageThread
+            ->where('uuid', $messageUuid)
+            ->where('user_id_receiver', $id)
+            ->where('is_read', false)
+            ->exists();
     }
 
     public function isMessageLimitReachedByUserId(int $id): bool

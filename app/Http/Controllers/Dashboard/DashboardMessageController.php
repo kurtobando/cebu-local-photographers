@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\MessageThread;
 use App\Services\MessageService;
-use Illuminate\Http\RedirectResponse;
 use Inertia\Response;
 
 class DashboardMessageController extends Controller
@@ -29,18 +28,25 @@ class DashboardMessageController extends Controller
                     'updated_at',
                     'created_at',
                     'subject'
-                ]));
+                ]), [
+                    'is_unread' => $this->messageService->isMessageHasUnreadThreadByUserId(auth()->id(), $message->uuid),
+                ]);
             })
         ]);
     }
 
     public function show(string $uuid): Response
     {
-        $messages = $this->messageService->getMessageThreadByUuid($uuid);
+        $message = $this->messageService->getMessageByUuid($uuid);
+        $messageThread = $this->messageService->getMessageThreadByUuid($uuid);
 
         return inertia('Dashboard/TheDashboardMessageShow', [
             'message_uuid' => $uuid,
-            'messages_thread' => $messages->map(function (MessageThread $thread) {
+            'message_user_id_receiver' => $message
+                ->filter(fn (Message $item) => $item->user_id !== auth()->id())
+                ->first()
+                ->user_id,
+            'messages_thread' => $messageThread->map(function (MessageThread $thread) {
                 return array_merge($thread->only([
                     'id',
                     'uuid',
@@ -52,14 +58,8 @@ class DashboardMessageController extends Controller
                     'sender' => $thread->sender->only(['id', 'name', 'email']),
                     'receiver' => $thread->receiver->only(['id', 'name', 'email']),
                 ]);
-            })
+            }),
+            'message_thread_mark_as_read' => $this->messageService->markMessageThreadReadByUuid($uuid, auth()->id()),
         ]);
-    }
-
-    public function update(string $uuid): RedirectResponse
-    {
-        $this->messageService->markMessageAsArchivedByUuid($uuid, auth()->id());
-
-        return redirect()->route('dashboard.message.index');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardMessageArchiveController;
 use App\Http\Controllers\Dashboard\DashboardMessageController;
+use App\Http\Controllers\Dashboard\DashboardMessageThreadController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
@@ -165,6 +166,12 @@ Route::prefix('dashboard')
             ->group(function () {
                 Route::get('/', 'index')->name('dashboard.message.index');
                 Route::get('/{uuid}', 'show')->name('dashboard.message.show');
+            });
+
+        Route::controller(DashboardMessageThreadController::class)
+            ->prefix('message-thread')
+            ->group(function () {
+                Route::post('/{uuid}', 'store')->name('dashboard.message-thread.store');
             });
 
         Route::controller(DashboardMessageArchiveController::class)

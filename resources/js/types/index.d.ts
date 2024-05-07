@@ -82,6 +82,7 @@ export interface Message {
     subject: string;
     updated_at: string;
     uuid: string;
+    is_unread: number;
 }
 
 export interface MessageThread {

@@ -11,7 +11,11 @@
                     :value="messages"
                     :data-key="'id'">
                     <template #list="slotProps">
-                        <div class="mt-4 rounded !border p-4">
+                        <div
+                            :class="{
+                                '!border-l-4 !border-l-accent': slotProps.data.is_unread,
+                            }"
+                            class="mt-4 rounded !border p-4">
                             <Link
                                 class="inline-block text-sm leading-relaxed"
                                 :href="route('dashboard.message.show', { uuid: slotProps.data.uuid })">
@@ -21,6 +25,9 @@
                                 {{ helper.formatDate(slotProps.data.created_at) }}
                             </p>
                         </div>
+                    </template>
+                    <template #empty>
+                        <p class="py-4 text-sm text-slate-400">No message yet, come back later.</p>
                     </template>
                 </DataView>
             </div>
