@@ -76,6 +76,33 @@ export interface PostComment {
     comment_is_like: boolean;
 }
 
+export interface Message {
+    created_at: string;
+    id: number;
+    subject: string;
+    updated_at: string;
+    uuid: string;
+}
+
+export interface MessageThread {
+    created_at: string;
+    id: number;
+    is_read: number;
+    message: string;
+    receiver: {
+        email: string;
+        id: number;
+        name: string;
+    };
+    sender: {
+        email: string;
+        id: number;
+        name: string;
+    };
+    updated_at: string;
+    uuid: string;
+}
+
 export interface SharedProps extends PageProps {
     app: App;
     auth: {

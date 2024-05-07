@@ -19,13 +19,19 @@
                 <Images :size="19" />
                 <span>Manage Gallery</span>
             </Link>
+            <Link
+                class="flex w-full items-center gap-3 rounded border-b border-slate-100 py-3"
+                :href="route('dashboard.message.index')">
+                <MessageSquareMore :size="19" />
+                <span>Manage Messages</span>
+            </Link>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Images, Upload, User } from 'lucide-vue-next';
+import { Images, MessageSquareMore, Upload, User } from 'lucide-vue-next';
 import useRoute from '@/composables/useRoute';
 
 const route = useRoute();

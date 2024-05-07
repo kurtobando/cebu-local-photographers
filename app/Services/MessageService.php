@@ -5,17 +5,43 @@ namespace App\Services;
 use App\Models\Message;
 use App\Models\MessageLimit;
 use App\Models\MessageThread;
+use App\Models\User;
+use App\Notifications\MessageNewNotification;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class MessageService
 {
     public function __construct(
+        private readonly User $user,
         private readonly Message $message,
         private readonly MessageThread $messageThread,
         private readonly MessageLimit $messageLimit
     ) {
         //
     }
+
+
+    public function getMessagesByUserId(int $id): Collection
+    {
+        return $this->message
+            ->with(['user'])
+            ->where('user_id', $id)
+            ->whereNot('is_archived', true)
+            ->orderByDesc('created_at')
+            ->get();
+    }
+
+    public function getMessageThreadByUuid(string $uuid): Collection
+    {
+        return $this
+            ->messageThread
+            ->with(['receiver', 'sender'])
+            ->where('uuid', $uuid)
+            ->orderByDesc('created_at')
+            ->get();
+    }
+
 
     public function saveMessage(
         string $uuid,
@@ -45,11 +71,23 @@ class MessageService
         ]);
     }
 
-    public function markMessageAsArchivedById(int $messageId): int
+    public function markMessageAsArchivedById(int $messageId, int $userId): int
     {
         return $this
             ->message
             ->where('id', $messageId)
+            ->where('user_id', $userId)
+            ->update([
+                'is_archived' => true
+            ]);
+    }
+
+    public function markMessageAsArchivedByUuid(string $uuid, int $userId): int
+    {
+        return $this
+            ->message
+            ->where('uuid', $uuid)
+            ->where('user_id', $userId)
             ->update([
                 'is_archived' => true
             ]);
@@ -81,4 +119,16 @@ class MessageService
             ->where('limit', 0)
             ->exists();
     }
+
+    public function notifyNewMessageByUserId(
+        int $id,
+        string $messageUuId
+    ): void {
+        $this
+            ->user
+            ->where('id', $id)
+            ->first()
+            ->notify(new MessageNewNotification($messageUuId));
+    }
+
 }

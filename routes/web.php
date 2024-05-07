@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardMessageArchiveController;
 use App\Http\Controllers\Dashboard\DashboardMessageController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardProfileImageController;
+use App\Http\Controllers\HireMeMessageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberFollowController;
@@ -117,6 +119,12 @@ Route::controller(SignUpGoogleController::class)
         Route::get('/callback', "callback")->name('auth.google.callback');
     });
 
+Route::controller(HireMeMessageController::class)
+    ->prefix('message')
+    ->group(function () {
+        Route::post('/', 'store')->name('hire-me.message.store');
+    });
+
 Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
@@ -153,9 +161,15 @@ Route::prefix('dashboard')
             });
 
         Route::controller(DashboardMessageController::class)
-        ->prefix('message')
-        ->group(function () {
-            Route::post('/', 'store')->name('dashboard.message.store');
+            ->prefix('message')
+            ->group(function () {
+                Route::get('/', 'index')->name('dashboard.message.index');
+                Route::get('/{uuid}', 'show')->name('dashboard.message.show');
+            });
 
-        });
+        Route::controller(DashboardMessageArchiveController::class)
+            ->prefix('message-archive')
+            ->group(function () {
+                Route::patch('/{uuid}', 'update')->name('dashboard.message-archive.update');
+            });
     });

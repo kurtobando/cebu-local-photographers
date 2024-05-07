@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DashboardMessageRequest;
+use App\Models\Message;
+use App\Models\MessageThread;
 use App\Services\MessageService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
+use Inertia\Response;
 
 class DashboardMessageController extends Controller
 {
@@ -16,28 +17,49 @@ class DashboardMessageController extends Controller
         //
     }
 
-    public function store(DashboardMessageRequest $request): RedirectResponse
+    public function index(): Response
     {
-        $messageUuId = Str::uuid()->toString();
-        $message = $request->message;
-        $messageUserIdSender = auth()->id();
-        $messageUserIdReceiver = $request->user_id_receiver;
+        $messages = $this->messageService->getMessagesByUserId(auth()->id());
 
-        if ($this->messageService->isMessageLimitReachedByUserId($messageUserIdSender)) {
-            return redirect()
-                ->back()
-                ->with(['error' => 'You have reached the message limit for this month']);
-        }
+        return inertia('Dashboard/TheDashboardMessage', [
+            'messages' => $messages->map(function (Message $message) {
+                return array_merge($message->only([
+                    'id',
+                    'uuid',
+                    'updated_at',
+                    'created_at',
+                    'subject'
+                ]));
+            })
+        ]);
+    }
 
-        $this->messageService->decreaseMessageLimitByUserId($messageUserIdSender);
-        $this->messageService->saveMessage($messageUuId, $message, $messageUserIdSender);
-        $this->messageService->saveMessage($messageUuId, $message, $messageUserIdReceiver);
-        $this->messageService->saveMessageThread($messageUuId, $messageUserIdSender, $messageUserIdReceiver, $message);
+    public function show(string $uuid): Response
+    {
+        $messages = $this->messageService->getMessageThreadByUuid($uuid);
 
-        // TODO! send notification via email for newly created message, only once
+        return inertia('Dashboard/TheDashboardMessageShow', [
+            'message_uuid' => $uuid,
+            'messages_thread' => $messages->map(function (MessageThread $thread) {
+                return array_merge($thread->only([
+                    'id',
+                    'uuid',
+                    'is_read',
+                    'message',
+                    'created_at',
+                    'updated_at'
+                ]), [
+                    'sender' => $thread->sender->only(['id', 'name', 'email']),
+                    'receiver' => $thread->receiver->only(['id', 'name', 'email']),
+                ]);
+            })
+        ]);
+    }
 
-        return redirect()
-            ->back()
-            ->with(['success' => 'Your message has been successfully sent']);
+    public function update(string $uuid): RedirectResponse
+    {
+        $this->messageService->markMessageAsArchivedByUuid($uuid, auth()->id());
+
+        return redirect()->route('dashboard.message.index');
     }
 }

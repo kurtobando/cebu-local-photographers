@@ -69,7 +69,7 @@ function onSubmit() {
             summary: 'Error',
         });
     }
-    form.post(route('dashboard.message.store'), {
+    form.post(route('hire-me.message.store'), {
         onError: (e) => console.error(e),
         onSuccess: () => {
             const { error, success } = useFlashMessage();
