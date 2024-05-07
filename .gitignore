@@ -9,6 +9,7 @@
 .env.backup
 .env.production
 .phpunit.result.cache
+.secrets
 .DS_Store
 Homestead.json
 Homestead.yaml
