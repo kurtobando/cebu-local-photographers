@@ -35,9 +35,9 @@ import InputError from '@/components/InputError/InputError.vue';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 
-type Form = {
+interface Form {
     file: File | null;
-};
+}
 
 const toast = useToast();
 const route = useRoute();

@@ -83,14 +83,13 @@ interface Props {
     categories: Category[];
     post: Post;
 }
-
-type Form = {
+interface Form {
     id: number | null;
     title: string;
     description: string;
     post_category_id: number | null;
     tags: string[];
-};
+}
 
 const props = defineProps<Props>();
 const route = useRoute();

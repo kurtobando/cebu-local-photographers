@@ -52,12 +52,12 @@ import useRoute from '@/composables/useRoute';
 import PageLayoutAuth from '@/layouts/PageLayoutAuth.vue';
 import { SharedProps } from '@/types';
 
-type Form = {
+interface Form {
     email: string;
     password: string;
     password_confirmation: string;
     token: string;
-};
+}
 
 const email = computed(() => usePage<SharedProps>().props.email as string);
 const token = computed(() => usePage<SharedProps>().props.token as string);

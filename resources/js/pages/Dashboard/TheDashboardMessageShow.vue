@@ -92,13 +92,18 @@ interface Props {
     message_user_id_receiver: number;
     message_thread_mark_as_read: boolean;
 }
+interface Form {
+    message: string;
+    message_user_id_receiver: number;
+    message_uuid: string;
+}
 
 const props = defineProps<Props>();
 const toast = useToast();
 const helper = useHelper();
 const route = useRoute();
 const auth = useAuth();
-const form = useForm({
+const form = useForm<Form>({
     message: '',
     message_user_id_receiver: props.message_user_id_receiver,
     message_uuid: props.message_uuid,

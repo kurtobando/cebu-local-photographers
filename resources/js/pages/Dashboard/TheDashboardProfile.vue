@@ -119,14 +119,14 @@ import useFlashMessage from '@/composables/useFlashMessage';
 import useRoutes from '@/composables/useRoute';
 import PageLayoutDashboard from '@/layouts/PageLayoutDashboard.vue';
 
-type Form = {
+interface Form {
     about: string;
     is_change_password: boolean;
     name: string;
     password: string;
     password_confirmation: string;
     provider: string;
-};
+}
 
 const toast = useToast();
 const route = useRoutes();

@@ -45,11 +45,10 @@ import useRoute from '@/composables/useRoute';
 interface Props {
     postId: number;
 }
-
-type Form = {
+interface Form {
     comment: string;
     post_id: number;
-};
+}
 
 const props = defineProps<Props>();
 const auth = useAuth();

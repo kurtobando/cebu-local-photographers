@@ -48,12 +48,17 @@ import useAuth from '@/composables/useAuth';
 import useFlashMessage from '@/composables/useFlashMessage';
 import useRoute from '@/composables/useRoute';
 
+interface Form {
+    message: string;
+    user_id_receiver: number | null;
+}
+
 const toast = useToast();
 const route = useRoute();
 const auth = useAuth();
-const form = useForm({
+const form = useForm<Form>({
     message: '',
-    user_id_receiver: '',
+    user_id_receiver: null,
 });
 const isVisible = ref(false);
 
