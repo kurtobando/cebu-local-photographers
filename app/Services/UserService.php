@@ -16,10 +16,20 @@ class UserService
     public function getUsers(): Collection
     {
         return $this
-        ->user
-        ->where('is_active', true)
-        ->whereNotNull('avatar')
-        ->get();
+            ->user
+            ->where('is_active', true)
+            ->whereNotNull('avatar')
+            ->get();
+    }
+
+    public function getUsersInRandomOrder(): Collection
+    {
+        return $this
+            ->user
+            ->where('is_active', true)
+            ->whereNotNull('avatar')
+            ->inRandomOrder()
+            ->get();
     }
 
     public function getUserById(int $id): User

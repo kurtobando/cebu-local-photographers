@@ -24,7 +24,7 @@ class MemberController extends Controller
     public function index(): Response
     {
         return inertia('TheMembers', [
-            'users' => $this->userService->getUsers()
+            'users' => $this->userService->getUsersInRandomOrder()
         ]);
     }
 
