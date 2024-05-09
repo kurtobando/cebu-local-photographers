@@ -8,8 +8,15 @@
         <nav
             v-if="isAuthenticated"
             class="font-sm inline-flex items-center gap-8 text-sm">
-            <Link href="">
+            <Link
+                class="relative"
+                :href="route('dashboard.notification.index')">
                 <Bell />
+                <div
+                    v-if="auth.notification.unread_count"
+                    class="absolute -right-5 -top-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent p-2 text-sm text-white">
+                    {{ auth.notification.unread_count }}
+                </div>
             </Link>
             <Avatar
                 class="custom-avatar uppercase"

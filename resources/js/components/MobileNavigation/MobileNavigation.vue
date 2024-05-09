@@ -29,7 +29,7 @@
                     </Link>
                 </nav>
                 <nav
-                    v-if="isAuthenticated"
+                    v-if="auth.isAuthenticated"
                     class="flex flex-col gap-8">
                     <Link
                         class="inline-flex items-center gap-3"
@@ -40,9 +40,16 @@
                     </Link>
                     <Link
                         class="inline-flex items-center gap-3"
-                        href=""
+                        :href="route('dashboard.notification.index')"
                         @click="toggleVisible">
-                        <Bell />
+                        <div class="relative">
+                            <Bell />
+                            <div
+                                v-if="auth.notification.unread_count"
+                                class="absolute -right-5 -top-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent p-2 text-sm text-white">
+                                {{ auth.notification.unread_count }}
+                            </div>
+                        </div>
                         <span>Notification</span>
                     </Link>
                     <Link
@@ -63,7 +70,7 @@
                     </Link>
                 </nav>
                 <nav
-                    v-if="!isAuthenticated"
+                    v-if="!auth.isAuthenticated"
                     class="flex flex-col gap-8">
                     <Link
                         :href="route('sign-in')"
@@ -100,7 +107,7 @@ import useAuth from '@/composables/useAuth';
 import useRoute from '@/composables/useRoute';
 
 const route = useRoute();
-const { isAuthenticated } = useAuth();
+const auth = useAuth();
 const visible = ref(false);
 
 function toggleVisible() {

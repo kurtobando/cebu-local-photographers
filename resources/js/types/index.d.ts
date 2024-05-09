@@ -104,10 +104,31 @@ export interface MessageThread {
     uuid: string;
 }
 
+export interface Notification {
+    unread_count: ?number
+    unread: ?NotificationUnread[]
+}
+
+export interface NotificationUnread {
+    created_at: string;
+    data: {
+        action: string;
+        message: string;
+        subject: string;
+    };
+    id: string;
+    notifiable_id: number;
+    notifiable_type: string;
+    read_at: string | null;
+    type: string;
+    updated_at: string;
+}
+
 export interface SharedProps extends PageProps {
     app: App;
     auth: {
         user: User | null;
+        notification: Notification
     };
     flash: FlashMessages;
 }

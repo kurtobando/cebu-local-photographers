@@ -15,14 +15,18 @@
                             :class="{
                                 '!border-l-4 !border-l-accent': slotProps.data.is_unread,
                             }"
-                            class="mt-4 rounded !border p-4">
+                            class="mt-2 rounded !border p-4">
                             <Link
+                                :class="{
+                                    '!font-bold': slotProps.data.is_unread,
+                                }"
                                 class="inline-block text-sm leading-relaxed"
                                 :href="route('dashboard.message.show', { uuid: slotProps.data.uuid })">
                                 {{ slotProps.data.subject }}
                             </Link>
-                            <p class="text-xs leading-relaxed text-slate-400">
-                                {{ helper.formatDate(slotProps.data.created_at) }}
+                            <p class="text-sm leading-relaxed text-slate-400">
+                                {{ helper.formatDate(slotProps.data.created_at) }},
+                                {{ helper.formatDateFromNow(slotProps.data.created_at) }}
                             </p>
                         </div>
                     </template>
@@ -54,4 +58,8 @@ const route = useRoute();
 const helper = useHelper();
 </script>
 
-<style scoped></style>
+<style>
+.p-dataview .p-paginator-bottom {
+    border: none !important;
+}
+</style>

@@ -31,18 +31,18 @@
                     :data-key="'uuid'">
                     <template #list="slotProps">
                         <div
-                            class="ml-8 mt-4 rounded !border p-4"
+                            class="ml-8 mt-2 rounded !border p-4"
                             v-if="slotProps.data.sender.id === auth.user?.id">
                             <p class="text-sm leading-relaxed">{{ slotProps.data.message }}</p>
-                            <p class="text-xs leading-relaxed text-slate-400">
+                            <p class="text-sm leading-relaxed text-slate-400">
                                 {{ helper.formatDateFromNow(slotProps.data.created_at) }}
                             </p>
                         </div>
                         <div
-                            class="mr-8 mt-4 rounded !border !border-l-4 !border-l-accent p-4"
+                            class="mr-8 mt-2 rounded !border !border-l-4 !border-l-accent p-4"
                             v-else>
                             <p class="text-sm leading-relaxed">{{ slotProps.data.message }}</p>
-                            <p class="text-xs leading-relaxed text-slate-400">
+                            <p class="text-sm leading-relaxed text-slate-400">
                                 {{ helper.formatDateFromNow(slotProps.data.created_at) }}
                             </p>
                         </div>

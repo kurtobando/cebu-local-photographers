@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardMessageArchiveController;
 use App\Http\Controllers\Dashboard\DashboardMessageController;
 use App\Http\Controllers\Dashboard\DashboardMessageThreadController;
+use App\Http\Controllers\Dashboard\DashboardNotificationController;
 use App\Http\Controllers\Dashboard\DashboardPhotosController;
 use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
@@ -178,5 +179,12 @@ Route::prefix('dashboard')
             ->prefix('message-archive')
             ->group(function () {
                 Route::patch('/{uuid}', 'update')->name('dashboard.message-archive.update');
+            });
+
+        Route::controller(DashboardNotificationController::class)
+            ->prefix('notification')
+            ->group(function () {
+                Route::get('/', 'index')->name('dashboard.notification.index');
+                Route::patch('/{uuid}', 'update')->name('dashboard.notification.update');
             });
     });

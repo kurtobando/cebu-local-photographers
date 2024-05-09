@@ -32,6 +32,10 @@ class HandleInertiaRequests extends Middleware
                     'about',
                     'message_limit'
                 ]),
+                'notification' => [
+                    'unread_count' => $request->user()?->unreadNotifications()->count(),
+                    'unread' => $request->user()?->unreadNotifications()->get(),
+                ],
                 'can' => [
                     'store' => [
                         'post' => $request->user()?->can('store post'),
