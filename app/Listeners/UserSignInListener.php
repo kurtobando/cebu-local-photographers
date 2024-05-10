@@ -15,10 +15,8 @@ class UserSignInListener implements ShouldQueue
 
     public function handle(UserSignInEvent $event): void
     {
-        $event->user->notify(new UserSignInNotification(
-            $event->clientIpAddress,
-            $event->userAgent
-        ));
-
+        $event
+            ->user
+            ->notify(new UserSignInNotification($event->clientIpAddress, $event->userAgent));
     }
 }

@@ -26,9 +26,6 @@ class PostCommentLikeListener
             ->first()
             ->user()
             ->first()
-            ->notify(new PostCommentLikeNewNotification(
-                $post,
-                $postComment
-            ));
+            ->notify(new PostCommentLikeNewNotification($post, $postComment));
     }
 }

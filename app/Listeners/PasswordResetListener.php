@@ -19,6 +19,10 @@ class PasswordResetListener implements ShouldQueue
         $email = $event->passwordResetToken->email;
         $token = $event->passwordResetToken->token;
 
-        $this->user->where('email', $email)->first()->notify(new PasswordResetNotification($token, $email));
+        $this
+            ->user
+            ->where('email', $email)
+            ->first()
+            ->notify(new PasswordResetNotification($token, $email));
     }
 }
