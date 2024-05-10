@@ -20,7 +20,7 @@ class PostCommentLikeNewNotification extends Notification
         private readonly Post $post,
         private readonly PostComment $postComment
     ) {
-        $this->subject = 'Someone Liked Your Comment';
+        $this->subject = 'Someone liked your comment';
         $this->message = "We're excited to inform you that someone appreciated your comment on one of our posts.";
         $this->action = route('post', ['id' => $this->post->id]);
     }

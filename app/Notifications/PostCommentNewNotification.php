@@ -18,7 +18,7 @@ class PostCommentNewNotification extends Notification
     public function __construct(
         private readonly PostComment $postComment
     ) {
-        $this->subject = 'Your Post Has Received a Comment';
+        $this->subject = 'Your post has received a comment';
         $this->message = "We're thrilled to inform you that someone has left a comment on your post.";
         $this->action = route('post', ['id' => $this->postComment->post_id]);
     }

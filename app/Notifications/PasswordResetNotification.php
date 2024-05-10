@@ -26,7 +26,7 @@ class PasswordResetNotification extends Notification implements ShouldQueue
     public function toMail(): MailMessage
     {
         return (new MailMessage())
-            ->subject('Your Password Reset')
+            ->subject('Your password reset request for your account')
             ->line('You are receiving this email because we received a password reset request for your account.')
             ->line('If you wish to continue with the password reset, please click the button below.')
             ->action('Password Reset', route('password-confirmation', ['token' => $this->token, 'email' => $this->email]))
