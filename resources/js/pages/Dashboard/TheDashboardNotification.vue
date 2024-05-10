@@ -5,7 +5,7 @@
         <template #description>Manage your recent notification</template>
 
         <DataView
-            :rows="4"
+            :rows="8"
             :paginator="true"
             :value="notification_unread ?? []"
             :data-key="'id'">
@@ -16,7 +16,7 @@
                     }"
                     class="mt-2 rounded !border !border-slate-200 p-4">
                     <p class="text-sm font-bold leading-relaxed">{{ slotProps.data?.data?.subject }}</p>
-                    <p class="text-sm leading-relaxed">{{ slotProps.data?.data?.message }}</p>
+                    <p class="text-sm leading-relaxed text-slate-500">{{ slotProps.data?.data?.message }}</p>
                     <div class="flex items-center justify-between gap-2">
                         <p class="text-sm leading-relaxed text-slate-400">
                             {{ helper.formatDate(slotProps.data.created_at) }},
