@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Enums\UserRoleEnum;
 use App\Events\UserSignUpEvent;
-use App\Notifications\SignUpNotification;
+use App\Notifications\UserSignUpNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class UserSignUpListener implements ShouldQueue
@@ -19,7 +19,7 @@ class UserSignUpListener implements ShouldQueue
         $defaultMessageLimitEveryMonth = 10;
 
         $event->user->assignRole(UserRoleEnum::USER->value);
-        $event->user->notify(new SignUpNotification());
+        $event->user->notify(new UserSignUpNotification());
         $event->user->messageLimit()->create(['user_id' => $event->user->id, 'limit' => $defaultMessageLimitEveryMonth]);
     }
 }

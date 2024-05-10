@@ -11,8 +11,11 @@ class UserSignInEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(public User $user)
-    {
+    public function __construct(
+        public readonly User $user,
+        public readonly string $clientIpAddress,
+        public readonly string $userAgent
+    ) {
         //
     }
 }

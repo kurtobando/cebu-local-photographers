@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserAuthProviderEnum;
+use App\Events\UserSignInEvent;
 use App\Services\SignUpService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class SignUpGoogleController extends Controller
@@ -20,11 +22,17 @@ class SignUpGoogleController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function callback(): RedirectResponse
+    public function callback(Request $request): RedirectResponse
     {
         $user = $this->signUpService->signUp([], UserAuthProviderEnum::GOOGLE->value);
 
         auth()->loginUsingId($user->id);
+
+        event(new UserSignInEvent(
+            auth()->user(),
+            $request->getClientIp(),
+            $request->header('User-Agent')
+        ));
 
         session()->regenerate();
 

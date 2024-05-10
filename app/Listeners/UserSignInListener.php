@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\UserSignInEvent;
+use App\Notifications\UserSignInNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Facades\Log;
 
 class UserSignInListener implements ShouldQueue
 {
@@ -15,9 +15,10 @@ class UserSignInListener implements ShouldQueue
 
     public function handle(UserSignInEvent $event): void
     {
-        // TODO! sends email notification to user email address
+        $event->user->notify(new UserSignInNotification(
+            $event->clientIpAddress,
+            $event->userAgent
+        ));
 
-        Log::debug($event->user->email);
-        Log::debug("TODO! send sign in email to user");
     }
 }
