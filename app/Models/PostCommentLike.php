@@ -6,6 +6,7 @@ use App\Events\PostCommentLikeEvent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+// TODO! add soft delete
 class PostCommentLike extends Model
 {
     protected $fillable = ['user_id', 'post_id', 'post_comment_id'];
