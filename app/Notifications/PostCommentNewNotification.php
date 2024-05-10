@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use App\Models\Post;
 use App\Models\PostComment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostCommentLikeNewNotification extends Notification
+class PostCommentNewNotification extends Notification
 {
     use Queueable;
 
@@ -17,12 +16,11 @@ class PostCommentLikeNewNotification extends Notification
     private string $action;
 
     public function __construct(
-        private readonly Post $post,
         private readonly PostComment $postComment
     ) {
-        $this->subject = 'Someone Liked Your Comment';
-        $this->message = "We're excited to inform you that someone appreciated your comment on one of our posts.";
-        $this->action = route('post', ['id' => $this->post->id]);
+        $this->subject = 'Your Post Has Received a Comment';
+        $this->message = "We're thrilled to inform you that someone has left a comment on your post.";
+        $this->action = route('post', ['id' => $this->postComment->post_id]);
     }
 
     public function via(): array
@@ -37,7 +35,7 @@ class PostCommentLikeNewNotification extends Notification
             ->greeting('Greetings!')
             ->subject($this->subject)
             ->line($this->message)
-            ->line("{$this->postComment->comment}")
+            ->line($this->postComment->comment)
             ->action('Visit Post', $this->action)
             ->line("Feel free to visit the post and continue the conversation!");
     }
