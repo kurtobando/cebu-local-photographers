@@ -1,14 +1,14 @@
 <template>
     <Meta title="Edit A Post" />
     <section class="flex max-h-screen min-h-[90vh] flex-col md:flex-row">
-        <div class="grid w-full place-content-center bg-[#171717] md:w-2/3">
+        <div class="grid w-full place-content-center bg-[#171717] lg:w-7/12">
             <Image
                 :src="post.media?.xlarge"
                 :preview="true"
                 image-class="w-full  max-h-screen"
                 alt="media image" />
         </div>
-        <div class="flex w-full flex-col gap-4 p-8 md:w-1/3">
+        <div class="flex w-full flex-col gap-4 p-8 lg:w-5/12">
             <div>
                 <h1 class="text-2xl font-bold">Edit a Post</h1>
                 <p class="leading-relaxed text-slate-400">Tell us more about this photo</p>
