@@ -96,6 +96,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(MessageThread::class, 'user_id_receiver');
     }
 
+    public function userFollowing(): HasMany
+    {
+        return $this->hasMany(UserFollower::class, 'user_id');
+    }
+
     public function getRoleAttribute(): string
     {
         return $this->roles->pluck('name')->first() ?? UserRoleEnum::USER->name;
