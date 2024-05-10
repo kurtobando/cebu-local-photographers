@@ -24,12 +24,10 @@ class MessageLimitJob implements ShouldQueue
 
     public function handle(): void
     {
-        $defaultMessageLimitPerMonth = 10;
-
         $this
             ->messageLimit
             ->update([
-                'limit' => $defaultMessageLimitPerMonth
+                'limit' => MessageLimit::DEFAULT_LIMIT
             ]);
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MessageLimit extends Model
 {
+    public const DEFAULT_LIMIT = 10;
+
     protected $fillable = [
         'user_id',
         'limit',
