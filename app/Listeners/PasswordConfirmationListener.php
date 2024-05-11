@@ -10,7 +10,6 @@ class PasswordConfirmationListener implements ShouldQueue
 {
     public function __construct()
     {
-        //
     }
 
     public function handle(PasswordConfirmationEvent $event): void

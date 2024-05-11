@@ -15,7 +15,6 @@ class PasswordResetNotification extends Notification implements ShouldQueue
         private readonly string $token,
         private readonly string $email
     ) {
-        //
     }
 
     public function via(): array
@@ -35,8 +34,6 @@ class PasswordResetNotification extends Notification implements ShouldQueue
 
     public function toArray(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

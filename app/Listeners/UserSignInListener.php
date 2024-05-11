@@ -10,7 +10,6 @@ class UserSignInListener implements ShouldQueue
 {
     public function __construct()
     {
-        //
     }
 
     public function handle(UserSignInEvent $event): void

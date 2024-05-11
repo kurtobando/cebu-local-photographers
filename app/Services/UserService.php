@@ -10,7 +10,6 @@ class UserService
     public function __construct(
         private readonly User $user
     ) {
-        //
     }
 
     public function getUsers(): Collection

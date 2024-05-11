@@ -14,7 +14,6 @@ class SignUpService
     public function __construct(
         private readonly User $user
     ) {
-        //
     }
 
     public function signUp(array $data, string $provider = ''): User

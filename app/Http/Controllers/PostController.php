@@ -15,7 +15,6 @@ class PostController extends Controller
         private readonly PostService $postService,
         private readonly UserFollowerService $userFollowerService
     ) {
-        //
     }
 
     public function index(Request $request): Response

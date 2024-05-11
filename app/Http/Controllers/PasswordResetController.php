@@ -18,7 +18,6 @@ class PasswordResetController extends Controller
         private readonly PasswordResetEvent $passwordResetEvent,
         private readonly PasswordResetToken $passwordResetToken
     ) {
-        //
     }
 
     public function index(): Response

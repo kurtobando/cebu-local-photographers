@@ -9,7 +9,6 @@ class PostCommentListener
 {
     public function __construct()
     {
-        //
     }
 
     public function handle(PostCommentEvent $event): void

@@ -13,7 +13,6 @@ class PasswordConfirmationNotification extends Notification implements ShouldQue
 
     public function __construct()
     {
-        //
     }
 
     public function via(): array
@@ -31,8 +30,6 @@ class PasswordConfirmationNotification extends Notification implements ShouldQue
 
     public function toArray(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

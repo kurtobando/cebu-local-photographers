@@ -9,7 +9,6 @@ class UserFollowerService
     public function __construct(
         private readonly UserFollower $userFollower
     ) {
-        //
     }
 
     public function getFollowerCountByUserId(int $userId): int

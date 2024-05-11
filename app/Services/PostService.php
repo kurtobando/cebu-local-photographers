@@ -24,7 +24,6 @@ class PostService
         private readonly PostCommentLike $postCommentLike,
         private readonly User         $user
     ) {
-        //
     }
 
     public function getPosts(): Collection

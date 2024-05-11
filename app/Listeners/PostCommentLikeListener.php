@@ -11,7 +11,6 @@ class PostCommentLikeListener
     public function __construct(
         private readonly PostComment $postComment
     ) {
-        //
     }
 
     public function handle(PostCommentLikeEvent $event): void

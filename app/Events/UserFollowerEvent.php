@@ -13,8 +13,8 @@ class UserFollowerEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public readonly UserFollower $userFollower)
-    {
-        //
+    public function __construct(
+        public readonly UserFollower $userFollower
+    ) {
     }
 }

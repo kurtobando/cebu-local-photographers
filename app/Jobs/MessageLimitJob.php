@@ -19,7 +19,6 @@ class MessageLimitJob implements ShouldQueue
     public function __construct(
         private readonly MessageLimit $messageLimit
     ) {
-        //
     }
 
     public function handle(): void

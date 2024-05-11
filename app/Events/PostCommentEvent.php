@@ -13,8 +13,8 @@ class PostCommentEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public readonly PostComment $postComment)
-    {
-        //
+    public function __construct(
+        public readonly PostComment $postComment
+    ) {
     }
 }

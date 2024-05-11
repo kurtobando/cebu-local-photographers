@@ -11,7 +11,6 @@ class PostCommentLikeController extends Controller
     public function __construct(
         private readonly PostService $postService
     ) {
-        //
     }
 
     public function store(PostCommentLikeRequest $request): RedirectResponse

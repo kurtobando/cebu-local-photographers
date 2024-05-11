@@ -9,7 +9,6 @@ class SignInService
     public function __construct(
         private readonly User $user
     ) {
-        //
     }
 
     public function signIn(string $email, string $password, bool $remember = false): bool

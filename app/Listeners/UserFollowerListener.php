@@ -9,7 +9,6 @@ class UserFollowerListener
 {
     public function __construct()
     {
-        //
     }
 
     public function handle(UserFollowerEvent $event): void

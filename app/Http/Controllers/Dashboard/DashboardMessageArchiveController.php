@@ -11,7 +11,6 @@ class DashboardMessageArchiveController extends Controller
     public function __construct(
         private readonly MessageService $messageService
     ) {
-        //
     }
 
     public function update(string $uuid): RedirectResponse

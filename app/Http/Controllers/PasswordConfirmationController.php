@@ -17,7 +17,6 @@ class PasswordConfirmationController extends Controller
         private readonly PasswordResetToken $passwordResetToken,
         private readonly PasswordConfirmationEvent $passwordConfirmationEvent
     ) {
-        //
     }
 
     public function index(): Response

@@ -13,8 +13,8 @@ class PasswordResetEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public PasswordResetToken $passwordResetToken)
-    {
-        //
+    public function __construct(
+        public PasswordResetToken $passwordResetToken
+    ) {
     }
 }

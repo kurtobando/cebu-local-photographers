@@ -11,7 +11,6 @@ class PostSaveForLaterController extends Controller
     public function __construct(
         private readonly PostService $postService
     ) {
-        //
     }
 
     public function store(PostSaveForLaterRequest $request): RedirectResponse

@@ -18,7 +18,6 @@ class MessageService
         private readonly MessageThread $messageThread,
         private readonly MessageLimit $messageLimit
     ) {
-        //
     }
 
 

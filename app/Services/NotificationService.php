@@ -8,7 +8,6 @@ class NotificationService
 {
     public function __construct()
     {
-        //
     }
 
     public function markUnreadNotificationById(string $id): int

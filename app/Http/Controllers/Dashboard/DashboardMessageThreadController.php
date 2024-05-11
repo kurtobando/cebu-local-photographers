@@ -12,7 +12,6 @@ class DashboardMessageThreadController extends Controller
     public function __construct(
         private readonly MessageService $messageService
     ) {
-        //
     }
 
     public function store(DashboardMessageThreadRequest $request, string $uuid): RedirectResponse

@@ -9,7 +9,6 @@ class PostLikeListener
 {
     public function __construct()
     {
-        //
     }
 
     public function handle(PostLikeEvent $event): void

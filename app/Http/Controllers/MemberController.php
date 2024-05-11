@@ -18,7 +18,6 @@ class MemberController extends Controller
         private readonly UserFollowerService $userFollowerService,
         private readonly PostService $postService
     ) {
-        //
     }
 
     public function index(): Response

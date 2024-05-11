@@ -13,7 +13,6 @@ class SignUpController extends Controller
     public function __construct(
         private readonly SignUpService $signUpService
     ) {
-        //
     }
 
     public function index(): Response

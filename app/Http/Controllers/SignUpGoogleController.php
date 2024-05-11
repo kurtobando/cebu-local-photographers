@@ -14,7 +14,6 @@ class SignUpGoogleController extends Controller
     public function __construct(
         private readonly SignUpService $signUpService,
     ) {
-        //
     }
 
     public function redirect(): RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse

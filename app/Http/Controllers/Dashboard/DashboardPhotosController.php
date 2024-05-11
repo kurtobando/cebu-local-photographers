@@ -17,7 +17,6 @@ class DashboardPhotosController extends Controller
     public function __construct(
         private readonly PostService $postService
     ) {
-        //
     }
 
     public function create(): Response

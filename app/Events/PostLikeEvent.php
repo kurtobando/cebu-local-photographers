@@ -13,9 +13,8 @@ class PostLikeEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public readonly PostLike $postLike)
-    {
-        //
+    public function __construct(
+        public readonly PostLike $postLike
+    ) {
     }
-
 }

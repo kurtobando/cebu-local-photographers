@@ -13,7 +13,6 @@ class UserSignUpNotification extends Notification implements ShouldQueue
 
     public function __construct()
     {
-        //
     }
 
     public function via(): array
@@ -32,8 +31,6 @@ class UserSignUpNotification extends Notification implements ShouldQueue
 
     public function toArray(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

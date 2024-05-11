@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    protected $policies = [
-        //
-    ];
+    protected $policies = [];
 
     public function boot(): void
     {

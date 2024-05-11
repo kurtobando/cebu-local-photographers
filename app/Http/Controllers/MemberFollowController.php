@@ -11,7 +11,6 @@ class MemberFollowController extends Controller
     public function __construct(
         private readonly UserFollowerService $userFollowerService
     ) {
-        //
     }
 
     public function store(User $user): RedirectResponse

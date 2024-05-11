@@ -16,6 +16,5 @@ class UserSignInEvent
         public readonly string $clientIpAddress,
         public readonly string $userAgent
     ) {
-        //
     }
 }
