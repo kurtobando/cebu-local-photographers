@@ -8,7 +8,7 @@
                 <Link :href="route('term-of-service')">Terms of Service</Link>
             </p>
             <p class="text-center">
-                <a href="">Sitemap</a>
+                <a href="/sitemap.xml">Sitemap</a>
             </p>
             <p class="text-center">© {{ new Date().getFullYear() }} All rights reserved</p>
         </div>
