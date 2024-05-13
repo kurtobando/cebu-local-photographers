@@ -20,10 +20,12 @@ use App\Http\Controllers\PostCommentLikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\PostSaveForLaterController;
+use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\SignUpGoogleController;
+use App\Http\Controllers\TermOfServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -125,6 +127,18 @@ Route::controller(HireMeMessageController::class)
     ->prefix('message')
     ->group(function () {
         Route::post('/', 'store')->name('hire-me.message.store');
+    });
+
+Route::controller(PrivacyController::class)
+    ->prefix('privacy')
+    ->group(function () {
+        Route::get('/', 'index')->name('privacy');
+    });
+
+Route::controller(TermOfServiceController::class)
+    ->prefix('term-of-service')
+    ->group(function () {
+        Route::get('/', 'index')->name('term-of-service');
     });
 
 Route::prefix('dashboard')
