@@ -40,7 +40,7 @@ class PostLikeNotification extends Notification
             ->line('Feel free to visit the post and continue the conversation!');
     }
 
-    public function toArray(object $notifiable): array
+    public function toArray(): array
     {
         return [
             'subject' => $this->subject,
