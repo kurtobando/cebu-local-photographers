@@ -39,7 +39,7 @@ class PostCommentLikeNewNotification extends Notification
             ->line($this->message)
             ->line("{$this->postComment->comment}")
             ->action('Visit Post', $this->action)
-            ->line("Feel free to visit the post and continue the conversation!");
+            ->line('Feel free to visit the post and continue the conversation!');
     }
 
     public function toArray(): array

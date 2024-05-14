@@ -34,24 +34,20 @@ class User extends Authenticatable implements HasMedia
         'provider_token',
         'provider_refresh_token',
         'avatar',
-        'about'
+        'about',
     ];
-
     protected $appends = [
         'role',
-        'message_limit'
+        'message_limit',
     ];
-
     protected $hidden = [
         'password',
         'remember_token',
     ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
     protected $dispatchesEvents = [
         'created' => UserSignUpEvent::class,
     ];
@@ -118,7 +114,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getDefaultAvatar(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . $this->name . '&color=383838&background=dee2e6&length=1';
+        return 'https://ui-avatars.com/api/?name='.$this->name.'&color=383838&background=dee2e6&length=1';
     }
 
     public function getAvatar(): string
@@ -131,7 +127,7 @@ class User extends Authenticatable implements HasMedia
             return $this->avatar;
         }
 
-        return  $this->getDefaultAvatar();
+        return $this->getDefaultAvatar();
     }
 
     public function getActivitylogOptions(): LogOptions

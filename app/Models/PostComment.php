@@ -11,10 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class PostComment extends Model
 {
     protected $fillable = ['post_id', 'user_id', 'comment', 'status', 'views', 'likes'];
-
-
     protected $dispatchesEvents = [
-        'created' => PostCommentEvent::class
+        'created' => PostCommentEvent::class,
     ];
 
     public function post(): BelongsTo

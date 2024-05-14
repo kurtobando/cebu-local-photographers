@@ -20,7 +20,6 @@ class MessageService
     ) {
     }
 
-
     public function getMessagesByUserId(int $id): Collection
     {
         return $this->message
@@ -49,7 +48,6 @@ class MessageService
             ->get();
     }
 
-
     public function saveMessage(
         string $uuid,
         string $subject,
@@ -59,7 +57,7 @@ class MessageService
             'uuid' => $uuid,
             'subject' => Str::limit($subject, 60),
             'user_id' => $userId,
-            'is_archived' => false
+            'is_archived' => false,
         ]);
     }
 
@@ -74,7 +72,7 @@ class MessageService
             'user_id_sender' => $userIdSender,
             'user_id_receiver' => $userIdReceiver,
             'message' => $message,
-            'is_read' => false
+            'is_read' => false,
         ]);
     }
 
@@ -87,7 +85,7 @@ class MessageService
             ->where('id', $messageId)
             ->where('user_id', $userId)
             ->update([
-                'is_archived' => true
+                'is_archived' => true,
             ]);
     }
 
@@ -100,7 +98,7 @@ class MessageService
             ->where('uuid', $uuid)
             ->where('user_id', $userId)
             ->update([
-                'is_archived' => true
+                'is_archived' => true,
             ]);
     }
 
@@ -110,7 +108,7 @@ class MessageService
             ->messageThread
             ->where('id', $messageThreadId)
             ->update([
-                'is_read' => true
+                'is_read' => true,
             ]);
     }
 
@@ -123,7 +121,7 @@ class MessageService
             ->where('uuid', $messageUuid)
             ->where('user_id_receiver', $userId)
             ->update([
-                'is_read' => true
+                'is_read' => true,
             ]);
     }
 

@@ -16,7 +16,7 @@ class SignInController extends Controller
 
     }
 
-    public function index(): Response| RedirectResponse
+    public function index(): Response|RedirectResponse
     {
         if (auth()->check()) {
             return redirect()->route('dashboard');

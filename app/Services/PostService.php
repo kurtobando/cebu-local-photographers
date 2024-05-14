@@ -16,13 +16,13 @@ use Illuminate\Support\Collection;
 class PostService
 {
     public function __construct(
-        private readonly Post         $post,
+        private readonly Post $post,
         private readonly PostCategory $postCategory,
-        private readonly PostLike     $postLike,
+        private readonly PostLike $postLike,
         private readonly PostSaveForLater $postSaveForLater,
         private readonly PostComment $postComment,
         private readonly PostCommentLike $postCommentLike,
-        private readonly User         $user
+        private readonly User $user
     ) {
     }
 
@@ -182,7 +182,7 @@ class PostService
             ->exists();
     }
 
-    public function isPostLikedByCurrentUser(int $postId, int|null $userId): bool
+    public function isPostLikedByCurrentUser(int $postId, ?int $userId): bool
     {
         if (is_null($userId)) {
             return false;
@@ -195,7 +195,7 @@ class PostService
             ->exists();
     }
 
-    public function isPostCommentLikedByCurrentUser(int $commentId, int|null $userId): bool
+    public function isPostCommentLikedByCurrentUser(int $commentId, ?int $userId): bool
     {
         if (is_null($userId)) {
             return false;
@@ -270,6 +270,5 @@ class PostService
             $comment->save();
         });
     }
-
 
 }

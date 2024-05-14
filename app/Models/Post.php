@@ -25,7 +25,7 @@ class Post extends Model implements HasMedia
         'likes',
         'comments',
         'status',
-        'tags'
+        'tags',
     ];
 
     public function user(): BelongsTo

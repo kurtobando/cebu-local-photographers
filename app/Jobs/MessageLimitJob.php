@@ -26,7 +26,7 @@ class MessageLimitJob implements ShouldQueue
         $this
             ->messageLimit
             ->update([
-                'limit' => MessageLimit::DEFAULT_LIMIT
+                'limit' => MessageLimit::DEFAULT_LIMIT,
             ]);
     }
 }

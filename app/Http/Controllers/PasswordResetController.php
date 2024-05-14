@@ -14,7 +14,7 @@ use Inertia\Response;
 class PasswordResetController extends Controller
 {
     public function __construct(
-        private readonly User               $user,
+        private readonly User $user,
         private readonly PasswordResetEvent $passwordResetEvent,
         private readonly PasswordResetToken $passwordResetToken
     ) {
@@ -43,7 +43,7 @@ class PasswordResetController extends Controller
         $token = $this->passwordResetToken->create([
             'email' => $request->email,
             'token' => Hash::make(now()),
-            'is_used' => false
+            'is_used' => false,
         ]);
 
         $this->passwordResetEvent->dispatch($token);

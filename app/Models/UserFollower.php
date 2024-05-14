@@ -13,7 +13,6 @@ class UserFollower extends Model
         'user_id',
         'user_id_follower',
     ];
-
     protected $dispatchesEvents = [
         'created' => UserFollowerEvent::class,
     ];

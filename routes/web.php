@@ -63,7 +63,7 @@ Route::prefix('post')
         Route::controller(PostCommentController::class)
             ->prefix('/{id}/comment')
             ->group(function () {
-                Route::post('/', "store")->name('post.comment.store');
+                Route::post('/', 'store')->name('post.comment.store');
             });
 
         Route::controller(PostCommentLikeController::class)
@@ -77,15 +77,15 @@ Route::prefix('post')
 Route::controller(MemberController::class)
     ->prefix('members')
     ->group(function () {
-        Route::get('/', "index")->name('members');
-        Route::get('/{user}', "show")->name('members.show');
+        Route::get('/', 'index')->name('members');
+        Route::get('/{user}', 'show')->name('members.show');
     });
 
 Route::controller(MemberFollowController::class)
     ->prefix('members/{user}/follow')
     ->group(function () {
-        Route::post('/', "store")->name('members.follow.store');
-        Route::delete('/', "destroy")->name('members.follow.destroy');
+        Route::post('/', 'store')->name('members.follow.store');
+        Route::delete('/', 'destroy')->name('members.follow.destroy');
     });
 
 Route::controller(PasswordResetController::class)
@@ -119,8 +119,8 @@ Route::controller(SignUpController::class)
 Route::controller(SignUpGoogleController::class)
     ->prefix('auth/google')
     ->group(function () {
-        Route::get('/redirect', "redirect")->name('auth.google.redirect');
-        Route::get('/callback', "callback")->name('auth.google.callback');
+        Route::get('/redirect', 'redirect')->name('auth.google.redirect');
+        Route::get('/callback', 'callback')->name('auth.google.callback');
     });
 
 Route::controller(HireMeMessageController::class)
@@ -144,8 +144,8 @@ Route::controller(TermOfServiceController::class)
 Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
-        Route::get('/', [DashboardController::class, "index"])->name('dashboard');
-        Route::post('/sign-out', [SignOutController::class, "store"])->name('dashboard.sign-out');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/sign-out', [SignOutController::class, 'store'])->name('dashboard.sign-out');
 
         Route::controller(DashboardProfileController::class)
             ->prefix('profile')

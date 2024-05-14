@@ -9,7 +9,7 @@ class HandleInertiaRequests extends Middleware
 {
     protected $rootView = 'app';
 
-    public function version(Request $request): string|null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
@@ -30,7 +30,7 @@ class HandleInertiaRequests extends Middleware
                     'provider',
                     'role',
                     'about',
-                    'message_limit'
+                    'message_limit',
                 ]),
                 'notification' => [
                     'unread_count' => $request->user()?->unreadNotifications()->count(),
@@ -69,8 +69,8 @@ class HandleInertiaRequests extends Middleware
                         'event_attendee' => $request->user()?->can('delete event-attendee'),
                         'user' => $request->user()?->can('delete user'),
                         'user_profile' => $request->user()?->can('delete user-profile'),
-                    ]
-                ]
+                    ],
+                ],
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

@@ -20,7 +20,7 @@ class SignInService
 
         return auth()->attempt([
             'email' => $email,
-            'password' => $password
+            'password' => $password,
         ], $remember);
     }
 

@@ -29,7 +29,7 @@ class PasswordConfirmationController extends Controller
         abort_if(!$this->isTokenValid($token, $email), 403, 'Token is invalid.');
         abort_if($this->isTokenUsed($token, $email), 404, 'Token is no longer valid.');
 
-        return inertia('ThePasswordConfirmation', [ 'email' => $email, 'token' => $token ]);
+        return inertia('ThePasswordConfirmation', ['email' => $email, 'token' => $token]);
     }
 
     public function update(PasswordConfirmationRequest $request): RedirectResponse

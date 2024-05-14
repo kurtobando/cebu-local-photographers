@@ -7,6 +7,6 @@ return [
         'telescope',
         'telescope.*',
         'ignition',
-        'ignition.*'
+        'ignition.*',
     ],
 ];

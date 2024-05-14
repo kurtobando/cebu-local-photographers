@@ -23,8 +23,8 @@ class UserSignUpNotification extends Notification implements ShouldQueue
     public function toMail(): MailMessage
     {
         return (new MailMessage())
-            ->subject('Welcome to ' . config('app.name'))
-            ->line('Congratulations! You have successfully signed up to ' . config('app.name') . '. Thank you for joining us and we hope you enjoy your experience.')
+            ->subject('Welcome to '.config('app.name'))
+            ->line('Congratulations! You have successfully signed up to '.config('app.name').'. Thank you for joining us and we hope you enjoy your experience.')
             ->action('Sign in', route('sign-in'))
             ->line('If you have any questions or need assistance, feel free to contact us.');
     }

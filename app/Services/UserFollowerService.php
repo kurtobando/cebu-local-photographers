@@ -35,7 +35,7 @@ class UserFollowerService
             ->delete();
     }
 
-    public function isCurrentUserFollower(int $userId, int|null $userIdFollower): bool
+    public function isCurrentUserFollower(int $userId, ?int $userIdFollower): bool
     {
         if (is_null($userIdFollower)) {
             return false;

@@ -37,7 +37,7 @@ class PostLikeNotification extends Notification
             ->subject($this->subject)
             ->line($this->message)
             ->action('Visit Post', $this->action)
-            ->line("Feel free to visit the post and continue the conversation!");
+            ->line('Feel free to visit the post and continue the conversation!');
     }
 
     public function toArray(object $notifiable): array

@@ -11,11 +11,10 @@ class PostLike extends Model
 {
     protected $fillable = [
         'post_id',
-        'user_id'
+        'user_id',
     ];
-
     protected $dispatchesEvents = [
-        'created' => PostLikeEvent::class
+        'created' => PostLikeEvent::class,
     ];
 
     public function post(): BelongsTo

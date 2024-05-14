@@ -27,7 +27,7 @@ class SignUpService
 
     private function signUpDefault(array $data): User
     {
-        $this->user->name = Str::before($data['email'], "@");
+        $this->user->name = Str::before($data['email'], '@');
         $this->user->email = $data['email'];
         $this->user->password = Hash::make($data['password']);
         $this->user->provider = UserAuthProviderEnum::DEFAULT->value;

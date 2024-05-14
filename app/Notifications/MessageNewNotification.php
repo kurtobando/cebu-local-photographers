@@ -31,10 +31,10 @@ class MessageNewNotification extends Notification implements ShouldQueue
     public function toMail(): MailMessage
     {
         return (new MailMessage())
-                    ->greeting('Greetings!')
-                    ->subject($this->subject)
-                    ->line($this->message)
-                    ->action('Read Message', $this->action);
+            ->greeting('Greetings!')
+            ->subject($this->subject)
+            ->line($this->message)
+            ->action('Read Message', $this->action);
     }
 
     public function toArray(): array

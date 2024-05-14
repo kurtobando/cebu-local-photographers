@@ -26,11 +26,11 @@ class DashboardMessageController extends Controller
                     'uuid',
                     'updated_at',
                     'created_at',
-                    'subject'
+                    'subject',
                 ]), [
                     'is_unread' => $this->messageService->isMessageHasUnreadThreadByUserId(auth()->id(), $message->uuid),
                 ]);
-            })
+            }),
         ]);
     }
 
@@ -52,7 +52,7 @@ class DashboardMessageController extends Controller
                     'is_read',
                     'message',
                     'created_at',
-                    'updated_at'
+                    'updated_at',
                 ]), [
                     'sender' => $thread->sender->only(['id', 'name', 'email']),
                     'receiver' => $thread->receiver->only(['id', 'name', 'email']),

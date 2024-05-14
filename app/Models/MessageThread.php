@@ -12,7 +12,7 @@ class MessageThread extends Model
         'user_id_sender',
         'user_id_receiver',
         'message',
-        'is_read'
+        'is_read',
     ];
 
     public function sender(): BelongsTo

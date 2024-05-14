@@ -18,7 +18,7 @@ class DashboardProfileUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'about' => 'required|string|max:500',
-            'provider' => 'required|in:' . implode(',', UserAuthProviderEnum::toArray()),
+            'provider' => 'required|in:'.implode(',', UserAuthProviderEnum::toArray()),
             'is_change_password' => 'required|boolean',
             'password' => ['exclude_if:is_change_password,false', Password::defaults(), 'confirmed'],
             'password_confirmation' => 'exclude_if:is_change_password,false',

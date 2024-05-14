@@ -21,7 +21,7 @@ class MemberFollowController extends Controller
 
         return redirect()
             ->back()
-            ->with(['success' => 'You are now following ' . $user->name . '.']);
+            ->with(['success' => 'You are now following '.$user->name.'.']);
     }
 
     public function destroy(User $user): RedirectResponse
@@ -32,6 +32,6 @@ class MemberFollowController extends Controller
 
         return redirect()
             ->back()
-            ->with(['success' => 'You are no longer following ' . $user->name . '.']);
+            ->with(['success' => 'You are no longer following '.$user->name.'.']);
     }
 }

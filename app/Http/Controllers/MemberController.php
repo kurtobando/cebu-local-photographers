@@ -23,7 +23,7 @@ class MemberController extends Controller
     public function index(): Response
     {
         return inertia('TheMembers', [
-            'users' => $this->userService->getUsersInRandomOrder()
+            'users' => $this->userService->getUsersInRandomOrder(),
         ]);
     }
 
@@ -42,7 +42,7 @@ class MemberController extends Controller
                 'name' => $user->name,
                 'about' => $user->about,
                 'avatar' => $user->getAvatar(),
-                'role' => $user->role
+                'role' => $user->role,
             ],
             'user_follower_count' => $this->userFollowerService->getFollowerCountByUserId($user->id),
             'user_is_followed' => $this->userFollowerService->isCurrentUserFollower($user->id, auth()->id()),
@@ -55,9 +55,9 @@ class MemberController extends Controller
                     return array_merge($post->toArray(), [
                         'category' => $post->category->name,
                         'media' => $post->getMediaThumbnails(),
-                        'user' => $post->user->only(['id', 'name', 'avatar'])
+                        'user' => $post->user->only(['id', 'name', 'avatar']),
                     ]);
-                })
+                }),
         ]);
     }
 }
