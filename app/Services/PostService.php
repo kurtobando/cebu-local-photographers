@@ -11,7 +11,10 @@ use App\Models\PostCommentLike;
 use App\Models\PostLike;
 use App\Models\PostSaveForLater;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class PostService
 {
@@ -79,9 +82,13 @@ class PostService
             ->get();
     }
 
-    public function savePost(): Post
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function savePost(UploadedFile $file): Post
     {
-        return $this->post->create([
+        $post = $this->post->create([
             'user_id' => auth()->user()->id,
             'status' => PostStatusEnum::DRAFT->value,
             'title' => '',
@@ -92,6 +99,10 @@ class PostService
             'views' => 0,
             'likes' => 0,
         ]);
+
+        $post->addMedia($file)->toMediaCollection('photos');
+
+        return $post;
     }
 
     public function savePostLike(int $postId, int $userId): PostLike

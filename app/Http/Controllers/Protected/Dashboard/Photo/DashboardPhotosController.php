@@ -27,8 +27,7 @@ class DashboardPhotosController extends Controller
     public function store(DashboardPhotosStoreRequest $request): RedirectResponse
     {
         try {
-            $post = $this->postService->savePost();
-            $post->addMedia($request->file)->toMediaCollection('photos');
+            $post = $this->postService->savePost($request->file);
 
             return redirect()->route('dashboard.photos.show', ['post' => $post->id]);
         } catch (FileDoesNotExist|FileIsTooBig $e) {
