@@ -28,7 +28,6 @@ class PostController extends Controller
 
         $this->postService->incrementPostViews($request->id);
         $post = $this->postService->getPostById($request->id);
-        $postAuthor = $this->postService->getPostAuthorByUserId($post->user_id);
         $postComments = $this->postService->getPostCommentsByPostId($request->id);
 
         return inertia('ThePost', [
@@ -49,14 +48,14 @@ class PostController extends Controller
                 'post_category_id' => $post->post_category_id,
             ],
             'post_author' => [
-                'id' => $postAuthor->id,
-                'name' => $postAuthor->name,
-                'email' => $postAuthor->email,
-                'role' => $postAuthor->role,
-                'about' => $postAuthor->about,
-                'avatar' => $postAuthor->getAvatar(),
+                'id' => $post->user->id,
+                'name' => $post->user->name,
+                'email' => $post->user->email,
+                'role' => $post->user->role,
+                'about' => $post->user->about,
+                'avatar' => $post->user->getAvatar(),
             ],
-            'post_author_is_followed' => $this->userFollowerService->isCurrentUserFollower($postAuthor->id, auth()->id()),
+            'post_author_is_followed' => $this->userFollowerService->isCurrentUserFollower($post->user->id, auth()->id()),
             'post_comments' => $postComments->map(function (PostComment $comment) {
                 return [
                     'id' => $comment->id,

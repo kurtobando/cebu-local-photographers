@@ -10,7 +10,6 @@ use App\Models\PostComment;
 use App\Models\PostCommentLike;
 use App\Models\PostLike;
 use App\Models\PostSaveForLater;
-use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -25,7 +24,6 @@ class PostService
         private readonly PostSaveForLater $postSaveForLater,
         private readonly PostComment $postComment,
         private readonly PostCommentLike $postCommentLike,
-        private readonly User $user
     ) {
     }
 
@@ -43,6 +41,7 @@ class PostService
     {
         return $this
             ->post
+            ->with(['user'])
             ->where('id', $id)
             ->first();
     }
@@ -55,14 +54,6 @@ class PostService
             ->where(['user_id' => $id])
             ->orderByDesc('updated_at')
             ->get();
-    }
-
-    public function getPostAuthorByUserId(int $id): User
-    {
-        return $this
-            ->user
-            ->where('id', $id)
-            ->first();
     }
 
     public function getPostCategories(): Collection
