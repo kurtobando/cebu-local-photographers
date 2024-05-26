@@ -19,7 +19,7 @@ class DashboardProfileImageController extends Controller
     public function store(DashboardProfileImageRequest $request): RedirectResponse
     {
         try {
-            $this->userService->saveProfileImageByUserId(auth()->id(), $request->file);
+            $this->userService->updateProfileImageByUserId(auth()->id(), $request->file);
 
             return redirect()
                 ->route('dashboard.profile.index')
