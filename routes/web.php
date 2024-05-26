@@ -1,31 +1,31 @@
 <?php
 
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\DashboardMessageArchiveController;
-use App\Http\Controllers\Dashboard\DashboardMessageController;
-use App\Http\Controllers\Dashboard\DashboardMessageThreadController;
-use App\Http\Controllers\Dashboard\DashboardNotificationController;
-use App\Http\Controllers\Dashboard\DashboardPhotosController;
-use App\Http\Controllers\Dashboard\DashboardPhotosGalleryController;
-use App\Http\Controllers\Dashboard\DashboardProfileController;
-use App\Http\Controllers\Dashboard\DashboardProfileImageController;
-use App\Http\Controllers\HireMeMessageController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\MemberFollowController;
-use App\Http\Controllers\PasswordConfirmationController;
-use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\PostCommentController;
-use App\Http\Controllers\PostCommentLikeController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\PostLikeController;
-use App\Http\Controllers\PostSaveForLaterController;
-use App\Http\Controllers\PrivacyController;
-use App\Http\Controllers\SignInController;
-use App\Http\Controllers\SignOutController;
-use App\Http\Controllers\SignUpController;
-use App\Http\Controllers\SignUpGoogleController;
-use App\Http\Controllers\TermOfServiceController;
+use App\Http\Controllers\Protected\Dashboard\DashboardController;
+use App\Http\Controllers\Protected\Dashboard\Message\DashboardMessageArchiveController;
+use App\Http\Controllers\Protected\Dashboard\Message\DashboardMessageController;
+use App\Http\Controllers\Protected\Dashboard\Message\DashboardMessageThreadController;
+use App\Http\Controllers\Protected\Dashboard\Notification\DashboardNotificationController;
+use App\Http\Controllers\Protected\Dashboard\Photo\DashboardPhotosController;
+use App\Http\Controllers\Protected\Dashboard\Photo\DashboardPhotosGalleryController;
+use App\Http\Controllers\Protected\Dashboard\Profile\DashboardProfileController;
+use App\Http\Controllers\Protected\Dashboard\Profile\DashboardProfileImageController;
+use App\Http\Controllers\Public\Auth\AuthPasswordConfirmationController;
+use App\Http\Controllers\Public\Auth\AuthPasswordResetController;
+use App\Http\Controllers\Public\Auth\AuthSignInController;
+use App\Http\Controllers\Public\Auth\AuthSignOutController;
+use App\Http\Controllers\Public\Auth\AuthSignUpController;
+use App\Http\Controllers\Public\Auth\AuthSignUpGoogleController;
+use App\Http\Controllers\Public\Home\HomeController;
+use App\Http\Controllers\Public\Member\MemberController;
+use App\Http\Controllers\Public\Member\MemberFollowController;
+use App\Http\Controllers\Public\Message\MessageHireMeController;
+use App\Http\Controllers\Public\Post\PostCommentController;
+use App\Http\Controllers\Public\Post\PostCommentLikeController;
+use App\Http\Controllers\Public\Post\PostController;
+use App\Http\Controllers\Public\Post\PostLikeController;
+use App\Http\Controllers\Public\Post\PostSaveForLaterController;
+use App\Http\Controllers\Public\Privacy\PrivacyController;
+use App\Http\Controllers\Public\TermsOfService\TermOfServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,42 +88,45 @@ Route::controller(MemberFollowController::class)
         Route::delete('/', 'destroy')->name('members.follow.destroy');
     });
 
-Route::controller(PasswordResetController::class)
-    ->prefix('password-reset')
+Route::prefix('auth')
     ->group(function () {
-        Route::get('/', 'index')->name('password-reset');
-        Route::post('/', 'store')->name('password-reset.store');
+        Route::controller(AuthPasswordResetController::class)
+            ->prefix('password-reset')
+            ->group(function () {
+                Route::get('/', 'index')->name('password-reset');
+                Route::post('/', 'store')->name('password-reset.store');
+            });
+
+        Route::controller(AuthPasswordConfirmationController::class)
+            ->prefix('password-confirmation')
+            ->group(function () {
+                Route::get('/', 'index')->name('password-confirmation');
+                Route::post('/', 'update')->name('password-confirmation.update');
+            });
+
+        Route::controller(AuthSignInController::class)
+            ->prefix('sign-in')
+            ->group(function () {
+                Route::get('/', 'index')->name('sign-in');
+                Route::post('/', 'store')->name('sign-in.store');
+            });
+
+        Route::controller(AuthSignUpController::class)
+            ->prefix('sign-up')
+            ->group(function () {
+                Route::get('/', 'index')->name('sign-up');
+                Route::post('/', 'store')->name('sign-up.store');
+            });
     });
 
-Route::controller(PasswordConfirmationController::class)
-    ->prefix('password-confirmation')
-    ->group(function () {
-        Route::get('/', 'index')->name('password-confirmation');
-        Route::post('/', 'update')->name('password-confirmation.update');
-    });
-
-Route::controller(SignInController::class)
-    ->prefix('sign-in')
-    ->group(function () {
-        Route::get('/', 'index')->name('sign-in');
-        Route::post('/', 'store')->name('sign-in.store');
-    });
-
-Route::controller(SignUpController::class)
-    ->prefix('sign-up')
-    ->group(function () {
-        Route::get('/', 'index')->name('sign-up');
-        Route::post('/', 'store')->name('sign-up.store');
-    });
-
-Route::controller(SignUpGoogleController::class)
+Route::controller(AuthSignUpGoogleController::class)
     ->prefix('auth/google')
     ->group(function () {
         Route::get('/redirect', 'redirect')->name('auth.google.redirect');
         Route::get('/callback', 'callback')->name('auth.google.callback');
     });
 
-Route::controller(HireMeMessageController::class)
+Route::controller(MessageHireMeController::class)
     ->prefix('message')
     ->group(function () {
         Route::post('/', 'store')->name('hire-me.message.store');
@@ -145,7 +148,7 @@ Route::prefix('dashboard')
     ->middleware(['auth'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        Route::post('/sign-out', [SignOutController::class, 'store'])->name('dashboard.sign-out');
+        Route::post('/sign-out', [AuthSignOutController::class, 'store'])->name('dashboard.sign-out');
 
         Route::controller(DashboardProfileController::class)
             ->prefix('profile')
